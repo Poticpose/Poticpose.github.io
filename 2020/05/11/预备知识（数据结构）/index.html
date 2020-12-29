@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>预备知识（数据结构） - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="本文依照数据结构、算法与应用（C++语言）（第二版）所进行学习
+1.函数部分1.1 传值参数
+abc(int a,int b,int c)123&amp;#123;  return a*b+c;&amp;#125;,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">预备知识（数据结构）</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">预备知识（数据结构）</h1>
+        <div class="stuff">
+            <span>五月 11, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><font size=2>本文依照数据结构、算法与应用（C++语言）（第二版）所进行学习</font></p>
+<p><b>1.函数部分</b><br><b>1.1 传值参数</b></p>
+<figure class="highlight plain"><figcaption><span>abc(int a,int b,int c)</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  return a*b+c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数abc中让int类型的a、b、c作为<strong>形参</strong>，在函数内用return返回由a、b、c所构成的表达式。之后可以进行<b>实参</b>传递：</p>
+<pre><code>z=abc(3,4,5);</code></pre><p>即z得到abc的实参3、4、5所参与的表达式进行运算后的结果（3×4+5=17）<br>要注意函数运行结束后，形参类型的<b>析构函数</b>负责释放形式参数。</p>
+<p><font size=2>即形参的值在函数运行结束后不会复制到对应的形参上，不会修改实参的值。</font></p>
+<p>形参与实参的数据类型不匹配即形参int a对应了实参float x=3.8，那么在参数传值的过程中只会传递数值3而不是3.8或4。<br><b>1.2 模板函数</b><br>函数与函数之间直接实现数据类型的相互套用。</p>
+<figure class="highlight plain"><figcaption><span>abc(float a,float b,float c)</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  return a+b+c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上为一般代码</p>
+<p>而在此基础上进行模板函数套用。</p>
+<pre><code>template&lt;class T&gt;
+T abc(T a,T b,T c)
+{
+return a+b+c;
+}</code></pre><p>则任何数据类型可以通过替代T来实现形参数据类型的统一。在主函数中调用时，任何一个操作规定了T的数据类型，则该模板函数中的T会自然统一。</p>
+<pre><code>int x=3;
+int y=4;
+z=abc&lt;int&gt;(x,y,5);</code></pre><p>则模板函数中的所有T都将被统一为int数据类型。<br><b>1.3 引用参数</b><br>在正常的参数传值过程中实际上是实参的值复制给了形参然后再运算后复制给实参，在此过程中的操作是十分繁多的，如果在1.1中abc传递的是一个1000数值的矩阵，那么过程中将进行3000次运算（复制给形参1000次，运算1000次，复制给实参1000次）。</p>
+<p>若利用引用参数的方法则对于1000数值的矩阵只需进行1000次运算，大大减少了工作负荷。</p>
+<pre><code>template&lt;class T&gt;
+T abc(T&amp; a,T&amp; b,T&amp; c)
+{
+  return a+b+c;
+}</code></pre><p>这个过程实际上是直接引用了实参，让实参替代了形参，而非将实参的值复制给形参，运算后得到结果直接赋给了实参不需要从形参再复制给实参。</p>
+<p><b>1.4 常量引用参数</b><br>常量引用的过程中被引用的实参无法被函数所修改。</p>
+<pre><code>template&lt;class T&gt;
+T abc(const T&amp; a,const T&amp; b,const T&amp; c)
+{
+  a++;b++;c++;
+  return a+b+c;
+}</code></pre><p>在该引用过程中若被引用的实参数值分别为3，4，5。那么得到的返回值将会是3+4+5=12而非4+5+6=15。</p>
+<p>更加规范正规的版本</p>
+<pre><code>template&lt;class Ta,class Tb,class Tc&gt;
+Ta abc(const Ta&amp; a,const Tb&amp; b,const Tc&amp; c)
+{
+  return a+b+c;
+}</code></pre><p><b>1.5 返回值</b><br>    return z;<br>在该返回方式中，返回值z会被放到返回值内存空间内，将随着函数结束后内存空间的释放而消失，在未释放前会一直占用内存空间。</p>
+<pre><code>T&amp; abc(int i,T&amp; z)</code></pre><p>这是<b>引用返回</b>，返回值将会直接被引用回主函数内，不会将返回值存入内存空间。</p>
+<pre><code>const T&amp; abc(int i,T&amp; z)</code></pre><p>这是常量引用返回，返回值中途无法被修改。</p>
+<p><b>练习</b><br>1.解释为何下列程序交换函数没有把形参x和y所对应的实参的值交换，如何修改代码可以实现交换？</p>
+<pre><code>void swap(int x,int y)
+{
+  int temp=x;
+  x=y;
+  y=temp;
+}</code></pre><p>答：在该代码片段中设计知识可回看<strong>1.1</strong>部分，由于析构函数会释放函数运行后的内存空间，形参的值不会直接复制给实参，且无返回值和主函数内返回值的接受对象，因此无法实现实参值得转换。可进行修改。</p>
+<pre><code>void swap(int&amp; x,int&amp; y)
+{
+  int temp=x;
+  x=y;
+  y=temp;
+}</code></pre><p>利用<b>引用参数</b>直接引用入实参进行交换，则是一种对实参值的直接交换。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="/music/小林未郁 - ThreeFiveNineFourε.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+				
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

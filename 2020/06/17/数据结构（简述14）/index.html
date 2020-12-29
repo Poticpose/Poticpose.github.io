@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>栈的链式存储 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="
+栈链，即把单链表的头指针与栈顶指针相结合，效果如图。   
+
+创建栈链的代码片段：
+12345678910typedef struct StackNode&amp;#123;    ElemType da,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">栈的链式存储</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">栈的链式存储</h1>
+        <div class="stuff">
+            <span>六月 17, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <img src="/img/数据结构（简述14）/图1.png">
+栈链，即把单链表的头指针与栈顶指针相结合，效果如图。   
+
+<p>创建栈链的代码片段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">typedef struct StackNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;      &#x2F;&#x2F;存放栈的数据</span><br><span class="line">    struct StackNode *next;</span><br><span class="line">&#125;StackNode, *LinkStackPtr;</span><br><span class="line">typedef struct LinkStack</span><br><span class="line">&#123;</span><br><span class="line">    LinkStackPtr top;   &#x2F;&#x2F;top指针</span><br><span class="line">    int count;      &#x2F;&#x2F;栈元素计数器</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="进栈操作"><a href="#进栈操作" class="headerlink" title="进栈操作"></a>进栈操作</h2><hr>
+<p>设元素值为e的新结点p。<br>Push操作代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Status Push(LinkStack *s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">    LinkStackPtr p &#x3D;(LinkStackPtr)malloc(sizeof(StackNode));</span><br><span class="line">    p-&gt;data &#x3D; e;</span><br><span class="line">    p-&gt;next &#x3D; s-&gt;top;</span><br><span class="line">    s-&gt;top &#x3D; p;</span><br><span class="line">    &#x2F;*简单说就是新结点的next指向旧的结点，然后再让top指向新结点*&#x2F;</span><br><span class="line">    s-&gt;count++;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="出栈操作"><a href="#出栈操作" class="headerlink" title="出栈操作"></a>出栈操作</h2><hr>
+<p>设变量p存储要删除的栈顶结点，将栈顶指针下移一位，再释放p。<br>Pop操作代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Status Pop(LinkStack *s, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">    LinkStackPtr p;</span><br><span class="line">    if(StackEmpty(*s))  &#x2F;&#x2F;判断栈是否为空栈。</span><br><span class="line">        return ERROR;</span><br><span class="line">    *e &#x3D; s-&gt;top-&gt;data;  &#x2F;&#x2F;获取要删除的元素数据</span><br><span class="line">    p &#x3D; s-&gt;top;     &#x2F;&#x2F;存放要删除的元素</span><br><span class="line">    s-&gt;top &#x3D; s-&gt;top-&gt;next;  &#x2F;&#x2F;令栈顶指针指向后一个结点</span><br><span class="line">    free(p);    &#x2F;&#x2F;释放要删除的元素</span><br><span class="line">    s-&gt;count--;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里可以看出了，在链栈中next并非指向最新的指针而是指向较旧的指针。</p>
+<h1 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h1><hr>
+<p>针对(1-2)*(4+5)这个表达式，用逆波兰表示法则为：1 2 - 4 5 + *</p>
+<p>其原理为：数字1和2进栈，遇到减号运算则弹出两个元素进行运算再把结果入栈。<br>如图：<br><img src="/img/数据结构（简述14）/图2.png"></p>
+<p>4和5再入栈，再入加号运算符，4和5弹出进行相加，结果入栈。<br>如图：<br><img src="/img/数据结构（简述14）/图3.png"></p>
+<p>最后遇到乘法运算符，弹出9和-1，进行运算，得到结果，无数据不压栈。<br>如图：<br><img src="/img/数据结构（简述14）/图4.png"></p>
+<p>逆波兰计算器源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;ctype.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;malloc.h&gt;</span><br><span class="line"></span><br><span class="line">#define STACK_INIT_SIZE 20</span><br><span class="line">#define STACKINCREMENT 10</span><br><span class="line">#define MAXBUFFER 10</span><br><span class="line"></span><br><span class="line">typedef double ElemType;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;建栈</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	ElemType* base;</span><br><span class="line">	ElemType* top;</span><br><span class="line">	int stackSize;</span><br><span class="line">&#125;sqStack;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;初始化栈</span><br><span class="line">void InitStack(sqStack* s)</span><br><span class="line">&#123;</span><br><span class="line">	s-&gt;base &#x3D; (ElemType*)malloc(STACK_INIT_SIZE * sizeof(ElemType));</span><br><span class="line">	if (!s-&gt;base)</span><br><span class="line">		exit(0);</span><br><span class="line"></span><br><span class="line">	s-&gt;top &#x3D; s-&gt;base;</span><br><span class="line">	s-&gt;stackSize &#x3D; STACK_INIT_SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;入栈</span><br><span class="line">void Push(sqStack* s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">	if (s-&gt;top - s-&gt;base &gt;&#x3D; s-&gt;stackSize)</span><br><span class="line">	&#123;</span><br><span class="line">		s-&gt;base &#x3D; (ElemType*)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT) * sizeof(ElemType));</span><br><span class="line">		if (!s-&gt;base)</span><br><span class="line">			exit(0);</span><br><span class="line"></span><br><span class="line">		s-&gt;top &#x3D; s-&gt;base + s-&gt;stackSize;</span><br><span class="line">		s-&gt;stackSize &#x3D; s-&gt;stackSize + STACKINCREMENT;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	*(s-&gt;top) &#x3D; e;		&#x2F;&#x2F;存放数据</span><br><span class="line">	s-&gt;top++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;出栈</span><br><span class="line">void Pop(sqStack* s, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">	if (s-&gt;top &#x3D;&#x3D; s-&gt;base)</span><br><span class="line">		return;</span><br><span class="line">	*e &#x3D; *--(s-&gt;top);	&#x2F;&#x2F;将栈顶指针弹出并修改</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;计算栈长</span><br><span class="line">int StackLen(sqStack* s)</span><br><span class="line">&#123;</span><br><span class="line">	return (s-&gt;top - s-&gt;base);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	sqStack s;</span><br><span class="line">	char c;</span><br><span class="line">	double d, e;</span><br><span class="line">	int i &#x3D; 0;</span><br><span class="line">	char str[MAXBUFFER];	&#x2F;&#x2F;最大缓冲区</span><br><span class="line"></span><br><span class="line">	InitStack(&amp;s);</span><br><span class="line"></span><br><span class="line">	printf(&quot;请以逆波兰表达式的方式输入待计算数据，以#表示输入结束：\n&quot;);</span><br><span class="line">	scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line"></span><br><span class="line">	while (c !&#x3D; &#39;#&#39;)</span><br><span class="line">	&#123;</span><br><span class="line">		while (isdigit(c) || c &#x3D;&#x3D; &#39;.&#39;)		&#x2F;&#x2F;isdigit函数判断c是否为数字</span><br><span class="line">		&#123;</span><br><span class="line">			str[i++] &#x3D; c;</span><br><span class="line">			str[i] &#x3D; &#39;\0&#39;;</span><br><span class="line">			if(i&gt;10)</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;单次输入过大！\n&quot;);</span><br><span class="line">				return -1;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line">			if (c &#x3D;&#x3D; &#39; &#39;)</span><br><span class="line">			&#123;</span><br><span class="line">				d &#x3D; atof(str);      &#x2F;&#x2F;字符转化浮点</span><br><span class="line">				Push(&amp;s, d);</span><br><span class="line">				i &#x3D; 0;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		switch (c)</span><br><span class="line">		&#123;</span><br><span class="line">		case &#39;+&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			Push(&amp;s, d + e);</span><br><span class="line">			break;</span><br><span class="line">		case &#39;-&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			Push(&amp;s, d - e);</span><br><span class="line">			break;</span><br><span class="line">		case &#39;*&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			Push(&amp;s, d * e);</span><br><span class="line">			break;</span><br><span class="line">		case &#39;&#x2F;&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			if (e !&#x3D; 0)</span><br><span class="line">				Push(&amp;s, d &#x2F; e);</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;除数为0，错误！\n&quot;);</span><br><span class="line">				return -1;</span><br><span class="line">			&#125;</span><br><span class="line">			break;</span><br><span class="line"></span><br><span class="line">		default:</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line">	&#125;</span><br><span class="line">	Pop(&amp;s, &amp;d);</span><br><span class="line">	printf(&quot;\n最终结果为：%f\n&quot;, d);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='//music/Deep East Music - Monsieur Melody.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='//music/HOYO-MiX - Clouds.mp3'></li>
+                        
+                    
+                        
+                            <li title='2' data-url='//music/J.Fla - Natural.mp3'></li>
+                        
+                    
+                        
+                            <li title='3' data-url='//music/The Score - Born For This.mp3'></li>
+                        
+                    
+                        
+                            <li title='4' data-url='//music/雅-MIYAVI- - Samurai 45.mp3'></li>
+                        
+                    
+                        
+                            <li title='5' data-url='//music/小林未郁 - ThreeFiveNineFourε.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进栈操作"><span class="toc-number">1.</span> <span class="toc-text">进栈操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#出栈操作"><span class="toc-number">2.</span> <span class="toc-text">出栈操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逆波兰表达式"><span class="toc-number"></span> <span class="toc-text">逆波兰表达式</span></a>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>栈的初识 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="什么是栈？
+栈是一种后进先出的线性结构，比如平常的手枪和自动步枪，子弹在弹夹中补充时，最后填入的子弹会被第一次射击中射出。浏览器的浏览历史中，点击后退一步会跳转到距离现在最新点开的上一个网页，而不是,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">栈的初识</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">栈的初识</h1>
+        <div class="stuff">
+            <span>六月 13, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="什么是栈？"><a href="#什么是栈？" class="headerlink" title="什么是栈？"></a>什么是栈？</h3><hr>
+<p>栈是一种后进先出的线性结构，比如平常的手枪和自动步枪，子弹在弹夹中补充时，最后填入的子弹会被第一次射击中射出。<br>浏览器的浏览历史中，点击后退一步会跳转到距离现在最新点开的上一个网页，而不是最早点开的网页。</p>
+<p>官方定义：栈（Stack）是一个<b>后进先出</b>的线性表，他要求只在表尾进行删除和插入操作。</p>
+<p>栈在操作上的特殊要求和限制：</p>
+<ul>
+<li>栈的元素必须“<b>后进先出</b>”。</li>
+<li>栈的操作只能在这个线性表的表尾进行。</li>
+<li>在栈中，表尾称为栈的栈顶，表头称为栈的栈底。</li>
+</ul>
+<p>栈的插入操作（Push），叫做进栈，也称为压栈，入栈。<br>栈的删除操作（Pop），叫做出栈，也称为弹(tan)栈。</p>
+<h3 id="栈的存储结构"><a href="#栈的存储结构" class="headerlink" title="栈的存储结构"></a>栈的存储结构</h3><hr>
+<p>因栈是一种特殊的线性表，因此栈也存在顺序存储结构和链式存储结构。</p>
+<p>栈为空时叫“空栈”，栈顶等于栈底。当数据从栈顶进入，则栈顶和栈底分离，栈的当前容量会变大，数据出栈从栈顶弹出，栈顶下移，栈的当前容量会减小。</p>
+<img src="/img/数据结构（简述12）/图1.png">
+
+<p>栈的顺序存储结构定义代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    ElemType *base;</span><br><span class="line">    ElemType *top;</span><br><span class="line">    int stackSzie;</span><br><span class="line">&#125;sqStack;</span><br></pre></td></tr></table></figure>
+
+<p>其中包含三个元素，base是指向栈底的指针变量，top是指向栈顶的指针变量，stackSize是指示栈当前可用最大容量。</p>
+<ul>
+<li><b>创建栈</b></li>
+</ul>
+<p>创建栈的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#define STACK_INIT_SIZE 100;</span><br><span class="line">void initStack(sqStack *s)</span><br><span class="line">&#123;</span><br><span class="line">    s-&gt;base &#x3D; (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));</span><br><span class="line">    &#x2F;&#x2F;100乘分配的数据空间即，分配了100个数据元素的空间</span><br><span class="line">    if(!s-&gt;base)</span><br><span class="line">    &#123;</span><br><span class="line">        exit(0);</span><br><span class="line">    &#125;</span><br><span class="line">    s-&gt;top &#x3D; s-&gt;base;   &#x2F;&#x2F;空栈状态，栈顶等于栈底</span><br><span class="line">    s-&gt;stackSize &#x3D; STACK_INIT_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><b>入栈操作</b></li>
+</ul>
+<ol>
+<li>入栈操作又称为压栈操作，即向栈中存放数据。</li>
+<li>入栈操作在栈顶进行，每次向栈中压入一个数据，top指针+1，直到栈满。</li>
+</ol>
+<p>入栈操作的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#define STACKINCREMENT 10</span><br><span class="line"></span><br><span class="line">void Push(sqStack *s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;若栈满，追加空间</span><br><span class="line">    if(s-&gt;top - s-&gt;base &gt;&#x3D; s-&gt;stackSize)    &#x2F;&#x2F;判断栈顶减栈底是否比可用空间大</span><br><span class="line">    &#123;</span><br><span class="line">        s-&gt;base &#x3D; (ElemType *)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT) * sizeof(ElemType));</span><br><span class="line">        &#x2F;*realloc可以看作是malloc的伸展，用于在原分配的空间上进行加分配，</span><br><span class="line">        它会自动判断空间是否已满，如果空间已满会自动增加10个空间，</span><br><span class="line">        这个加分配不会只进行一次，而是需要进行几次他就会自动进行几次。</span><br><span class="line">        此处在加分配数据前写s-&gt;base是定位一下栈底坐标再进行加分配。</span><br><span class="line">        加分配过程需原空间大小加上需要加分配的空间大小，</span><br><span class="line">        实际上是重新选择一个更大的数重新分配空间。*&#x2F;</span><br><span class="line"></span><br><span class="line">        if(!s-&gt;base)</span><br><span class="line">            exit(0);</span><br><span class="line">        </span><br><span class="line">        s-&gt;top &#x3D; s-&gt;base + s-&gt;stackSize;    &#x2F;&#x2F;栈顶此时需要重新设置，设置栈顶</span><br><span class="line">        s-&gt;stackSize &#x3D; s-&gt;stackSize + STACKINCREMENT;   &#x2F;&#x2F;栈的空间大小也要重新定义。</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *(s-&gt;top) &#x3D; e;  &#x2F;&#x2F;放入数据</span><br><span class="line">    s-&gt;top++;   &#x2F;&#x2F;栈顶增加1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><b>出栈操作</b></li>
+</ul>
+<ol>
+<li>出栈操作就是在栈顶取出数据，栈顶指针随之下移的操作。</li>
+<li>每当从栈内弹出一个数据，栈的当前容量就-1。</li>
+</ol>
+<p>出栈操作的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void Pop(sqstack *s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">    if(s-&gt;top &#x3D;&#x3D; s-&gt;base)</span><br><span class="line">        return;</span><br><span class="line">    *e &#x3D; *--(s-&gt;top);</span><br><span class="line">    &#x2F;*因为栈顶实际上是指在栈的最新一个数据元素顶上的空间，因此需要</span><br><span class="line">    栈顶指针下移一位指向最新的数据元素，并将其存入*e中。*&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='//music/Deep East Music - Monsieur Melody.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='//music/HOYO-MiX - Clouds.mp3'></li>
+                        
+                    
+                        
+                            <li title='2' data-url='//music/J.Fla - Natural.mp3'></li>
+                        
+                    
+                        
+                            <li title='3' data-url='//music/The Score - Born For This.mp3'></li>
+                        
+                    
+                        
+                            <li title='4' data-url='//music/雅-MIYAVI- - Samurai 45.mp3'></li>
+                        
+                    
+                        
+                            <li title='5' data-url='//music/小林未郁 - ThreeFiveNineFourε.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是栈？"><span class="toc-number">1.</span> <span class="toc-text">什么是栈？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈的存储结构"><span class="toc-number">2.</span> <span class="toc-text">栈的存储结构</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>双向链表 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="双线链表其必要性在火车运货问题上可以见得。当存在A-B-C-D-E-F-G-H-I-J-K-L这几个点时，火车在J点，要运货到I点。正常的运作是J-K-L-A-B-C-D-E-F-G-H-I。十分的,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">双向链表</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">双向链表</h1>
+        <div class="stuff">
+            <span>六月 13, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>双线链表其必要性在火车运货问题上可以见得。<br>当存在A-B-C-D-E-F-G-H-I-J-K-L这几个点时，火车在J点，要运货到I点。正常的运作是J-K-L-A-B-C-D-E-F-G-H-I。十分的麻烦，因此火车在尾部也加了一个火车头，从而达到J-I的效果，双向链表也是如此。</p>
+<p>双向链表结点结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef struct DualNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    struct DualNode *prior;     &#x2F;&#x2F;前驱结点</span><br><span class="line">    struct DualNode *next;      &#x2F;&#x2F;后继结点</span><br><span class="line">&#125;DualNode, *DuLinkList;</span><br></pre></td></tr></table></figure>
+<img src="/img/数据结构（简述11）/图1.png">
+从上图可以看到不同于一般链表结点的data+next形式而是prior+data+next形式。判断为空的条件即自身指向自身，x->prior = x->prior; x->next = x->next;   
+以下为双向循环链表
+<img src="/img/数据结构（简述11）/图2.png">
+
+<h3 id="双向链表插入操作"><a href="#双向链表插入操作" class="headerlink" title="双向链表插入操作"></a>双向链表插入操作</h3><hr>
+<img src="/img/数据结构（简述11）/图3.png">
+以上为插入操作图示。
+插入操作很看重顺序，图示上已经标出操作顺序，不可打乱！
+
+<p>代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s-&gt;next &#x3D; p;</span><br><span class="line">s-&gt;prior &#x3D; p-&gt;prior;</span><br><span class="line">p-&gt;prior-&gt;next &#x3D; s;</span><br><span class="line">p-&gt;prior &#x3D; s;</span><br></pre></td></tr></table></figure>
+<p>图示插入操作原理为：</p>
+<ul>
+<li>令s结点的后继指向p，此时有两个结点的后继都指向p结点，但p结点的前驱只指向最前面的那个结点；</li>
+<li>s的前驱指向p的前驱，即s的前驱指向了最前面的结点；</li>
+<li>p的前驱的后继指向s，即最前面结点的后继指向s；</li>
+<li>p的前驱指向s，完成连接，插入完成。</li>
+</ul>
+<h3 id="双线链表删除操作"><a href="#双线链表删除操作" class="headerlink" title="双线链表删除操作"></a>双线链表删除操作</h3><hr>
+<img src="/img/数据结构（简述11）/图4.png">
+以上为删除操作图示。
+代码实现：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p-&gt;prior-&gt;next &#x3D; p-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior &#x3D; p-&gt;prior;</span><br><span class="line">free(p);</span><br></pre></td></tr></table></figure>
+
+<p>图示删除操作原理为：</p>
+<ul>
+<li>令p结点的前驱所指结点的的后继指向p结点后继所指结点，即p前面的结点后继指向p后面的结点；</li>
+<li>p后继所指结点的前驱指向p的前驱所指的结点，即p的后面结点的前驱指向p前面的结点，此时两个结点已经与p没有任何关系了；</li>
+<li>释放p结点，完成删除操作。</li>
+</ul>
+<h1 id="双向链表实践操作"><a href="#双向链表实践操作" class="headerlink" title="双向链表实践操作"></a>双向链表实践操作</h1><hr>
+<p>题目：<br>要求实现用户输入一个数字，使得26个字幕的排列发生变化，如用户输入3，输出结果：<br>DEFGHIJKLMNOPQRSTUVWXYZABC<br>即实现输入数字n后，将前n个字母依照原先的排列顺序将其排到最后一个字母Z的后面。<br>当用户输入-3，输出结果：<br>XYZABCDEFGHIJKLMNOPQRSTUVW<br>即实现输入数字-n后，将后n个字母依照原先的排列顺序将其排到第一个字母A的前面。</p>
+<p>完整代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">#define ERROR 0;</span><br><span class="line">#define OK 1;</span><br><span class="line"></span><br><span class="line">typedef char ElemType;</span><br><span class="line">typedef int Status;</span><br><span class="line"></span><br><span class="line">typedef struct DualNode</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data;</span><br><span class="line">	struct DualNode* next;</span><br><span class="line">	struct DualNode* prior;</span><br><span class="line">&#125;DualNode, *DualLinkList;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;初始化链表</span><br><span class="line">Status initDualList(DualLinkList* L)</span><br><span class="line">&#123;</span><br><span class="line">	DualNode* p, * q;	&#x2F;&#x2F;两个工具指针</span><br><span class="line"></span><br><span class="line">	*L &#x3D; (DualLinkList)malloc(sizeof(DualNode));</span><br><span class="line"></span><br><span class="line">	if (!(*L))</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	(*L)-&gt;next &#x3D; (*L)-&gt;prior &#x3D; NULL;	&#x2F;&#x2F;完成头结点初始化</span><br><span class="line"></span><br><span class="line">	p &#x3D; (*L);	&#x2F;&#x2F;先令p等于头结点</span><br><span class="line"></span><br><span class="line">	for (int i &#x3D; 0; i &lt; 26; i++)	&#x2F;&#x2F;因为要26个字母，因此循环26次</span><br><span class="line">	&#123;</span><br><span class="line">		q &#x3D; (DualNode*)malloc(sizeof(DualNode));</span><br><span class="line">		if (!q)</span><br><span class="line">		&#123;</span><br><span class="line">			return ERROR;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		q-&gt;data &#x3D; &#39;A&#39; + i;	&#x2F;&#x2F;让q的数据域存放字母，第一次为A+i即A+0等于A，第二次即A+1等于B</span><br><span class="line">		q-&gt;prior &#x3D; p;	&#x2F;&#x2F;令q的前驱指向p，第一次中即q的前驱指向头结点</span><br><span class="line">		q-&gt;next &#x3D; p-&gt;next;		&#x2F;&#x2F;令q的后继等于p的后继，即q的后继等于NULL</span><br><span class="line">		p-&gt;next &#x3D; q;	&#x2F;&#x2F;令p的后继指向q，在第一次中即，头结点的后继指向q</span><br><span class="line"></span><br><span class="line">		p &#x3D; q;</span><br><span class="line">		&#x2F;*</span><br><span class="line">		令p最后等于q</span><br><span class="line">		到了第二次即，q有了新的空间存放B，</span><br><span class="line">		q的前驱指向p即指向存放B的结点，</span><br><span class="line">		q的后继等于p的后继，扔等同于NULL，</span><br><span class="line">		p的后继指向q，即存放A的的结点的后继指向q，完成链接。</span><br><span class="line">		最后又令p等于q完成了第二次初始化</span><br><span class="line">		*&#x2F;</span><br><span class="line"></span><br><span class="line">		p-&gt;next &#x3D; (*L)-&gt;next;</span><br><span class="line">		(*L)-&gt;next-&gt;prior &#x3D; p;		&#x2F;&#x2F;将头结点排除在外，完成26个字母的封闭双向循环链表初始化</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;排序函数</span><br><span class="line">void Sort(DualLinkList* L, int i)</span><br><span class="line">&#123;</span><br><span class="line">	if (i &gt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		do</span><br><span class="line">		&#123;</span><br><span class="line">			(*L) &#x3D; (*L)-&gt;next;</span><br><span class="line">		&#125; while (--i);</span><br><span class="line">	&#125;</span><br><span class="line">	if (i &lt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		do</span><br><span class="line">		&#123;</span><br><span class="line">			(*L) &#x3D; (*L)-&gt;next;</span><br><span class="line">		&#125; while (++i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	DualLinkList L;</span><br><span class="line">	int i, n;</span><br><span class="line"></span><br><span class="line">	initDualList(&amp;L);</span><br><span class="line"></span><br><span class="line">	printf(&quot;请输入数字：&quot;);</span><br><span class="line">	scanf_s(&quot;%d&quot;, &amp;n);</span><br><span class="line"></span><br><span class="line">	printf(&quot;\n&quot;);</span><br><span class="line">	Sort(&amp;L, n);</span><br><span class="line"></span><br><span class="line">	for(i &#x3D; 0; i &lt; 26; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		L &#x3D; L-&gt;next;</span><br><span class="line">		printf(&quot;%c&quot;, L-&gt;data);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='//music/Deep East Music - Monsieur Melody.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='//music/HOYO-MiX - Clouds.mp3'></li>
+                        
+                    
+                        
+                            <li title='2' data-url='//music/J.Fla - Natural.mp3'></li>
+                        
+                    
+                        
+                            <li title='3' data-url='//music/The Score - Born For This.mp3'></li>
+                        
+                    
+                        
+                            <li title='4' data-url='//music/雅-MIYAVI- - Samurai 45.mp3'></li>
+                        
+                    
+                        
+                            <li title='5' data-url='//music/小林未郁 - ThreeFiveNineFourε.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#双向链表插入操作"><span class="toc-number">1.</span> <span class="toc-text">双向链表插入操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双线链表删除操作"><span class="toc-number">2.</span> <span class="toc-text">双线链表删除操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#双向链表实践操作"><span class="toc-number"></span> <span class="toc-text">双向链表实践操作</span></a>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

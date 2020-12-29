@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Bootstrap网格</title>
+    <url>/2020/06/11/Bootstrap%E7%BD%91%E6%A0%BC/</url>
+    <content><![CDATA[<h2 id="什么是Bootstrap网格？"><a href="#什么是Bootstrap网格？" class="headerlink" title="什么是Bootstrap网格？"></a>什么是Bootstrap网格？</h2><hr>
+<img src="/img/Bootstrap网格/图1.png">
+Bootstrap将网页横向默认的分为12个单元块，即12个网格块，而通过相关CSS内含样式可以将这12个单元块重新合并再分为四个三单元块，三个四单元块，两个六单元块等等。但始终记得一行中单元块总体不能超过12。
+
+<h3 id="网格系统工作原理"><a href="#网格系统工作原理" class="headerlink" title="网格系统工作原理"></a>网格系统工作原理</h3><hr>
+<ul>
+<li>行必须放置在 .container class 内，以便获得适当的对齐（alignment）和内边距（padding）。</li>
+<li>使用行来创建列的水平组。</li>
+<li>内容应该放置在列内，且唯有列可以是行的直接子元素。</li>
+<li>预定义的网格类，比如 .row 和 .col-xs-4，可用于快速创建网格布局。LESS 混合类可用于更多语义布局。</li>
+<li>列通过内边距（padding）来创建列内容之间的间隙。该内边距是通过 .rows 上的外边距（margin）取负，表示第一列和最后一列的行偏移。</li>
+<li>网格系统是通过指定您想要横跨的十二个可用的列来创建的。例如，要创建三个相等的列，则使用三个 .col-xs-4。</li>
+</ul>
+<h3 id="媒体限制"><a href="#媒体限制" class="headerlink" title="媒体限制"></a>媒体限制</h3><hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@media (max-width: @screen-xs-max) &#123; ... &#125;</span><br><span class="line">@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) &#123; ... &#125;</span><br><span class="line">@media (min-width: @screen-md-min) and (max-width: @screen-md-max) &#123; ... &#125;</span><br><span class="line">@media (min-width: @screen-lg-min) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>以此方式通过确定屏幕大小来确定可展示或者隐藏的内容，只有某个限定媒体才可查看内容写在以上代码中的限定样式后的{…}内。</p>
+<h3 id="网格选项总结"><a href="#网格选项总结" class="headerlink" title="网格选项总结"></a>网格选项总结</h3><hr>
+<img src="/img/Bootstrap网格/图2.png">
+
+<p>Bootstrap网格基本结构：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">   &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;col-*-*&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;col-*-*&quot;&gt;&lt;&#x2F;div&gt;      </span><br><span class="line">   &lt;&#x2F;div&gt;</span><br><span class="line">   &lt;div class&#x3D;&quot;row&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;....</span><br></pre></td></tr></table></figure>
+
+<p>在应用过程中，往往col-<em>-</em>是搭配使用的，比如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;col-xs-6 col-sm-4 col-md-6 col-lg-4&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>这样就可以精确限制在各个媒体设备上的展示效果。</p>
+<h3 id="响应列重置"><a href="#响应列重置" class="headerlink" title="响应列重置"></a>响应列重置</h3><hr>
+<p>有时候不恰当的模块浮动布局会让人很头疼，比如<br><img src="/img/Bootstrap网格/图3.png"></p>
+<p>但可以通过 .clearfix class来解决相关问题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 就让div中代码为空 --&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;clearfix&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>即可形成以下效果：<br><img src="/img/Bootstrap网格/图4.png"></p>
+<h3 id="偏移列"><a href="#偏移列" class="headerlink" title="偏移列"></a>偏移列</h3><p>有时候你想要让你的模块在一行中有所位置偏移，但利用绝对和相对定位又很麻烦而且达不到响应式效果。此时可以利用 .col-md-offset-* 类进行列偏移。范围是1-11。<br>比如有一个<div class="col-md-6">..</div>。因为之前提到一行是12个单位块，此div已经占用6个，因此偏移3个即令其达到居中效果.col-md-offset-3。</p>
+<p>相关代码片段：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;瞅瞅这偏移&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;row&quot; &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;col-md-6 col-md-offset-3&quot; </span><br><span class="line">        style&#x3D;&quot;background-color: #dedef8;box-shadow: </span><br><span class="line">        inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">            &lt;p&gt;我漂移了！</span><br><span class="line">            &lt;&#x2F;p&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>效果：<br><img src="/img/Bootstrap网格/图5.png"></p>
+<h3 id="嵌套列"><a href="#嵌套列" class="headerlink" title="嵌套列"></a>嵌套列</h3><p>顾名思义，嵌套效果，其实就是一个class=”row”里面的col-<em>-</em>里面的再一个class=”row”和col-<em>-</em><br>大概效果：<br><img src="/img/Bootstrap网格/图6.png"></p>
+<p>一次完整示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;测试一下&lt;&#x2F;title&gt;</span><br><span class="line">      &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">      &lt;!-- 引入 Bootstrap --&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.staticfile.org&#x2F;jquery&#x2F;2.1.1&#x2F;jquery.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">      &lt;link href&#x3D;&quot;https:&#x2F;&#x2F;cdn.staticfile.org&#x2F;twitter-bootstrap&#x2F;3.3.7&#x2F;css&#x2F;bootstrap.min.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;</span><br><span class="line"> </span><br><span class="line">      &lt;!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 --&gt;</span><br><span class="line">      &lt;!-- 注意： 如果通过 file:&#x2F;&#x2F;  引入 Respond.js 文件，则该文件无法起效果 --&gt;</span><br><span class="line">      &lt;!--[if lt IE 9]&gt;</span><br><span class="line">         &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;oss.maxcdn.com&#x2F;libs&#x2F;html5shiv&#x2F;3.7.0&#x2F;html5shiv.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">         &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;oss.maxcdn.com&#x2F;libs&#x2F;respond.js&#x2F;1.3.0&#x2F;respond.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">      &lt;![endif]--&gt;</span><br><span class="line">   &lt;&#x2F;head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">         &lt;h1&gt;来了老弟&lt;&#x2F;h1&gt;</span><br><span class="line">         &lt;div class&#x3D;&quot;row&quot; &gt;</span><br><span class="line">             &lt;div class&#x3D;&quot;col-md-6 col-md-offset-3&quot; </span><br><span class="line">             style&#x3D;&quot;background-color: #dedef8;box-shadow: </span><br><span class="line">             inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">                 &lt;p&gt;首先，我先给大家整个漂移。</span><br><span class="line">                 &lt;&#x2F;p&gt;</span><br><span class="line">             &lt;&#x2F;div&gt;</span><br><span class="line">             &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">             inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">                WTM直接二分天下</span><br><span class="line">                 &lt;&#x2F;div&gt;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">            inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">            这半边是我的。</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6 col-md-offset-3&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">            inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">               &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">               inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">               我给大伙套个娃</span><br><span class="line">               &lt;&#x2F;div&gt;</span><br><span class="line">               &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">               inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">               禁止套娃！</span><br><span class="line">               &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">         &lt;&#x2F;div&gt;</span><br><span class="line">     &lt;&#x2F;div&gt;</span><br><span class="line"> </span><br><span class="line">      &lt;!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) --&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;code.jquery.com&#x2F;jquery.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">      &lt;!-- 包括所有已编译的插件 --&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;js&#x2F;bootstrap.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">   &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p>效果图：<br><img src="/img/Bootstrap网格/图7.png"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>框架</category>
+        <category>Bootstrap</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>框架</tag>
+        <tag>Bootstrap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pixiv美图推荐——第一期</title>
+    <url>/2020/03/19/pixiv%E7%BE%8E%E5%9B%BE%E6%8E%A8%E8%8D%90%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E6%9C%9F/</url>
+    <content><![CDATA[<h1 id="pixiv美图推荐——第一期"><a href="#pixiv美图推荐——第一期" class="headerlink" title="pixiv美图推荐——第一期"></a>pixiv美图推荐——第一期</h1><p>本期主题为<strong><em>“撒狗粮”</em></strong><br>主要是以两人呈画的一些高质量美图进行分享。<br>虽然对于doge们来说是毒狗粮，但万一呢┗( ▔, ▔ )┛</p>
+<hr>
+<h2 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h2><img src="/img/20.03.19.01.jpg">
+来自日本的画师キャロット于2020年2月24日发表
+
+<p><em>pixivid:79704252</em><br>从キャロット的小仓库里可以看出他对蝴蝶忍和富冈义勇这对“遗憾的情侣”是十分中意的。<br>他最近的二十多张作品几乎全是富冈义勇与蝴蝶忍的同框出镜。<br>总之甜就完事儿了。这幅画我尤为喜欢，不单单是画的精致，而是图片内的元素布置恰到好处。绿叶与枝条的颜色与富冈义勇的衣服相对应。而樱花与紫罗兰同样是与蝴蝶忍的衣服与发色相对应。整幅图画的配色十分平衡，恰到好处。<br>紫罗兰的话语：Please,trust me</p>
+<hr>
+<h3 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h3><img src="/img/20.03.19.02.jpg">
+来自中国的画师DM喵于2020年3月8日发表
+
+<p><em>pixivid:79964956</em><br>为什么选这个图做推荐，因为撒狗粮不能少了橘里橘气!<br>那为什么偏偏是这个图？因为他反转了拉普兰德和德克萨斯的地位</p>
+<p><strong>一  转  攻  势  ！</strong></p>
+<hr>
+<h3 id="Part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h3><img src="/img/20.03.19.03.jpg">
+来自日本的画师ぴよ吉于2020年3月16日发表
+
+<p><em>pixivid:80150446</em><br>地缚少年花子君（×）<br>色气男友出道记（√）<br>根据画师本人的个人介绍，他是百合流的画师（百合大法好）<br>他本人最近近四十多幅作品中，除了花子君和八寻宁宁这对异性情侣同框之外，就只剩下了橘里橘气<br>但就是这个橘子头画师，把攻气拉满的花子君画的男友力十足（只是面部表情的略微改变，居然改变了花子君整体画风 Orz）<br>这幅画i了，希望太太多出点正常流！</p>
+<hr>
+<hr>
+<p>好啦，第一期美图推荐就到这里，这期略微仓促。<br>后面会精心准备更多图片以优良的文案向大家分享！<img src="/img/20.03.19.final.jpg" width=20%></p>
+]]></content>
+      <categories>
+        <category>美图推荐</category>
+      </categories>
+      <tags>
+        <tag>美图推荐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库期末碎片化知识点复习</title>
+    <url>/2020/12/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%9F%E6%9C%AB%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%8D%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="第一章-数据库系统概述"><a href="#第一章-数据库系统概述" class="headerlink" title="第一章 数据库系统概述"></a>第一章 数据库系统概述</h2><p><b>数据</b> </p>
+<ul>
+<li>数据是描述现实世界中各种具体事物或抽象概念的符号标记，除了常用的数字数据外，文字、图形、图像、声音等信息也都是数据。</li>
+</ul>
+<p><b>数据库系统阶段特点</b></p>
+<ul>
+<li>数据结构化：数据结构化是数据库系统与文件系统的根本区别。</li>
+<li>较高的数据共享性：数据共享是指允许<b>多个用户同时存取数据而互不影响</b>，该特征是数据库技术先进性的体现。</li>
+<li>较高的数据独立性：所谓数据独立是指<b>数据与应用程序的彼此独立</b>，他们之间不存在相互依赖的关系。</li>
+<li>数据由DBMS统一管理和控制：数据库的共享是<b>并发共享</b> ，即多个用户可以同时存取数据库中的数据，因此DBMS还必须提供数据的统一管理和控制功能。</li>
+</ul>
+<p><b>数据库系统的组成</b> </p>
+<img src="/img/数据库期末复习/img1.jpg">
+
+<hr>
+<p>由底层到外层：<b>硬件 -&gt; 数据库 -&gt; OS -&gt; DBMS -&gt; 开发工具 -&gt; 数据库应用系统 -&gt; 人员</b></p>
+<p><b>概念模型</b></p>
+<ul>
+<li>实体：实体是客观存在并且可以相互区分的事物，人、物、概念、状态都可以用实体表示，也可指事物之间的具体联系，如一名学生、一名老师。</li>
+<li>属性：属性是<b>实体所具有的某些特性</b>。实体是由<b>属性组成的</b>，通过<b>属性</b>对<b>实体</b>进行<b>描述</b>。</li>
+</ul>
+<p><b>实体关系模型（E-R图）</b></p>
+<img src="/img/数据库期末复习/img2.jpg">
+
+<hr>
+<p>由上图可以知道E-R图的画法：</p>
+<ul>
+<li><b>矩形：</b>表示实体。</li>
+<li><b>椭圆形：</b>表示实体所含属性</li>
+<li><b>菱形：</b>表示两实体之间的联系（<em>两实体之间必须有一联系作为介质</em> ）</li>
+<li><b>N、M、1：</b>表示对应数量【图中<em>课程</em> 与<em>选修</em> 之间的N，以及<em>选修</em> 与<em>学生</em> 之间的M表示<b>N个课程由M个学生选修</b>或<b>M个学生选修N个课程</b>】</li>
+</ul>
+<p>一个复杂的E-R图（供学习理解）</p>
+<img src="/img/数据库期末复习/img3.jpg">
+
+<hr>
+<p><b>关系模型</b></p>
+<img src="/img/数据库期末复习/img4.jpg">
+
+<hr>
+<ul>
+<li>关系：一个关系就是一张二维表，每个关系都有一个关系名。</li>
+<li>元组：二维表中的行称为元组，每一行是一个元组，元组对应存储文件中的一个记录。</li>
+<li>属性：二维表的列称为属性，每一列有一个属性名，属性值是属性的具体值，属性对应存储文件中的一个字段。</li>
+<li>域：域是属性的取值范围。</li>
+<li>关系模式：对关系的信息结构及语义限制的描述称为关系模式，用关系名和包含的属性名的集合表示。</li>
+<li>关键字或码：在关系的属性中，能够用来唯一标识元组的属性（或属性组合）称为关键字或码。</li>
+<li>候选关键字或候选码：如果一个关系中存在多个属性（或属性组合）都能用来唯一标识该关系中的元组，这些属性都成为该关系的候选关键字或候选码，候选码可以有多个。</li>
+<li>主键或主码：在一个关系的若干候选关键字中，被指定作为关键字的候选关键字称为该关系的主键或主码。</li>
+<li>主属性和非主属性：在一个关系中，包含在任何候选关键字中的各个属性都成为主属性，不包含在任一候选关键字中的属性称为非主属性。（图中<em>职工号、姓名</em> 为主属性，<em>性别、年龄</em> 为非主属性）</li>
+<li>外键或外码：一个关系的某个属性（或属性组合）不是该关系的主键的一部分，却是另一个关系的主键，则称这样的属性为该关系的外键或外码。</li>
+</ul>
+<hr>
+<h2 id="第二章-关系数据库"><a href="#第二章-关系数据库" class="headerlink" title="第二章 关系数据库"></a>第二章 关系数据库</h2><p><b>关系的性质</b></p>
+<ul>
+<li>列是同质的，<em>即每一列中的分量是同一类型的数据，来自同一个域</em> 。</li>
+<li>在同一关系中，列的次序无关紧要，即<em>列的排序是不分先后的</em> 。</li>
+<li>在同一关系中，不同的列的数据可以是同一种数据类型，但各属性的名称必须互不相同。</li>
+<li>在同一关系中，任意两个元组都<b>不能完全相同</b>。</li>
+<li>在同一关系中，元组的位置无关紧要，即排行不分先后，可以任意交换两行的位置。</li>
+<li>关系中的每个属性必须是单值，即不可再分，这就要求关系的结构<b>不能嵌套</b>，这是最基本的条件。</li>
+</ul>
+<p><b>笛卡尔积</b></p>
+<ul>
+<li>笛卡尔积记作：A×B={(x,y)|x∈A∧y∈B}</li>
+<li>设A,B为集合，用A中元素为第一元素，B中元素为第二元素构成有序对，所有这样的有序对组成的集合叫做A与B的笛卡尔积，记作AxB</li>
+</ul>
+<p>例如，A={a,b}, B={0,1,2}，则</p>
+<p>A×B={(a, 0), (a, 1), (a, 2), (b, 0), (b, 1), (b, 2)}</p>
+<p>B×A={(0, a), (0, b), (1, a), (1, b), (2, a), (2, b)}</p>
+<p><b>专门的关系计算——选择</b></p>
+<img src="/img/数据库期末复习/img5.png">
+
+<p><b>用于查询满足某一条件的元组</b></p>
+<p>如果要查询student表中的专业是数学系的学生。</p>
+<p>即：<em>特殊符号（下标：专业）=’数学系’【上标（student）】</em></p>
+<p>详细例子看书P29-4。</p>
+<p><b>专门的关系计算——投影</b></p>
+<img src="/img/数据库期末复习/img6.png">
+
+<p><b>用于查询所有元组中满足某些条件的属性</b></p>
+<p>如果要查询课程表中的课程名和课程号</p>
+<p>即：<em>特殊符号（下标：课程名，课程号）（课程表）</em></p>
+<p>详细例子看书P29-4</p>
+<p><b>专门的关系运算——连接</b></p>
+<img src="/img/数据库期末复习/img8.jpg">
+
+<img src="/img/数据库期末复习/img7.jpg">
+
+<p>连接是比较两个表的笛卡尔积，因此要对比较大小的值每一个都互相匹配一遍，将满足连接条件的所有元组单独成表。</p>
+<p>其中自然连接可以看到原两表中R.B和S.B的值相同，即将该元组加入新表。目的为了筛选掉重复信息。</p>
+<p>一般条件下，经常使用自然连接。</p>
+<p>详细例子看书P29-4。</p>
+<p><b>三大范式</b></p>
+<ul>
+<li><b>第一范式：</b><ul>
+<li>每个属性值域不可再分即满足第一范式。例如工资下分基本工资、职务工资等便不满足第一范式</li>
+</ul>
+</li>
+<li><b>第二范式：</b><ul>
+<li>若主码为学号, 课程名称的组合。存在决定关系：(学号, 课程名称) → (姓名, 年龄, 成绩, 学分)。但又存在(课程名称) → (学分)<br>(学号) → (姓名, 年龄)。有多余匹配，造成数据冗余，因此不符合第二范式。</li>
+</ul>
+</li>
+<li><b>第三范式：</b><ul>
+<li>存在传递关系关键字段 → 非关键字段x → 非关键字段y。例如”A → B → C”，若存在A → C，则不满足第三范式。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第三章-数据库设计"><a href="#第三章-数据库设计" class="headerlink" title="第三章 数据库设计"></a>第三章 数据库设计</h2><p><b>将E-R图转化为关系数据模型</b></p>
+<ul>
+<li><p>实体的转换</p>
+<p>  一个实体转化为一个关系模式，实体属性即关系模式的属性，实体主码即关系模式主码。</p>
+</li>
+<li><p>联系的转换</p>
+<p>  在E-R图中，菱形表示实体间的联系，用无向边分别把菱形与有关实体连接起来，并在无向边旁注明了联系的类型。而在关系数据模型中，实体和联系都用关系来表示。</p>
+</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><p>1:1联系的转换</p>
+<img src="/img/数据库期末复习/img9.jpg">
+
+<p>  如图内，有两种转换方法，一种是独立型，即将联系、实体分别转换成关系模式，第二种是整合型，将联系和实体整合转换成关系模式。</p>
+<p>  方法一：</p>
+<p>  转换成以下关系模式：</p>
+<p>  班级（<u>班号</u>，系别，班主任，入学时间）</p>
+<p>  班长（<u>学号</u>，姓名，性别，年龄）</p>
+<p>  班级-班长（<u>班号，学号</u>，任期）</p>
+<p>  &nbsp;</p>
+<p>  方法二：（<em>因为任期是班长的任期而不是班级的任期，因此将任期整合在班长中</em> ）</p>
+<p>  班级（<u>班号</u>，系别，班主任，入学时间）</p>
+<p>  班长（<u>学号</u>，姓名，性别，年龄，班号，<b>任期</b>）</p>
+<p>  &nbsp;</p>
+</li>
+<li><p>1:N联系的转换</p>
+<img src="/img/数据库期末复习/img10.jpg">
+
+<p>  方法一：（<em>关系的主码为N端实体的主码</em> ）</p>
+<p>  转换成以下关系模式：</p>
+<p>  系（<u>系号</u>，系名，系主任）</p>
+<p>  教师（<u>教师号</u>，教师名，年龄，职称）</p>
+<p>  工作（<u>教师号</u>，系号，入系日期）</p>
+<p>  &nbsp;</p>
+<p>  方法二：（<em>联系合并到N端实体</em> ）</p>
+<p>  转换成以下关系模式：</p>
+<p>  系（<u>系号</u>，系名，系主任）</p>
+<p>  教师（<u>教师号</u>，教师名，年龄，职称，系号，<b>入系日期</b>）</p>
+<p>  &nbsp;</p>
+</li>
+<li><p>M:N联系的转换</p>
+<img src="/img/数据库期末复习/img11.jpg">
+
+<p>  方法一：</p>
+<p>  职工（<u>职工号</u>，姓名，性别，年龄，职务）</p>
+<p>  项目（<u>项目号</u>，项目名，起始日期，鉴定日期）</p>
+<p>  参加（<u>职工号，项目号</u>，薪酬）</p>
+</li>
+</ul>
+<hr>
+<h2 id="第四章-SQL-Server-2008基础"><a href="#第四章-SQL-Server-2008基础" class="headerlink" title="第四章 SQL Server 2008基础"></a>第四章 SQL Server 2008基础</h2><p><b>T-SQL语言的分类</b></p>
+<ul>
+<li><p>数据定义语言（DDL）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">CREATE</td>
+<td align="center">创建数据库或数据库对象</td>
+<td align="center">不同数据库对象的创建，其CREATE语句的语法形式不同</td>
+</tr>
+<tr>
+<td align="center">ALTER</td>
+<td align="center">修改数据库或数据库对象</td>
+<td align="center">不同数据库对象的修改，其ALTER语句的语法形式不同</td>
+</tr>
+<tr>
+<td align="center">DROP</td>
+<td align="center">删除数据库或数据库对象</td>
+<td align="center">不同数据库对象的删除，其DROP语句的语法形式不同</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>数据操作语言（DML）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">INSERT</td>
+<td align="center">插入数据</td>
+<td align="center">插入一行或多行数据到表或视图末尾</td>
+</tr>
+<tr>
+<td align="center">UPDATE</td>
+<td align="center">修改数据</td>
+<td align="center">既可修改表或视图的一行数据，也可修改一组或全部数据</td>
+</tr>
+<tr>
+<td align="center">DELETE</td>
+<td align="center">删除数据</td>
+<td align="center">可根据条件删除表或视图中指定的数据行或全部数据行</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>数据控制语言（DCL）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GRANT</td>
+<td align="center">授予权限</td>
+<td align="center">可把语句许可成对象许可的权限授予其他用户或角色</td>
+</tr>
+<tr>
+<td align="center">REVOKE</td>
+<td align="center">撤销权限</td>
+<td align="center">与GRANT的功能相反，但不影响该用户或角色从其他角色中作为成员继承许可权限</td>
+</tr>
+<tr>
+<td align="center">DENY</td>
+<td align="center">禁止权限</td>
+<td align="center">功能与REVOKE相似，不同之处是除收回权限外，还禁止从其他角色继承许可权限</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>数据查询语言（DQL）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT</td>
+<td align="center">检索数据</td>
+<td align="center">从表或视图中检索需要的数据，是使用最频繁的SQL语句之一</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<hr>
+<h2 id="第五章-数据库的概念和操作"><a href="#第五章-数据库的概念和操作" class="headerlink" title="第五章 数据库的概念和操作"></a>第五章 数据库的概念和操作</h2><p><b>SQL Server 2008中数据库文件的类型</b></p>
+<ul>
+<li>主数据文件：主数据文件是数据库的起点，指向是数据库中的其他文件。每个数据库都<b>有且只有一个主数据文件</b>。文件扩展名.mdf</li>
+<li>辅助数据文件：除<b>主数据</b>文件以外的<b>其他所有数据文件</b>都是<b>辅助数据文件</b>。某些数据库可能不含有任何辅助数据文件，而有些数据库有多个辅助数据文件。文件扩展名.ndf</li>
+<li>事务日志文件：日志文件包括了用于<b>恢复数据库的所有日志信息</b>。每个数据库必须<b>至少有一个</b>日志文件，也可以有多个。SQL Server 2008中采用事务日志提前写入的方式，即对数据库的修改先写进日志，再写入数据库。文件扩展名.ldf</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>逻辑数据库</b></p>
+<ul>
+<li><p>master数据库</p>
+<p>  master数据库是SQL Server 2008中的主数据库，它是最重要的<b>系统数据库</b>，记录系统中的所有系统级信息。对其他数据库实施控制和管理功能。</p>
+</li>
+<li><p>model数据库</p>
+<p>  model数据库为用户新创建的数据库提供模板，它包含用户数据库中应该包含的所有系统表结构。用户创建数据库时，系统会自动把model数据库中的内容复制到新建的用户数据库中。</p>
+</li>
+<li><p>msdb数据库</p>
+<p>  msdb数据库记录备份及还原的历史信息、维护计划信息、作业信息、异常信息以及操作者信息等。它可以为SQL Server代理程序提供要调度的警报和作业等信息。</p>
+</li>
+<li><p>tempdb数据库</p>
+<p>  tempdb数据库是<b>临时的</b>，每次打开SQL Server它都将被重新创建。tempdb数据库用于存放临时表和临时数据库对象的存储过程，它是一个全局资源。</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>创建数据库</b></p>
+<p>基本语句</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE STUDENT1</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库名为 <em>STUDENT2</em> 的数据库，包含一个主数据文件和一个事务日志文件。主数据文件逻辑名为 <em>STUDENT2_DATA</em> ，操作系统文件名称为 <em>STUDENT2_DATA.MDF</em> ，初始容量大小为5MB，最大容量为20MB，文件增长量为20%。事务日志文件的逻辑名为 <em>STUDENT2_LOG</em> ，物理文件名为 <em>STUDENT2_LOG.LDF</em> ，初始容量为5MB，最大容量为10MB，文件增长量为2MB。数据文件和事务日志文件都放在F盘根目录下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE STUDENT2</span><br><span class="line">ON PRIMARY</span><br><span class="line">(NAME &#x3D; &#39;STUDENT2_DATA&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT2_DATA.MDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 20MB,</span><br><span class="line">FILEGROWTH &#x3D; 20% )</span><br><span class="line">LOG ON</span><br><span class="line">(NAME &#x3D; &#39;STUDENT2_LOG&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT2_LOG.LDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 10MB,</span><br><span class="line">FILEGROWTH &#x3D; 2MB )</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库名为 <em>STUDENTS</em> 的数据库，包含多个数据文件和多个事务日志文件。数据文件逻辑名为 <em>STUDENT1</em> 和 <em>STUDENT2</em> ，操作系统文件名称为 <em>STUDENT1.MDF</em> 和 <em>STUDENT2.MDF</em> ，初始容量大小为5MB和10MB，最大容量为无限大和100MB，文件增长量为10%和1MB，主数据文件 <em>STUDENT1</em> 属于 <em>PRIMARY</em> 文件组，辅助数据文件 <em>STUDENT2</em> ，属于新建文件分组 <em>FG1</em> 。事务日志文件的逻辑名为 <em>STUDENTLOG1</em> 和 <em>STUDENTLOG2</em> ，物理文件名为 <em>STUDENTLOG1.LDF</em> 和 <em>STUDENTLOG2.LDF</em> ，初始容量都为5MB，最大容量为50MB，文件增长量为1MB。数据文件和事务日志文件都放在F盘根目录下。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE STUDENTS</span><br><span class="line">ON PRIMARY</span><br><span class="line">(NAME &#x3D; &#39;STUDENT1&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT1.MDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; unlimited,</span><br><span class="line">FILEGROWTH &#x3D; 10% )，</span><br><span class="line">FILEGROUP FG1</span><br><span class="line">(NAME &#x3D; &#39;STUDENT2&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT2.MDF&#39;,</span><br><span class="line">SIZE &#x3D; 10MB,</span><br><span class="line">MAXSIZE &#x3D; 100MB,</span><br><span class="line">FILEGROWTH &#x3D; 1MB )</span><br><span class="line">LOG ON</span><br><span class="line">(NAME &#x3D; &#39;STUDENTLOG1&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENTLOG1.LDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 50MB,</span><br><span class="line">FILEGROWTH &#x3D; 1MB ),</span><br><span class="line">(NAME &#x3D; &#39;STUDENTLOG2&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENTLOG2.LDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 50MB,</span><br><span class="line">FILEGROWTH &#x3D; 1MB )</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第六章-表的操作"><a href="#第六章-表的操作" class="headerlink" title="第六章 表的操作"></a>第六章 表的操作</h2><p><b>创建表</b></p>
+<p>在数据库 <em>teaching</em> 中创建 <em>course</em> 表，该表结构如图：<br><img src="/img/数据库期末复习/img12.jpg"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE TABLE course</span><br><span class="line">(cno        char(4) PRIMARY KEY,</span><br><span class="line">cname       nvarchar(20) NOT NULL,</span><br><span class="line">classhour   tinyint,</span><br><span class="line">credit      tinyint</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>创建和删除FOREIGN KEY约束</b></p>
+<p>在数据库 <em>STUDENT1</em> 中创建一个 “<em>成绩</em> ” 表，包括 “<em>学号</em> ” 、 “<em>课程号</em> ”、 “<em>成绩</em> ” 字段，并为 “<em>成绩</em> ” 表创建<b>外键</b>约束，该约束把 “<em>成绩</em> ” 表中的 “<em>学号</em> ” 字段和 “<em>学生</em> ” 表中的 “<em>学号</em> ” 字段关联起来。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">CREATE TABLE 成绩</span><br><span class="line">( 学号      char(6)  CONSTRAINT f_st_pk  FOREIGN KEY REFERENCES 学生(学号),</span><br><span class="line">  课程号    char(4),</span><br><span class="line">  成绩      int )</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>表中插入数据</b></p>
+<p>在 <em>teaching</em> 数据库的 <em>student</em> 表中插入一行数据，即 “<em>sno，sname，ssex，grade</em> ” 值为 “ ‘1600215’，‘刘玲玲’，‘女’，‘16级’ ”。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">INSERT INTO student(sno,sname,ssex,grade)</span><br><span class="line">VALUE(&#39;1600215&#39;,&#39;刘玲玲&#39;,&#39;女&#39;,&#39;16级&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>STUDENT1</em> 数据库的 “<em>学生</em> ” 表中插入3行数据，即“ ‘160102’，‘王小玲’，‘130212199907190926’，‘女’ ” 、 “ ‘160103’，‘王伟’，‘130212199809100871’，‘男’ ” 、 “ ‘160104’，‘张大力’，‘130212199702150812’，‘男’ ”。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">INSERT INTO 学生 VALUE(&#39;160102&#39;,&#39;王小玲&#39;,&#39;130212199907190926&#39;,&#39;女&#39;),</span><br><span class="line">                      (&#39;160103&#39;,&#39;王伟&#39;,&#39;130212199809100871&#39;,&#39;男&#39;),</span><br><span class="line">                      (&#39;160104&#39;,&#39;张大力&#39;,&#39;130212199702150812&#39;,&#39;男&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>表中修改数据</b></p>
+<p>将 <em>STUDENT1</em> 数据库的 “<em>学生</em> ” 表中的 “<em>性别</em> ” 字段的值设为 “<em>男</em> ”。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">UPDATE 学生 SET 性别 &#x3D; &#39;男&#39;</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>STUDENT1</em> 数据库的 “<em>学生</em> ” 表中添加 “<em>备注</em> ” 字段 <em>navchar(20)</em> ， “<em>备注</em> ” 字段的信息为 “<em>已毕业</em> ”。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">ALTER TABLE 学生</span><br><span class="line">ADD 备注 navchar(20)</span><br><span class="line">UPDATE 学生 SET 备注 &#x3D; &#39;已毕业&#39;</span><br></pre></td></tr></table></figure>
+
+<p>在 “<em>学生</em> ” 表中将学号为 “<em>160101</em> ” 的学生的姓名改为 “<em>王武</em> ”。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">UPDATE 学生 SET 姓名 &#x3D; &#39;王武&#39; WHERE 学号 &#x3D; &#39;160101&#39;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>表中删除数据</b></p>
+<p>删除 “<em>学生</em> ” 表中 “<em>160101</em> ” 号学生的记录。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">DELETE 学生 WHERE 学号 &#x3D; &#39;160101&#39;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第七章-数据库查询"><a href="#第七章-数据库查询" class="headerlink" title="第七章 数据库查询"></a>第七章 数据库查询</h2><p><b>SELECT查询语法</b></p>
+<ul>
+<li>INTO XXX：指定使用结果集创建新表。</li>
+<li>FROM {XXX}：指定要从中检索数据的表名或视图名。</li>
+<li>WHERE {XXX}：定义了源表中的行要满足SELECT语句的要求所必须达到的条件。</li>
+<li>GROUP BY{XXX}：根据列中的值将结果集分成组。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>投影查询</b></p>
+<p>查询 <em>teaching</em> 数据库中学生的姓名、性别和专业。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sname,ssex,specialty FROM student</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>course</em> 表的所有记录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM course        &#x2F;&#x2F; * 表示所有列</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>student</em> 表的专业名称，滤掉重复行。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT DISTINCT specialty FROM student</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>course</em> 表的前三行信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT top 3 * FROM course</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>course</em> 表的前50%行的信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT top 50 percent * FROM course</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>student</em> 表中所有学生的学号、姓名，将结果中各列的标题分别指定为汉字 “学号” 和 “姓名” 。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno AS 学号, sname AS 姓名 FROM student</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>sc</em> 表，按150分制计算成绩。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,cno,score150 &#x3D; score*1.50 FROM sc</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>选择查询</b></p>
+<p>常用查询条件：</p>
+<table>
+<thead>
+<tr>
+<th align="center">查 询 条 件</th>
+<th align="center">谓 词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">比较运算符</td>
+<td align="center">=、&gt;、&lt;、&gt;=、&lt;=、!=、&lt;&gt;、!&gt;、!&lt;</td>
+</tr>
+<tr>
+<td align="center">确定范围</td>
+<td align="center">BETWEEN AND、NOT BETWEEN AND</td>
+</tr>
+<tr>
+<td align="center">确定集合</td>
+<td align="center">IN、NOT IN</td>
+</tr>
+<tr>
+<td align="center">字符匹配</td>
+<td align="center">LIKE、NOT LIKE</td>
+</tr>
+<tr>
+<td align="center">空值</td>
+<td align="center">IS NULL、IS NOT NULL</td>
+</tr>
+<tr>
+<td align="center">多重条件</td>
+<td align="center">AND、OR、NOT</td>
+</tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>查询 <em>teaching</em> 数据库的 <em>sc</em> 表中成绩大于等于60的学生的学号、课程号和成绩。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM sc WHERE score &gt;&#x3D; 60</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 “计算机” 专业的 “男” 生的信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM student WHERE specialty &#x3D; &#39;计算机&#39; AND ssex &#x3D; &#39;男&#39;</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 “计算机” 专业学生或所有专业 “男” 生的信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM student WHERE specialty &#x3D; &#39;计算机&#39; OR ssex &#x3D; &#39;男&#39;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初识Bootstrap框架</title>
+    <url>/2020/06/11/%E5%88%9D%E8%AF%86Bootstrap%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h1 id="什么是Bootstrap？"><a href="#什么是Bootstrap？" class="headerlink" title="什么是Bootstrap？"></a>什么是Bootstrap？</h1><hr>
+<p>Bootstrap是应用于快速开发Web应用程序和网站的前端框架。其技术基于HTML、CSS、JS。<br>Bootstrap主要应用于响应式设计方便开发者编写一个在任何设备都方便查看且简洁美观的网站。</p>
+<p>Bootstrap的优点：</p>
+<ul>
+<li><b>移动设备优先：</b>框架包含了贯穿于整个库的移动设备优先的样式。</li>
+<li><b>浏览器支持：</b>所有主流浏览器都支持Bootstrap。</li>
+<li><b>容易上手：</b>没啥说的，入门涉及JS方面代码较少，主要是HTML、CSS。</li>
+<li><b>响应式设计：</b>Bootstrap响应式CSS能够自适应于台式机、平板电脑和手机等相关设备。</li>
+</ul>
+<hr>
+<h2 id="移动设备的优先支持"><a href="#移动设备的优先支持" class="headerlink" title="移动设备的优先支持"></a>移动设备的优先支持</h2><hr>
+<p>有时候开发者在开发网站时，可能会遇到想要确定网站的布局样式，不希望它在不同设备上出现不同的效果，此时可以利用在head标签内添加viewport meta 标签。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>width 属性控制设备的宽度。假设您的网站将被带有不同屏幕分辨率的设备浏览，那么将它设置为 device-width 可以确保它能正确呈现在不同设备上。</p>
+<p>initial-scale=1.0 确保网页加载时，以 1:1 的比例呈现，不会有任何的缩放。</p>
+<p>在移动设备浏览器上，通过为 viewport meta 标签添加 user-scalable=no 可以禁用其缩放（zooming）功能。</p>
+<p>通常情况下，maximum-scale=1.0 与 user-scalable=no 一起使用。这样禁用缩放功能后，用户只能滚动屏幕，就能让您的网站看上去更像原生应用的感觉。</p>
+<h2 id="响应式图像"><a href="#响应式图像" class="headerlink" title="响应式图像"></a>响应式图像</h2><hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;...&quot; class&#x3D;&quot;img-responsive&quot; alt&#x3D;&quot;响应式图像&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>通过添加 img-responsive class 可以让 Bootstrap 3 中的图像对响应式布局的支持更友好。</p>
+<h2 id="容器（Container）"><a href="#容器（Container）" class="headerlink" title="容器（Container）"></a>容器（Container）</h2><hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>反正写Bootstrap框架下的代码，套在这里面就对了。</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>框架</category>
+        <category>Bootstrap</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>框架</tag>
+        <tag>Bootstrap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构（基础）</title>
+    <url>/2020/05/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p><b>数据结构</b>是相互之间存在一种或多种特定关系的数据元素的集合。</p>
+<p>数据结构分<b>逻辑结构</b>和<b>存储结构</b>。</p>
+<h2 id="1-逻辑结构"><a href="#1-逻辑结构" class="headerlink" title="1. 逻辑结构"></a>1. 逻辑结构</h2><hr>
+<p>逻辑结构可以看作是具体问题中抽象出的数学模型。<br>逻辑结构两大要素：<b>数据元素</b>、<b>关系</b>。<br>四大逻辑结构：集合结构（统一集合无对应关系）、线性结构（一对一）、树结构（一对多）、图结构（多对多）。<br><img src="/img/数据结构（基础）/图1.png"></p>
+<h2 id="2-存储结构"><a href="#2-存储结构" class="headerlink" title="2. 存储结构"></a>2. 存储结构</h2><hr>
+<p>数据对象在计算机中的存储表示称为数据的<b>存储结构</b>,也称为<b>物理结构</b>。</p>
+<p>（1）顺序存储结构</p>
+<p>利用元素在存储器中的相对位置表达数据元素间的逻辑关系，比如由学号排序的学生信息表。（根据学生学号进行位置一一分配，明确上一个才能分配下一个）</p>
+<p>（2）链式存储结构</p>
+<p>一个结点占用两个存储单元，一个存储结点信息，一个存储后继结点的首地址。（让指针指向下个结点的地址进行联系）</p>
+<img src="/img/数据结构（基础）/图二.png">  
+
+<h2 id="3-数据类型和抽象数据类型"><a href="#3-数据类型和抽象数据类型" class="headerlink" title="3. 数据类型和抽象数据类型"></a>3. 数据类型和抽象数据类型</h2><hr>
+<p><b>1. 数据类型</b></p>
+<p><b>数据类型</b>是一个值的集合和定义在这个值集上的一组操作的总称。</p>
+<p><b>2. 抽象数据类型</b></p>
+<p><b>抽象数据类型</b>一般指由用户定义的、表示应用问题的数学模型以及定义在这个模型上的一组操作的总称。<br>包括三部分：数据对象、数据对象上的关系集合、对数据对象的基本操作的集合。</p>
+<p>其伪代码：</p>
+<pre><code>ADT 抽象数据类型名{
+  数据对象：&lt;数据对象的定义&gt;  
+  数据关系：&lt;数据关系的定义&gt;  
+  基本操作：&lt;基本操作的定义&gt;  
+}ADT 抽象数据类型名</code></pre><p>基本操作定义格式：</p>
+<pre><code>基本操作名（参数表）
+  初始条件：&lt;初始条件描述&gt;
+  操作结果：&lt;操作结果描述&gt;</code></pre><div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>双向链表</title>
+    <url>/2020/06/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B011%EF%BC%89/</url>
+    <content><![CDATA[<p>双线链表其必要性在火车运货问题上可以见得。<br>当存在A-B-C-D-E-F-G-H-I-J-K-L这几个点时，火车在J点，要运货到I点。正常的运作是J-K-L-A-B-C-D-E-F-G-H-I。十分的麻烦，因此火车在尾部也加了一个火车头，从而达到J-I的效果，双向链表也是如此。</p>
+<p>双向链表结点结构：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct DualNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    struct DualNode *prior;     &#x2F;&#x2F;前驱结点</span><br><span class="line">    struct DualNode *next;      &#x2F;&#x2F;后继结点</span><br><span class="line">&#125;DualNode, *DuLinkList;</span><br></pre></td></tr></table></figure>
+<img src="/img/数据结构（简述11）/图1.png">
+从上图可以看到不同于一般链表结点的data+next形式而是prior+data+next形式。判断为空的条件即自身指向自身，x->prior = x->prior; x->next = x->next;   
+以下为双向循环链表
+<img src="/img/数据结构（简述11）/图2.png">
+
+<h3 id="双向链表插入操作"><a href="#双向链表插入操作" class="headerlink" title="双向链表插入操作"></a>双向链表插入操作</h3><hr>
+<img src="/img/数据结构（简述11）/图3.png">
+以上为插入操作图示。
+插入操作很看重顺序，图示上已经标出操作顺序，不可打乱！
+
+<p>代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">s-&gt;next &#x3D; p;</span><br><span class="line">s-&gt;prior &#x3D; p-&gt;prior;</span><br><span class="line">p-&gt;prior-&gt;next &#x3D; s;</span><br><span class="line">p-&gt;prior &#x3D; s;</span><br></pre></td></tr></table></figure>
+<p>图示插入操作原理为：</p>
+<ul>
+<li>令s结点的后继指向p，此时有两个结点的后继都指向p结点，但p结点的前驱只指向最前面的那个结点；</li>
+<li>s的前驱指向p的前驱，即s的前驱指向了最前面的结点；</li>
+<li>p的前驱的后继指向s，即最前面结点的后继指向s；</li>
+<li>p的前驱指向s，完成连接，插入完成。</li>
+</ul>
+<h3 id="双线链表删除操作"><a href="#双线链表删除操作" class="headerlink" title="双线链表删除操作"></a>双线链表删除操作</h3><hr>
+<img src="/img/数据结构（简述11）/图4.png">
+以上为删除操作图示。
+代码实现：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">p-&gt;prior-&gt;next &#x3D; p-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior &#x3D; p-&gt;prior;</span><br><span class="line">free(p);</span><br></pre></td></tr></table></figure>
+
+<p>图示删除操作原理为：</p>
+<ul>
+<li>令p结点的前驱所指结点的的后继指向p结点后继所指结点，即p前面的结点后继指向p后面的结点；</li>
+<li>p后继所指结点的前驱指向p的前驱所指的结点，即p的后面结点的前驱指向p前面的结点，此时两个结点已经与p没有任何关系了；</li>
+<li>释放p结点，完成删除操作。</li>
+</ul>
+<h1 id="双向链表实践操作"><a href="#双向链表实践操作" class="headerlink" title="双向链表实践操作"></a>双向链表实践操作</h1><hr>
+<p>题目：<br>要求实现用户输入一个数字，使得26个字幕的排列发生变化，如用户输入3，输出结果：<br>DEFGHIJKLMNOPQRSTUVWXYZABC<br>即实现输入数字n后，将前n个字母依照原先的排列顺序将其排到最后一个字母Z的后面。<br>当用户输入-3，输出结果：<br>XYZABCDEFGHIJKLMNOPQRSTUVW<br>即实现输入数字-n后，将后n个字母依照原先的排列顺序将其排到第一个字母A的前面。</p>
+<p>完整代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">#define ERROR 0;</span><br><span class="line">#define OK 1;</span><br><span class="line"></span><br><span class="line">typedef char ElemType;</span><br><span class="line">typedef int Status;</span><br><span class="line"></span><br><span class="line">typedef struct DualNode</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data;</span><br><span class="line">	struct DualNode* next;</span><br><span class="line">	struct DualNode* prior;</span><br><span class="line">&#125;DualNode, *DualLinkList;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;初始化链表</span><br><span class="line">Status initDualList(DualLinkList* L)</span><br><span class="line">&#123;</span><br><span class="line">	DualNode* p, * q;	&#x2F;&#x2F;两个工具指针</span><br><span class="line"></span><br><span class="line">	*L &#x3D; (DualLinkList)malloc(sizeof(DualNode));</span><br><span class="line"></span><br><span class="line">	if (!(*L))</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	(*L)-&gt;next &#x3D; (*L)-&gt;prior &#x3D; NULL;	&#x2F;&#x2F;完成头结点初始化</span><br><span class="line"></span><br><span class="line">	p &#x3D; (*L);	&#x2F;&#x2F;先令p等于头结点</span><br><span class="line"></span><br><span class="line">	for (int i &#x3D; 0; i &lt; 26; i++)	&#x2F;&#x2F;因为要26个字母，因此循环26次</span><br><span class="line">	&#123;</span><br><span class="line">		q &#x3D; (DualNode*)malloc(sizeof(DualNode));</span><br><span class="line">		if (!q)</span><br><span class="line">		&#123;</span><br><span class="line">			return ERROR;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		q-&gt;data &#x3D; &#39;A&#39; + i;	&#x2F;&#x2F;让q的数据域存放字母，第一次为A+i即A+0等于A，第二次即A+1等于B</span><br><span class="line">		q-&gt;prior &#x3D; p;	&#x2F;&#x2F;令q的前驱指向p，第一次中即q的前驱指向头结点</span><br><span class="line">		q-&gt;next &#x3D; p-&gt;next;		&#x2F;&#x2F;令q的后继等于p的后继，即q的后继等于NULL</span><br><span class="line">		p-&gt;next &#x3D; q;	&#x2F;&#x2F;令p的后继指向q，在第一次中即，头结点的后继指向q</span><br><span class="line"></span><br><span class="line">		p &#x3D; q;</span><br><span class="line">		&#x2F;*</span><br><span class="line">		令p最后等于q</span><br><span class="line">		到了第二次即，q有了新的空间存放B，</span><br><span class="line">		q的前驱指向p即指向存放B的结点，</span><br><span class="line">		q的后继等于p的后继，扔等同于NULL，</span><br><span class="line">		p的后继指向q，即存放A的的结点的后继指向q，完成链接。</span><br><span class="line">		最后又令p等于q完成了第二次初始化</span><br><span class="line">		*&#x2F;</span><br><span class="line"></span><br><span class="line">		p-&gt;next &#x3D; (*L)-&gt;next;</span><br><span class="line">		(*L)-&gt;next-&gt;prior &#x3D; p;		&#x2F;&#x2F;将头结点排除在外，完成26个字母的封闭双向循环链表初始化</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;排序函数</span><br><span class="line">void Sort(DualLinkList* L, int i)</span><br><span class="line">&#123;</span><br><span class="line">	if (i &gt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		do</span><br><span class="line">		&#123;</span><br><span class="line">			(*L) &#x3D; (*L)-&gt;next;</span><br><span class="line">		&#125; while (--i);</span><br><span class="line">	&#125;</span><br><span class="line">	if (i &lt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		do</span><br><span class="line">		&#123;</span><br><span class="line">			(*L) &#x3D; (*L)-&gt;next;</span><br><span class="line">		&#125; while (++i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	DualLinkList L;</span><br><span class="line">	int i, n;</span><br><span class="line"></span><br><span class="line">	initDualList(&amp;L);</span><br><span class="line"></span><br><span class="line">	printf(&quot;请输入数字：&quot;);</span><br><span class="line">	scanf_s(&quot;%d&quot;, &amp;n);</span><br><span class="line"></span><br><span class="line">	printf(&quot;\n&quot;);</span><br><span class="line">	Sort(&amp;L, n);</span><br><span class="line"></span><br><span class="line">	for(i &#x3D; 0; i &lt; 26; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		L &#x3D; L-&gt;next;</span><br><span class="line">		printf(&quot;%c&quot;, L-&gt;data);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二十一世纪成功的游戏设计所包含的关键元素</title>
+    <url>/2020/03/30/%E4%BA%8C%E5%8D%81%E4%B8%80%E4%B8%96%E7%BA%AA%E6%88%90%E5%8A%9F%E7%9A%84%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1%E6%89%80%E5%8C%85%E5%90%AB%E7%9A%84%E5%85%B3%E9%94%AE%E5%85%83%E7%B4%A0/</url>
+    <content><![CDATA[<center><b><font face="黑体" size=6>二十一世纪成功的游戏设计所包含的关键元素</font></b></center>
+<center><font face="仿宋" size=2>郭嘉祺</font></center>
+<center><b><font face="黑体" size=5>摘要</font></b></center>
+<font face="宋体">&nbsp;&nbsp;随着电子竞技在当下社会中显露出其巨大的潜力和极大的可开发市场空间，因此越来越多的公司企业投入到游戏设计开发中，但大量的劣质产品只会腐蚀整个电子游戏产业环境，所以当下急需各个制作方明确成功的游戏设计其独到之处何在。本文主要从游戏的剧情、沉浸感、音乐创意三个方面出发，以五个电子游戏市场上的成功案例进行分析，而表述出当下成功游戏所具有的关键元素。针对游戏剧情，本文选取反乌托邦这个当下火爆的文案题材对相关成功案例进行分析。而沉浸感方面则是例举了市场上最具特色的成功案例分析出其如何营造出深度游玩沉浸感和深度沉浸感带给玩家怎样的游玩体验。音乐创意方面本文例举了两个成功案例，两个案例中的音乐创意所带来的整体影响各有特色，两者可以几乎代表了整个游戏市场上音乐创意对游戏设计的整体影响。通过这三个方面帮助制作方进行设计定位，更有方向性的完成优质的游戏设计开发。</font>  
+
+<p><b><font face="宋体">关键词：</font></b><font face="宋体">电子游戏；游戏设计；剧情；沉浸感；音乐创意；关键元素</font></p>
+<hr>
+<center><b><font face="Times New Roman" size=5>Abstract</font></b></center>
+<font face="Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As esports in the present society shows its great potential and great market space as far as possible, and therefore more and more companies into the design and development of the game, but a lot of bad products would only corrupt the electronic game industry environment, so the successful game design need all producers clear the present its unique. Starting from the three aspects of the game's plot, immersion and music creativity, this paper analyzes five successful cases in the video game market and describes the key elements of the current successful games. In view of the game plot, this paper selects dystopia, a popular copywriting theme, to analyze the relevant successful cases. In terms of the sense of immersion, the most distinctive successful cases in the market are cited to analyze how to create a sense of deep play immersion and what kind of play experience the sense of deep play brings to the players. In the aspect of music creativity, this paper illustrates two successful cases. The overall impact of music creativity in the two cases has its own characteristics, and both cases can almost represent the overall impact of music creativity on game design in the entire game market. Through these three aspects to help the producer design positioning, more directional to complete quality game design and development.</font>  
+
+<p><b><font face="Times New Roman">Keywords:</font></b><font face="Times New Roman"> Video games, Game design, The plot,Immersive, Music creativity, The key elements</font>  </p>
+<hr>
+<center><b><font face="黑体" size=5>前言</font></b></center>  
+<font face="宋体">&nbsp;&nbsp;电子竞技是当下社会最火爆的非传统体育项目。随着电子竞技热度的不断提高，越来越多的人关注于电子竞技，越来越多的人投身于电子竞技，围绕着电子竞技的产业发展也在迅速扩大，而电子竞技的载体——电子游戏也吸引了越来越多的人去接触它，无论是于其中游玩取乐还是从事相关行业，不得不说电子游戏的发展之迅速引发了许多人的思考。电子游戏自20世纪60年代末出现，当时的电子游戏还属于一种奢侈产品，因为许多一般家庭买不起运行电子游戏的主机，而且电子游戏的发行受限也较为严重，因此电子游戏出现后的很长一段时间并没有进入许多人的视野。电子游戏真正开始走向发展的“高速公路”是于1980年末期。在1980年末，显卡的出现致使电脑的整体图形质量大大提升，越来越多的高质量游戏因此诞生。与此同时，任天堂发布Game Boy开启了移动游戏新时代，电子游戏不再局限于家用主机，而是做到随时随地可以游玩，这也是开启电子游戏全民时代的一个重要转折点之一。21世纪越来越多的游戏企业崛起——艺电、索尼、暴雪……这是个百花齐放的时代，电子游戏迎来了真正的爆发期。在图形质量的不断提高下，游戏的本身质量的提升也成倍增长。越来越多的游戏公司出现导致了越来越多的游戏出现。曾经的人们因为有新游戏玩而兴奋，而如今的游戏则是需要绞尽脑汁去讨好玩家的喜好。于是，游戏作画的研究、音乐的研究、剧情的研究、及时算法的研究、动画效果的研究等等，成了当下游戏公司走向成功的必修课。而总结成功的游戏案例其中的那些特质吸引了玩家，因何而吸引玩家则是本文的主要内容。</font>  
+
+<hr>
+<p><b><font face="黑体" size=5>一、 剧情对游戏的影响</font></b><br><b><font face="宋体" size=4>1.1 火爆的剧情题材——反乌托邦</font></b><br><font face="宋体">&nbsp;&nbsp;判断一个游戏优秀、成功与否，其中占很大一部分要素的就是游戏的背景故事以及后续的发展剧情，这直接反映出这款游戏是站在什么样的思想下建立起来的。<br>&nbsp;&nbsp;每款游戏的背景故事都各不相同，但不同的故事题材也能大概进行分类，分为几个主题出来。在21世纪爆火的一种题材就是末日，或者说是反乌托邦题材。其中有环境大退化、经济危机、全球恐怖主义等等[1]。但反乌托邦题材中也有不同的表现手法，一种是于绝望中追求希望[2]，比如《行尸走肉》(The Walking Dead)，还有一种便是末日喜剧，比如《植物大战僵尸》(Plants vs Zombies)。</font></p>
+<p><b><font face="宋体" size=4>1.2 反乌托邦中的“悲剧”</font></b><br><font face="宋体">&nbsp;&nbsp;自广岛核爆以及切尔诺贝利核泄漏事件后，越来越多的游戏题材围绕核危机以及能源危机进行剧情展开。其中极为有名的一部作品是广为人知的《辐射》系列，该系列中极为经典的则是《辐射4》(Fallout 4)。《辐射4》的故事背景便是在一个进行核子战争后的一个充满核污染的世界。<br>&nbsp;&nbsp;作为一个角色扮演游戏，《辐射4》的玩法上和其他角色扮演游戏无太大出入，但是其极为优秀的游戏剧情结合其玩法便是让游戏的可玩性和吸引力大大提高。比如在其剧情中主角因为核战争的爆发不得不躲入提前预备好的避难所中，但在主角苏醒后目睹了自己的孩子被人抢走，自此开始了废土之上的寻子之路。<br>&nbsp;&nbsp;在整个游玩过程中，玩家将带入主角的身份[3]，看到末世下的持强凌弱，末世下的互帮互助，末世下的爱情友情……而《辐射4》作为一个高自由度的游戏，其中的许多剧情又是由玩家自己的抉择去发现不同的新故事。这便大大提高了玩家的代入感以及想要知道接下来怎么做又能开启怎么样的新故事。但真正让游戏升华的是《辐射》系列每一部的一个共同特点——主角在故事的开始会有一条狗跟随着主角从始至终。不需要对这条狗多加什么描述和性格，只需要在主角于废土之上的孤独寻子路有这么一个陪伴，便带给玩家无尽的感动。</font>  </p>
+<p><b><font face="宋体" size=4>1.3 反乌托邦中的“喜剧”</font></b><br><font face="宋体">&nbsp;&nbsp;说到国内的反乌托邦题材的优秀作品就不得不提到于2019年在国内爆火的一款可以归为末日喜剧题材的作品——《明日方舟》(Arknights)。《明日方舟》不同于许多的反乌托邦游戏，它的故事中不提末世创造者、不提末世主导者。而是一直围绕着整个末世环境下的一些小环境、小团体进行剧情展开。其故事发生在一个架空世界中，一种名为“源石”的新型能源的出现导致了科技的飞速上升，但同时也带来了一种公认的不可治之症——“矿石病”。矿石病感染者为世人所唾弃，于是一些不接受压迫的感染者们举起反抗的旗帜成立了名为“整合运动”的组织。而故事主角是一位被称为“博士”的民间医疗组织领袖。<br>&nbsp;&nbsp;故事的开始便是“博士”与组织内的干员们与各个官方或非官方的地方组织与“整合运动”进行战斗。在这样的背景下也许很难认为这款游戏是一款末日喜剧题材的游戏，但它的后续剧情展开的确是围绕着这一主题进行的。<br>&nbsp;&nbsp;因为剧情内的反派是末世的“受害者”身份[4]。因此性质上就已经表明其反派并非十恶不赦，而更多的是一些理念纠纷。显然《明日方舟》的文案也十分清楚整部作品如何进行定位，在后续的剧情中着重突出的并非战斗，而是纠纷之间的或让人潸然泪下，或让人莞尔一笑的小互动。而这种小互动不单单存在于主角的阵营中，同时存在于配角阵营以及反派阵营。这也就导致整个游戏内的所有人物无论是所谓正派，还是所谓反派都有这极为可观的粉丝群体，这种情况是十分难得的。这也正是表现出《明日方舟》的优秀剧情抓住了玩家的心，末日喜剧，苦中作乐，这不正是生活的真谛？</font>  </p>
+<hr>
+<p><b><font face="黑体" size=5>二、 沉浸感对游玩体验的重要性</font></b><br><b><font face="宋体" size=4>2.1 游戏中说话与行走的艺术</font></b><br><font face="宋体">&nbsp;&nbsp;许多游戏以其玩法之丰富、操作之炫目、节奏之迅速而受广大玩家的追捧。但不同于这些游戏，甚至可以说与之相反的游戏同样有着一大批的粉丝群体，针对这类游戏有个分类，称其为——“步行模拟器”。这类游戏大多数几乎没有什么操作，甚至键盘上从头到尾可能只需要用到四个键位，鼠标也只用一个左键，但就是这么操作如此单一的游戏却让人无法自拔，这是为什么呢？<br>&nbsp;&nbsp;这里需要谈到一款游戏，也许并不是如何出名，但每个接触过它的玩家都会给出近乎满分的评价，它就是《奇异人生》(Life is Strange)。这款游戏在TGA上被评为“2015年度最具革命性游戏”，正是对整个《奇异人生》系列的最好的肯定，因为这款游戏是真正的开创性的，它完美的诠释了什么是说话与行走的艺术。<br>&nbsp;&nbsp;《奇异人生》的设定背景设定在俄勒冈州的一个普通小镇。离开小镇五年后的主角麦克斯和儿时好友克洛伊回到小镇寻找失踪的同学瑞秋。在这个设定下一般的游戏都会想着解谜的方向进行发展，但《奇异人生》不同。在整个游戏游玩过程中，没有战斗，没有追逐，只有聆听、选择、行走。</font>  </p>
+<p><b><font face="宋体" size=4>2.2 必要的“聆听”</font></b><br><font face="宋体">&nbsp;&nbsp;聆听是游玩这款游戏最重要的成分，没有之一。整个游戏没有一处提示，你只有去认真倾听主角和其他人的对话，然后玩家选择主角应该如何回复，几乎每一处选择都会给出三个以上的选项，甚至六到八个，这就好比像是在做英语听力一样。</font>  </p>
+<p><b><font face="宋体" size=4>2.3 重要的“选择”</font></b><br><font face="宋体">&nbsp;&nbsp;选择是仅次于聆听的重中之重。《奇异人生》在游玩过程中没遇到一次选择会有大量的选项产生，于是你将面对游戏最为伟大的部分之一，那就是每一种选择都会导向不同的故事展开。要知道作为一款诠释了说话与行走的艺术的一款游戏，他必然伴随着剧情内的大量对话互动，这也就产生了数不尽的选项，可怕的是每个选项都有独立的发展剧情[5]，就像细胞分裂一样当你遇到第一个选择的时候给了你四个选项，也就是有四种发展剧情。当你遇到下一个选择的时候又给了你四个选项，又是四种新的发展剧情，与先前相结合也就是两次选择其中就包含着十六种剧情，以此类推。这就是《奇异人生》，它有着成千上万种剧情，而玩家在游玩过程中可能只会触发其中的几百种，这也是为什么聆听与选择会如此的重要。而如此剧情开放性的游戏也会大大提高玩家的代入感，毕竟玩家不代入主角的身份，是玩不了这款游戏的。</font>  </p>
+<p><b><font face="宋体" size=4>2.4 抉择的“行走”</font></b><br><font face="宋体">&nbsp;&nbsp;行走[6]是增强玩家代入感和游玩体验的一个过程。因为往往在对话进行结束的时候需要玩家操控主角根据对话中所提供的线索或是要求通过行走进行剧情推进，但不同于其他游戏的任务系统那么刻板的是在《奇异人生》中你不需要必须怎样做，而是你想怎样做。举个例子来说明的话就像是近些年较为火爆的一款国产独立游戏《艾希》(Icey)的一大游玩特色就是其故事导向的选择自由性较大。玩家所操控的艾希将行走不同的路线和不同的怪物战斗会触发多种剧情，而引导玩家进行选择的便是旁白。游戏中的旁白提示你需要走一号路线，但玩家可以不遵循这种提示而选择二号路线则开启了不同于一号路线的剧情[7]。在《奇异人生》中也是如此，偶尔有英语差的玩家当NPC需要主角前往某个地点赴约时，也许玩家没有听懂，到了赴约时间却单方面违约，于是触发了另外的剧情发展。<br>&nbsp;&nbsp;整个游玩过程可以说就是由对话和行走组成的，没有多余的其他成分掺杂在其中，但就是这样的游戏却赢得了玩家的一致好评，这边是将说话与行走的艺术发挥到了极致的一款成功且优秀的游戏作品。</font>  </p>
+<hr>
+<p><b><font face="黑体" size=5>三、 游戏内的音乐创意</font></b><br><b><font face="宋体" size=4>3.1 音乐创意的表现</font></b><br><font face="宋体">&nbsp;&nbsp;人有五感——形、声、色、味、触。每一种对人的直接刺激，或者说人的直接快乐，绝对都是来自于这五感。而游戏则主要与其中的三感打交道，也就是形、声、触。这里的触不是说游戏内容可以进行触摸，而是游戏操作给人的感受[8]。既然人的直接快乐来自于五感，而游戏又与其中三感密切相关，那一个优秀的游戏也必然要抓住这一点，三感中的任何一点都是可以左右玩家的游玩体验的，缺其一或劣其一都需要大量的工作去弥补[9]。而在游戏行业有这么一大类游戏可以说是将这形、声、触与游戏的联系发挥到了极致，那就是音乐游戏（以下全部简称为音游）。一个优秀的音游这三要素不单单是缺一不可，而是劣一不可，其中一项的体验差了，这款音游就可以说是没有太多的发展空间了。其实这一点从当下市场优秀的音游就可以看出来，就比如音游第一和第二把交椅上的优秀作品——《喵斯快跑》(Muse Dahs)和《音乐世界2》(Cytus II)。这两款游戏各有自己的突出优势和相较劣势，但全部做到了针对形、声、触这三点上的业界典范。这两款游戏始终位于全球手游热销榜单前十，为什么这两款内容并不丰富，延展性不高，缺乏剧情因素的游戏能够收到全球玩家的喜爱？原因就是其音乐创意[10]。</font>  </p>
+<p><b><font face="宋体" size=4>3.2 音乐创意的“形”</font></b><br><font face="宋体">&nbsp;&nbsp;在游玩音游的过程中，不需要针对玩家制造出恐怖游戏和战争游戏内的紧张感，也是绝对不能有任何紧张成分在其中。《喵斯快跑》这款游戏对比《音乐世界2》的优势在于她的画面感更强，它是玩家在游玩过程中操控人物在场景中击打节拍符进行游玩的日系卡通风格的音游，因此对于那些对画面感敏感的音游玩家来说可能这款游戏比《音乐世界2》更好玩一些。既然是有一定画面感且为卡通风格的游戏更需要营造出轻快的氛围。针对玩家多为男性方面，制作方则是让游戏内充满了美少女角色；针对女性玩家，制作方则是将游戏美术风格定为卡通风格，增加了可爱元素。美少女与可爱相结合则是拥有了受众面更广的画面。而针对其美术风格，则是更多的搭配了音色温柔、曲风轻快的音乐。这些音乐与其卡通风格的优秀作画相结合，让玩家更容易沉浸在游玩过程中[11]。</font>  </p>
+<p><b><font face="宋体" size=4>3.3 音乐创意的“声”</font></b><br><font face="宋体">&nbsp;&nbsp;音乐创意不是音乐创作，在游戏里音乐创意不单单要考虑音乐本身的质量，还要与游戏内其余因素搭配起来要协调，这是一门需要下功夫的功课。在音乐创意上可以说音乐本身质量已然不是最重要的，简单举例来说就是将一个乡村摇滚榜单第一的音乐加入到赛博朋克风格的战斗游戏中，那样的游戏肯定很难让人接受，与优秀游戏完全不搭边，但一个不至于让人反感的乡村摇滚音乐加入到一个农场经营的游戏内则是达到了作为音乐创意的基本标准之一。</font>  </p>
+<p><b><font face="宋体" size=4>3.4 音乐创意的“触”</font></b><br><font face="宋体">&nbsp;&nbsp;若《音乐世界2》中的音乐和触击操作与《喵斯快跑》进行互换的话，那这两款游戏都将成为失败作，这也就是说到了音乐创意中的节奏感。<br>&nbsp;&nbsp;《音乐世界2》是一款由玩家直接用手指进行触击节拍符进行游玩的赛博朋克风格音游，且其触击相应的声音更加清脆悦耳，那么对于喜爱摇滚乐的玩家来说则《音乐世界2》是一款更棒的游戏。不是说只要是优秀的摇滚乐都可以作为《音乐世界2》的游玩音乐，他所加入在游玩体验中的音乐必须要保持玩家操作体验并提高审美刺激上的节奏感。在提高审美刺激方面与本文主题偏离较远，本文内不加以阐述，在此将主要阐述何为保持玩家操作体验。音乐进入了音游，它将不再仅仅为人的耳朵去服务，同时要照顾到玩家手部的操作体验[12]。如果一首节奏较快，且音符多偏向左声道的音乐加入到音游内会如何？玩家将会在三分钟的时间内利用左手进行高负荷的触击操作，那么这首音乐在音游内的表现将不再是提高玩家的游玩体验，而是成为玩家的游玩负担。因此音游中的节奏感十分重要，不单说是听觉上的节奏感，还有触觉上的节奏感。尤其是对于《音乐世界2》这款赛博朋克风格的音游来说，更加需要的是左右声道音符较为平衡，节奏快，节拍顿挫感较为强烈的音乐，事实上制作商在选乐和创作音乐上也是遵循这一点，所以《音乐世界2》成功了。</font>  </p>
+<hr>
+<p><b><font face="黑体" size=5>四、 结果</font></b><br><font face="宋体">&nbsp;&nbsp;针对文中所提到的三大优游戏设计的成功与否的关键要素一共例举了五个例子，对五个成功案例进行分类分析可得到一下结果：<br>&nbsp;&nbsp;一、剧情要素：<br>&nbsp;&nbsp;1.《辐射4》(Fallout 4)：与前三作相比，《辐射4》它所带来的是更加自由的游玩体验。一般而言，游玩较为自由的游戏都会在剧情元素上略有缺失，但《辐射4》的制作方利用整个系列的共同点——玩家身边都有一条狗作为伙伴，以此将玩家在自由游玩过程中始终与剧情进行捆绑，令人满意的是反乌托邦题材的游戏的一大特点就是让玩家知道珍惜，从而更加注重游玩过程中的每一次接触，也就是对增强了对剧情的身临其境，因此《辐射4》成功了。<br>&nbsp;&nbsp;2.《明日方舟》(Arknights)：明日方舟的成功分三点——独特的作画、创意的玩法、优秀的剧情。在剧情方面，明日方舟是一款反乌托邦题材的游戏，但它不同于大部分同题材游戏的是玩家在游玩过程中几乎感觉不到游戏内所露出的绝望感，而绝望感是反乌托邦游戏的一大特色。《明日方舟》虽为反乌托邦题材游戏但剧情上更多的是在描写两个人或三四个人的带有喜剧性的对话，利用这些对话掩盖背景后的绝望感和推动剧情发展，这一点正是抓住了人性中所向往的苦衷作乐的心态，因此得以成功。<br>&nbsp;&nbsp;二、沉浸感要素<br>&nbsp;&nbsp;《奇异人生》(Life is Strange)主要以其剧情丰富、对话提示、互动选择等非操作性元素整合在一块，降低了玩家在游玩过程中对双手行为的注意力，为了防止玩家注意力的分散，利用其聆听的必要性将玩家的注意力集中在角色代入和剧情代入中，从而大大提高了玩家游玩的沉浸感，以此提高玩家的游玩兴趣和游玩乐趣，并且间接的为游戏本身创造出更大的拓展空间。因此《奇异人生》以其颇具特色的沉浸体验享誉业界。<br>&nbsp;&nbsp;三、音乐创意要素<br>&nbsp;&nbsp;1.《喵斯快跑》(Muse Dahs)中利用其优质的音乐和优良的作画收获了大量玩家的喜爱，并且始终明确游戏玩法定位，围绕着音乐进行作画创作、节拍设计的同时永不偏离其卡通画风所具备的可爱、轻快风格，创造了稳定的玩家群体，真正做到了围绕音乐进行玩法创作，以音乐和玩法的平衡结合对整个游戏进行了升华，因此《喵斯快跑》得到了众多玩家的追捧。<br>&nbsp;&nbsp;2.《音乐世界》(Cytus II)作为享誉世界的音游厂商雷亚游戏，在未发售前就有众多粉丝群体翘首以盼。当他发售后以其节奏紧凑、节拍交错平衡，且听觉刺激强的音乐结合其赛博朋克风格的画风，立刻收获了大量玩家的喜爱，且其全屏触击，节拍触击响应清脆悦耳，搭配其优质的电音、摇滚，立刻调动起玩家的肾上腺素，在持续兴奋的状态下进行游玩，可以说没有哪个音游玩家不会喜欢这样的一款以音乐带来刺激感的游戏，因此《音乐世界2》依旧保持雷亚游戏出品的传统，位居世界畅销榜前列。</font>  </p>
+<hr>
+<p><b><font face="黑体" size=5>五、 讨论</font></b><br><font face="宋体">&nbsp;&nbsp;网络上充斥着大量与本文类似的单独游戏作品的评测文章，其中大部分文章对游戏进行评价是多指出游戏最为突出的特点，如针对音乐游戏多有评价其音乐的，针对枪战游戏多有评价其对抗玩法的，较少有文章会提及为何这些游戏的优秀部分会顺利的展示给玩家。<br>&nbsp;&nbsp;本文中针对例举的游戏作品进行分析时，用较少的文字去描述其突出优势，而是更多的描述其他因素是如何配合其突出因素而让整个游戏设计显得自然且平衡。<br>&nbsp;&nbsp;事实上当下越是吸取玩家意见多的游戏，越是容易走向失败。原因就是玩家一般只会提出那些让自己最满意和最不满意的观点，而对那些可以接受的部分只字不提。因此原本游戏元素间的平衡就可能因为制作方的针对一个元素的大幅改动而导致游戏整体失衡，从而有希望成为优秀创作的游戏而越走越偏。<br>&nbsp;&nbsp;因此本文观点认为今后的游戏厂商，在吸取玩家意见，调查玩家喜好的同时，不能只注重玩家群体，同时要尊重游戏整体生态，要明确游戏各个元素间的搭配关系，如何分配元素资源才能完成一项可发展空间大，细节优良的游戏创作。</font>  </p>
+<hr>
+<p><b><font face="黑体" size=5>六、 结论</font></b><br><font face="宋体">&nbsp;&nbsp;在游戏中剧情处于一大主导地位，剧情的优秀与否直接导致玩家在继续游玩过程中的热度保持程度，如果剧情不够吸引人，不够有独创性，不具有艺术感则会让玩家的游玩热情加速降低，相反的优秀的剧情则会保持并且提高玩家的游玩热情。<br>&nbsp;&nbsp;沉静感则是玩家游玩过程中的投入度，电子游戏作为一个娱乐性产品，玩家去游玩定是去削减压力或是消磨时间的，而沉浸感越深，玩家削减压力的效率则越高，对玩家的心情影响就越大，从而玩家会更喜爱这个带给他快乐心情的游戏。<br>&nbsp;&nbsp;音乐创意可以说是连接了游戏内外的一大关键因素。音乐创意和画面创意作为两大游戏刺激的关键点，都可以通过提高玩家肾上腺素分泌而带来更加爽快的游玩体验。音乐创意更是让玩家直接感受到游戏的主题以及游戏所想表达的思想，可以说是建起了玩家与游戏的桥梁，因此优秀的音乐创意更容易让玩家在一种兴奋状态游玩。<br>&nbsp;&nbsp;这三点只是本文中提出的三大关键因素，但事实上能够提高游戏质量的关键因素远不止这些。在二十一世纪，游戏制作已经渐渐脱离了曾经那种追求新式引擎，追求新的平台，追求新的市场的模式，而逐渐转换为追求玩家体验，追求忠实玩家群体，追求生态环境的模式。因此当下的游戏设计所注重的已不是单单的技术层面问题，而是在策划方面加大力度，要将更多艺术与思考加入到游戏中以此带给玩家更加新颖、健康且兴奋的游戏体验，这是当下游戏设计成功与否的关键。</font>  </p>
+<hr>
+<p><b><font face="黑体" size=5>参考文献</font></b><br><font face="Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1] Óliver Pérez-Latorre   Post-apocalyptic Games, Heroism and the Great Recession[J]   Game Studies   2019年12月3日   卷19期<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2] Baccolini, R. and Moylan, T. (2003). Dark Horizons. Science fiction and dystopian imagination. London: Routledge.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3] Buinicki, M. T. (2016). “Nostalgia and the Dystopia of History in 2K’s Bioshock Infinite.” The Journal of Popular Culture, 49, 722-737.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4] Peck, J. (2013). “Austere reason, and the eschatology of neoliberalism’s End Times.” Comparative European Politics, 11(6), 713-721.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[5]Chang, A., Constantino, J., &amp; Soderman, B. (2017). The multiple lives of permadeath: An introduction. Journal of Gaming and Virtual Worlds, 9(2), P103–121<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[6] Melissa Kagen   Walking, Talking and Playing with Masculinities in Firewatch[J]   Game Studies   2018年9月2日   卷18期<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[7] Kagen, M. (2017). Walking sims, gamergate, and the gender of wandering. In Eburne, J.P. &amp; Schreier, B. (Eds.), The year’s work in nerds, wonks, and neo-cons (P275–300). Bloomington: Indiana University Press<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[8] Alexander Wharton, Karen Collins Subjective Measures of the Influence of Music Customization on the Video Game Play Experience: A Pilot Study[J]   Game Studies   2011年5月2日   卷11期<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[9] Aaron Oldenburg Sonic Mechanics: Audio as Gameplay[J]   Game Studies   2013年9月1日   卷13期<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[10] Joshua D. Sites, Robert F. Potter Everything Merges with the Game: A Generative Music System Embedded in a Videogame Increases Flow[J]   Game Studies   2018年9月2日   卷18期<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[11] Jin, S.-A. A. (2012). “Toward Integrative Models of Flow”: Effects of Performance, Skill, Challenge, Playfulness, and Presence on Flow in Video Games. Journal of Broadcasting &amp; Electronic Media, 56(2), 169-186. doi:10.1080/08838151.2012.678516<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[12] Friberg, J. and Gärdenfors, D. Audio games: New perspectives on game audio. In Proceedings of the ACM International Conference on Advances in Computer Entertainment Technology (pp. 148—154), Jumanji, Singapore, 2004.</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>论文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新入坑博客想说的一些话</title>
+    <url>/2020/03/18/%E6%88%91%E7%9A%84%E6%96%B0%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="为什么要入坑博客？"><a href="#为什么要入坑博客？" class="headerlink" title="为什么要入坑博客？"></a>为什么要入坑博客？</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>入坑博客主要是为了向别人分享更多的自己的心得体会还有平时看到的、遇到的一些新奇或者美丽的事物进行分享，能够拥有更多志同道合的小伙伴。</p>
+<h2 id="————————————————————"><a href="#————————————————————" class="headerlink" title="————————————————————"></a>————————————————————</h2><h2 id="我又要在博客上写些什么东西？"><a href="#我又要在博客上写些什么东西？" class="headerlink" title="我又要在博客上写些什么东西？"></a>我又要在博客上写些什么东西？</h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>我将会在博客上分享的内容不仅仅是关于计算机方面的专业知识，还会有一定的美图分享、视频分享，以及一些个人文章的分享。不让博客成为某种意义上的学习整理和检索工具，而是让博客成为真正的“博客”。</p>
+<h2 id="————————————————————-1"><a href="#————————————————————-1" class="headerlink" title="————————————————————"></a>————————————————————</h2><h2 id="我的联系方式"><a href="#我的联系方式" class="headerlink" title="我的联系方式"></a>我的联系方式</h2><h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><p>QQ：1026548945<br>邮箱：<a href="mailto:1026548945@qq.com">1026548945@qq.com</a><br>微博：@诗文SAMA<br>bilibili：@大歪脖树下的诗文</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>栈的初识</title>
+    <url>/2020/06/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B012%EF%BC%89/</url>
+    <content><![CDATA[<h3 id="什么是栈？"><a href="#什么是栈？" class="headerlink" title="什么是栈？"></a>什么是栈？</h3><hr>
+<p>栈是一种后进先出的线性结构，比如平常的手枪和自动步枪，子弹在弹夹中补充时，最后填入的子弹会被第一次射击中射出。<br>浏览器的浏览历史中，点击后退一步会跳转到距离现在最新点开的上一个网页，而不是最早点开的网页。</p>
+<p>官方定义：栈（Stack）是一个<b>后进先出</b>的线性表，他要求只在表尾进行删除和插入操作。</p>
+<p>栈在操作上的特殊要求和限制：</p>
+<ul>
+<li>栈的元素必须“<b>后进先出</b>”。</li>
+<li>栈的操作只能在这个线性表的表尾进行。</li>
+<li>在栈中，表尾称为栈的栈顶，表头称为栈的栈底。</li>
+</ul>
+<p>栈的插入操作（Push），叫做进栈，也称为压栈，入栈。<br>栈的删除操作（Pop），叫做出栈，也称为弹(tan)栈。</p>
+<h3 id="栈的存储结构"><a href="#栈的存储结构" class="headerlink" title="栈的存储结构"></a>栈的存储结构</h3><hr>
+<p>因栈是一种特殊的线性表，因此栈也存在顺序存储结构和链式存储结构。</p>
+<p>栈为空时叫“空栈”，栈顶等于栈底。当数据从栈顶进入，则栈顶和栈底分离，栈的当前容量会变大，数据出栈从栈顶弹出，栈顶下移，栈的当前容量会减小。</p>
+<img src="/img/数据结构（简述12）/图1.png">
+
+<p>栈的顺序存储结构定义代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    ElemType *base;</span><br><span class="line">    ElemType *top;</span><br><span class="line">    int stackSzie;</span><br><span class="line">&#125;sqStack;</span><br></pre></td></tr></table></figure>
+
+<p>其中包含三个元素，base是指向栈底的指针变量，top是指向栈顶的指针变量，stackSize是指示栈当前可用最大容量。</p>
+<ul>
+<li><b>创建栈</b></li>
+</ul>
+<p>创建栈的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define STACK_INIT_SIZE 100;</span><br><span class="line">void initStack(sqStack *s)</span><br><span class="line">&#123;</span><br><span class="line">    s-&gt;base &#x3D; (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));</span><br><span class="line">    &#x2F;&#x2F;100乘分配的数据空间即，分配了100个数据元素的空间</span><br><span class="line">    if(!s-&gt;base)</span><br><span class="line">    &#123;</span><br><span class="line">        exit(0);</span><br><span class="line">    &#125;</span><br><span class="line">    s-&gt;top &#x3D; s-&gt;base;   &#x2F;&#x2F;空栈状态，栈顶等于栈底</span><br><span class="line">    s-&gt;stackSize &#x3D; STACK_INIT_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><b>入栈操作</b></li>
+</ul>
+<ol>
+<li>入栈操作又称为压栈操作，即向栈中存放数据。</li>
+<li>入栈操作在栈顶进行，每次向栈中压入一个数据，top指针+1，直到栈满。</li>
+</ol>
+<p>入栈操作的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define STACKINCREMENT 10</span><br><span class="line"></span><br><span class="line">void Push(sqStack *s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;若栈满，追加空间</span><br><span class="line">    if(s-&gt;top - s-&gt;base &gt;&#x3D; s-&gt;stackSize)    &#x2F;&#x2F;判断栈顶减栈底是否比可用空间大</span><br><span class="line">    &#123;</span><br><span class="line">        s-&gt;base &#x3D; (ElemType *)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT) * sizeof(ElemType));</span><br><span class="line">        &#x2F;*realloc可以看作是malloc的伸展，用于在原分配的空间上进行加分配，</span><br><span class="line">        它会自动判断空间是否已满，如果空间已满会自动增加10个空间，</span><br><span class="line">        这个加分配不会只进行一次，而是需要进行几次他就会自动进行几次。</span><br><span class="line">        此处在加分配数据前写s-&gt;base是定位一下栈底坐标再进行加分配。</span><br><span class="line">        加分配过程需原空间大小加上需要加分配的空间大小，</span><br><span class="line">        实际上是重新选择一个更大的数重新分配空间。*&#x2F;</span><br><span class="line"></span><br><span class="line">        if(!s-&gt;base)</span><br><span class="line">            exit(0);</span><br><span class="line">        </span><br><span class="line">        s-&gt;top &#x3D; s-&gt;base + s-&gt;stackSize;    &#x2F;&#x2F;栈顶此时需要重新设置，设置栈顶</span><br><span class="line">        s-&gt;stackSize &#x3D; s-&gt;stackSize + STACKINCREMENT;   &#x2F;&#x2F;栈的空间大小也要重新定义。</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *(s-&gt;top) &#x3D; e;  &#x2F;&#x2F;放入数据</span><br><span class="line">    s-&gt;top++;   &#x2F;&#x2F;栈顶增加1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><b>出栈操作</b></li>
+</ul>
+<ol>
+<li>出栈操作就是在栈顶取出数据，栈顶指针随之下移的操作。</li>
+<li>每当从栈内弹出一个数据，栈的当前容量就-1。</li>
+</ol>
+<p>出栈操作的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void Pop(sqstack *s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">    if(s-&gt;top &#x3D;&#x3D; s-&gt;base)</span><br><span class="line">        return;</span><br><span class="line">    *e &#x3D; *--(s-&gt;top);</span><br><span class="line">    &#x2F;*因为栈顶实际上是指在栈的最新一个数据元素顶上的空间，因此需要</span><br><span class="line">    栈顶指针下移一位指向最新的数据元素，并将其存入*e中。*&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构化</category>
+        <category>栈</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>栈的操作延伸</title>
+    <url>/2020/06/14/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B013%EF%BC%89/</url>
+    <content><![CDATA[<h3 id="栈的规范套路性创建"><a href="#栈的规范套路性创建" class="headerlink" title="栈的规范套路性创建"></a>栈的规范套路性创建</h3><hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef int ElemType</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data[MAXSIZE];</span><br><span class="line">    int top;    &#x2F;&#x2F;用于标注栈顶的位置</span><br><span class="line">    int stackSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>与上一篇创建的操作只有方法不同，但同样是创建栈，不过推荐上一篇的创建栈的方法。</p>
+<h3 id="清空栈"><a href="#清空栈" class="headerlink" title="清空栈"></a>清空栈</h3><hr>
+<p>清空栈是将其中的数据元素进行清空，而栈的物理空间不发生改变。<br>因此只需要令top=base即可，不需要将整个栈进行销毁。</p>
+<p>代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ClearStack(sqStack *s)</span><br><span class="line">&#123;</span><br><span class="line">    s-&gt;top &#x3D; s-&gt;base;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="销毁栈"><a href="#销毁栈" class="headerlink" title="销毁栈"></a>销毁栈</h3><hr>
+<p>不同于清空栈的只是把其中的数据元素作废，销毁栈是切实的将栈的物理空间进行释放。<br>代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DestroyStack(sqStack *s)</span><br><span class="line">&#123;</span><br><span class="line">    int i, len;</span><br><span class="line">    len &#x3D; s-&gt;stackSize;</span><br><span class="line">    for(i&#x3D;0; i &lt; len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        free(s-&gt;base);</span><br><span class="line">        s-&gt;base++;</span><br><span class="line">    &#125;</span><br><span class="line">    s-&gt;base &#x3D; s-&gt;top &#x3D; NULL;</span><br><span class="line">    s-&gt;stackSize &#x3D; 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算栈的当前容量"><a href="#计算栈的当前容量" class="headerlink" title="计算栈的当前容量"></a>计算栈的当前容量</h3><hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int StackLen(sqStack s)</span><br><span class="line">&#123;</span><br><span class="line">    return s.top-s.base;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="栈的实例操作"><a href="#栈的实例操作" class="headerlink" title="栈的实例操作"></a>栈的实例操作</h3><hr>
+<p>题目：利用栈的数据结构特点，将二进制数据转换为十进制。</p>
+<p>提示：第n位乘2^(n-1)，将所有位乘后数字相加即可得到转换后的十进制数。记住第一位是从个位开始数，即从右往左数。<br>比如存放11001001时，即：<br><img src="/img/数据结构（简述13）/图1.png"></p>
+<p>实际代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line"></span><br><span class="line">#define STACK_INIT_SIZE 20</span><br><span class="line">#define STACKINCREMENT 10</span><br><span class="line"></span><br><span class="line">typedef char ElemType;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	ElemType* base;</span><br><span class="line">	ElemType* top;</span><br><span class="line">	int stackSize;</span><br><span class="line">&#125;sqStack;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;初始化栈</span><br><span class="line">void InitStack(sqStack* s)</span><br><span class="line">&#123;</span><br><span class="line">	s-&gt;base &#x3D; (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));</span><br><span class="line">	if (!(s-&gt;base))</span><br><span class="line">	&#123;</span><br><span class="line">		exit(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	s-&gt;top &#x3D; s-&gt;base;</span><br><span class="line">	s-&gt;stackSize &#x3D; STACK_INIT_SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;压栈操作</span><br><span class="line">void Push(sqStack* s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">    if (s-&gt;top - s-&gt;base &gt;&#x3D; s-&gt;stackSize)   </span><br><span class="line">    &#123;</span><br><span class="line">        s-&gt;base &#x3D; (ElemType*)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT) * sizeof(ElemType));</span><br><span class="line"></span><br><span class="line">        if (!s-&gt;base)</span><br><span class="line">        &#123;</span><br><span class="line">            exit(0);</span><br><span class="line">        &#125;</span><br><span class="line">             </span><br><span class="line">        s-&gt;top &#x3D; s-&gt;base + s-&gt;stackSize; </span><br><span class="line">        s-&gt;stackSize &#x3D; s-&gt;stackSize + STACKINCREMENT; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *(s-&gt;top) &#x3D; e; </span><br><span class="line">    s-&gt;top++;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;出栈操作</span><br><span class="line">void Pop(sqStack* s, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">    if (s-&gt;top &#x3D;&#x3D; s-&gt;base)</span><br><span class="line">        return;</span><br><span class="line">    *e &#x3D; *--(s-&gt;top);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;计算栈的大小</span><br><span class="line">int StackLen(sqStack s)</span><br><span class="line">&#123;</span><br><span class="line">    return (s.top - s.base);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    ElemType c;</span><br><span class="line">    sqStack s;</span><br><span class="line">    int len, i, sum &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    InitStack(&amp;s);</span><br><span class="line"></span><br><span class="line">    printf(&quot;请输入需要转换的二进制数，最后输入#表示输入完成：\n&quot;);</span><br><span class="line"></span><br><span class="line">    scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line"></span><br><span class="line">    while (c !&#x3D;&#39;#&#39;)</span><br><span class="line">    &#123;</span><br><span class="line">        Push(&amp;s, c);</span><br><span class="line">        scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getchar();</span><br><span class="line"></span><br><span class="line">    len &#x3D; StackLen(s);</span><br><span class="line"></span><br><span class="line">    printf(&quot;栈的当前容量为：%d\n&quot;, len);</span><br><span class="line"></span><br><span class="line">    for (i &#x3D; 0; i &lt; len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Pop(&amp;s, &amp;c);</span><br><span class="line">        sum &#x3D; sum + (c - 48) * pow(2, i);</span><br><span class="line">        &#x2F;*因为c在传值过程中是以字符形式传值，而数</span><br><span class="line">        字0在ASCII码中代表数字48，所以在整型计算</span><br><span class="line">        这里要减掉48，而pow就是math函数库中的一个</span><br><span class="line">        函数，这里意思是2的i次方*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;转化后得到的十进制数：%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>栈</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>栈的链式存储</title>
+    <url>/2020/06/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B014%EF%BC%89/</url>
+    <content><![CDATA[<img src="/img/数据结构（简述14）/图1.png">
+栈链，即把单链表的头指针与栈顶指针相结合，效果如图。   
+
+<p>创建栈链的代码片段：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct StackNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;      &#x2F;&#x2F;存放栈的数据</span><br><span class="line">    struct StackNode *next;</span><br><span class="line">&#125;StackNode, *LinkStackPtr;</span><br><span class="line">typedef struct LinkStack</span><br><span class="line">&#123;</span><br><span class="line">    LinkStackPtr top;   &#x2F;&#x2F;top指针</span><br><span class="line">    int count;      &#x2F;&#x2F;栈元素计数器</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="进栈操作"><a href="#进栈操作" class="headerlink" title="进栈操作"></a>进栈操作</h2><hr>
+<p>设元素值为e的新结点p。<br>Push操作代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Status Push(LinkStack *s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">    LinkStackPtr p &#x3D;(LinkStackPtr)malloc(sizeof(StackNode));</span><br><span class="line">    p-&gt;data &#x3D; e;</span><br><span class="line">    p-&gt;next &#x3D; s-&gt;top;</span><br><span class="line">    s-&gt;top &#x3D; p;</span><br><span class="line">    &#x2F;*简单说就是新结点的next指向旧的结点，然后再让top指向新结点*&#x2F;</span><br><span class="line">    s-&gt;count++;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="出栈操作"><a href="#出栈操作" class="headerlink" title="出栈操作"></a>出栈操作</h2><hr>
+<p>设变量p存储要删除的栈顶结点，将栈顶指针下移一位，再释放p。<br>Pop操作代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Status Pop(LinkStack *s, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">    LinkStackPtr p;</span><br><span class="line">    if(StackEmpty(*s))  &#x2F;&#x2F;判断栈是否为空栈。</span><br><span class="line">        return ERROR;</span><br><span class="line">    *e &#x3D; s-&gt;top-&gt;data;  &#x2F;&#x2F;获取要删除的元素数据</span><br><span class="line">    p &#x3D; s-&gt;top;     &#x2F;&#x2F;存放要删除的元素</span><br><span class="line">    s-&gt;top &#x3D; s-&gt;top-&gt;next;  &#x2F;&#x2F;令栈顶指针指向后一个结点</span><br><span class="line">    free(p);    &#x2F;&#x2F;释放要删除的元素</span><br><span class="line">    s-&gt;count--;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里可以看出了，在链栈中next并非指向最新的指针而是指向较旧的指针。</p>
+<h1 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h1><hr>
+<p>针对(1-2)*(4+5)这个表达式，用逆波兰表示法则为：1 2 - 4 5 + *</p>
+<p>其原理为：数字1和2进栈，遇到减号运算则弹出两个元素进行运算再把结果入栈。<br>如图：<br><img src="/img/数据结构（简述14）/图2.png"></p>
+<p>4和5再入栈，再入加号运算符，4和5弹出进行相加，结果入栈。<br>如图：<br><img src="/img/数据结构（简述14）/图3.png"></p>
+<p>最后遇到乘法运算符，弹出9和-1，进行运算，得到结果，无数据不压栈。<br>如图：<br><img src="/img/数据结构（简述14）/图4.png"></p>
+<p>逆波兰计算器源码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;ctype.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;malloc.h&gt;</span><br><span class="line"></span><br><span class="line">#define STACK_INIT_SIZE 20</span><br><span class="line">#define STACKINCREMENT 10</span><br><span class="line">#define MAXBUFFER 10</span><br><span class="line"></span><br><span class="line">typedef double ElemType;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;建栈</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	ElemType* base;</span><br><span class="line">	ElemType* top;</span><br><span class="line">	int stackSize;</span><br><span class="line">&#125;sqStack;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;初始化栈</span><br><span class="line">void InitStack(sqStack* s)</span><br><span class="line">&#123;</span><br><span class="line">	s-&gt;base &#x3D; (ElemType*)malloc(STACK_INIT_SIZE * sizeof(ElemType));</span><br><span class="line">	if (!s-&gt;base)</span><br><span class="line">		exit(0);</span><br><span class="line"></span><br><span class="line">	s-&gt;top &#x3D; s-&gt;base;</span><br><span class="line">	s-&gt;stackSize &#x3D; STACK_INIT_SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;入栈</span><br><span class="line">void Push(sqStack* s, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">	if (s-&gt;top - s-&gt;base &gt;&#x3D; s-&gt;stackSize)</span><br><span class="line">	&#123;</span><br><span class="line">		s-&gt;base &#x3D; (ElemType*)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT) * sizeof(ElemType));</span><br><span class="line">		if (!s-&gt;base)</span><br><span class="line">			exit(0);</span><br><span class="line"></span><br><span class="line">		s-&gt;top &#x3D; s-&gt;base + s-&gt;stackSize;</span><br><span class="line">		s-&gt;stackSize &#x3D; s-&gt;stackSize + STACKINCREMENT;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	*(s-&gt;top) &#x3D; e;		&#x2F;&#x2F;存放数据</span><br><span class="line">	s-&gt;top++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;出栈</span><br><span class="line">void Pop(sqStack* s, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">	if (s-&gt;top &#x3D;&#x3D; s-&gt;base)</span><br><span class="line">		return;</span><br><span class="line">	*e &#x3D; *--(s-&gt;top);	&#x2F;&#x2F;将栈顶指针弹出并修改</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;计算栈长</span><br><span class="line">int StackLen(sqStack* s)</span><br><span class="line">&#123;</span><br><span class="line">	return (s-&gt;top - s-&gt;base);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	sqStack s;</span><br><span class="line">	char c;</span><br><span class="line">	double d, e;</span><br><span class="line">	int i &#x3D; 0;</span><br><span class="line">	char str[MAXBUFFER];	&#x2F;&#x2F;最大缓冲区</span><br><span class="line"></span><br><span class="line">	InitStack(&amp;s);</span><br><span class="line"></span><br><span class="line">	printf(&quot;请以逆波兰表达式的方式输入待计算数据，以#表示输入结束：\n&quot;);</span><br><span class="line">	scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line"></span><br><span class="line">	while (c !&#x3D; &#39;#&#39;)</span><br><span class="line">	&#123;</span><br><span class="line">		while (isdigit(c) || c &#x3D;&#x3D; &#39;.&#39;)		&#x2F;&#x2F;isdigit函数判断c是否为数字</span><br><span class="line">		&#123;</span><br><span class="line">			str[i++] &#x3D; c;</span><br><span class="line">			str[i] &#x3D; &#39;\0&#39;;</span><br><span class="line">			if(i&gt;10)</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;单次输入过大！\n&quot;);</span><br><span class="line">				return -1;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line">			if (c &#x3D;&#x3D; &#39; &#39;)</span><br><span class="line">			&#123;</span><br><span class="line">				d &#x3D; atof(str);      &#x2F;&#x2F;字符转化浮点</span><br><span class="line">				Push(&amp;s, d);</span><br><span class="line">				i &#x3D; 0;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		switch (c)</span><br><span class="line">		&#123;</span><br><span class="line">		case &#39;+&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			Push(&amp;s, d + e);</span><br><span class="line">			break;</span><br><span class="line">		case &#39;-&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			Push(&amp;s, d - e);</span><br><span class="line">			break;</span><br><span class="line">		case &#39;*&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			Push(&amp;s, d * e);</span><br><span class="line">			break;</span><br><span class="line">		case &#39;&#x2F;&#39;:</span><br><span class="line">			Pop(&amp;s, &amp;e);</span><br><span class="line">			Pop(&amp;s, &amp;d);</span><br><span class="line">			if (e !&#x3D; 0)</span><br><span class="line">				Push(&amp;s, d &#x2F; e);</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;除数为0，错误！\n&quot;);</span><br><span class="line">				return -1;</span><br><span class="line">			&#125;</span><br><span class="line">			break;</span><br><span class="line"></span><br><span class="line">		default:</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		scanf_s(&quot;%c&quot;, &amp;c);</span><br><span class="line">	&#125;</span><br><span class="line">	Pop(&amp;s, &amp;d);</span><br><span class="line">	printf(&quot;\n最终结果为：%f\n&quot;, d);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>栈</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构（单链表定义与查找）</title>
+    <url>/2020/05/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A1%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><h2 id="链式存储结构定义"><a href="#链式存储结构定义" class="headerlink" title="链式存储结构定义"></a>链式存储结构定义</h2><hr>
+<ul>
+<li>特点是用一组任意的存储单元存储线性表的数据元素，这组存储单元可以存在内存中未被占用的任意位置（随意位置插入）；</li>
+<li>链式存储结构需要存储数据元素信息以外，还要存储后继元素存储地址（指针）；</li>
+<li>存储数据元素信息的域称为数据域，存储直接后继位置的域称为指针域。这两部分信息组成数据元素称为存储映像，称为结点（Node）；</li>
+<li>每个结点只包含一个指针域，因此叫单链表；<img src="/img/数据结构（简述②）/图1.png">
+
+</li>
+</ul>
+<h2 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h2><hr>
+<ul>
+<li>链表第一个结点存储位置叫头指针，最后一个结点指针为空（NULL）<h3 id="头指针"><a href="#头指针" class="headerlink" title="头指针"></a>头指针</h3></li>
+<li>头指针是指链表指向第一个结点的指针；</li>
+<li>头指针具有标识作用，所以常用头指针冠以链表名；</li>
+<li>无论链表是否为空，头指针都不为空；</li>
+<li>头指针是链表的必须要素。</li>
+</ul>
+<h3 id="头结点"><a href="#头结点" class="headerlink" title="头结点"></a>头结点</h3><ul>
+<li>头结点是为了操作的统一和方便而设立的，放在第一个元素的结点之前，其数据域一般无意义（可用来存放链表长度）；</li>
+<li>有了头结点，对在第一个元素结点前插入结点和删除第一结点起操作与其他结点的统一；</li>
+<li>头结点不一定是链表的必须要素。</li>
+</ul>
+<p><b>单链表图例：</b><br><img src="/img/数据结构（简述②）/图2.png"><br><b>空链表图例：</b><br><img src="/img/数据结构（简述②）/图3.png"></p>
+<p><b>代码示例：</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct Node</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data;		&#x2F;&#x2F;数据域</span><br><span class="line">	struct Node* next;		&#x2F;&#x2F;指针域</span><br><span class="line">&#125;Node;</span><br><span class="line">typedef struct Node* LinkList;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>举例p为指向线性表第i个元素的指针，则该结点ai的数据域我们可用p-&gt;data的的值表示一个数据元素，结点ai的指针域可用p-&gt;next来表示，其值为一个指针。</li>
+<li>p-&gt;next指向第i+1个元素，即指向ai+1的指针</li>
+<li>若p-&gt;data = ai，则p-&gt;next-&gt;data = ai+1</li>
+</ul>
+<h3 id="获取链表第i个数据的算法思路："><a href="#获取链表第i个数据的算法思路：" class="headerlink" title="获取链表第i个数据的算法思路："></a>获取链表第i个数据的算法思路：</h3><ul>
+<li>声明一个结点p指向链表的第一个结点，初始化j从1开始；</li>
+<li>当j&lt;i时，就遍历链表，让p的指针向后移动，不断指向下下一结点，j++；</li>
+<li>若到链表末尾p为空，则第i个元素不存在；</li>
+<li>否则查找成功，返回结点p的数据。</li>
+</ul>
+<p><b>获取第i个数据的算法代码片段：</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define ERROR 0</span><br><span class="line">#define OK 1</span><br><span class="line"></span><br><span class="line">Status GetElem(LinkList L, int i, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">	int j;</span><br><span class="line">	LinkList p;		&#x2F;&#x2F;通过上方的代码示例可知此处的p是一个指针，LinkList是Node*的别名</span><br><span class="line"></span><br><span class="line">	p &#x3D; L-&gt;next;	&#x2F;&#x2F;p指针指向链表L的第一个结点</span><br><span class="line">	j &#x3D; 1;		&#x2F;&#x2F;“当前位置计数器”j初始化为1</span><br><span class="line"></span><br><span class="line">	while(p &amp;&amp; j&lt;i)		&#x2F;&#x2F;循环条件p不为空且j小于获取位置i</span><br><span class="line">	&#123;</span><br><span class="line">		p &#x3D; p-&gt;next;	&#x2F;&#x2F;p指向下一个结点，即遍历</span><br><span class="line">		++j;	&#x2F;&#x2F;位置计数器+1</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if(!p || j&gt;i)</span><br><span class="line">	&#x2F;*上方循环结束后，有可能是因为直接不满足循环条</span><br><span class="line">    件而非找到需获取元素，因此当p为空或者j大于i的时</span><br><span class="line">    候返回错误*&#x2F;</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	*e &#x3D; p-&gt;data;	&#x2F;&#x2F;获取到元素e的值给p的数据域</span><br><span class="line"></span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>单链表的获取难，增删简单；</li>
+<li>顺序表的获取简单，增删难。</li>
+</ul>
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构线性表5</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构（单链表增删）</title>
+    <url>/2020/05/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A2%EF%BC%89/</url>
+    <content><![CDATA[<p>假设当下有ai结点和ai+1结点相连，此时e结点想要插入到ai结点后面形成ai —— e —— ai+1。ai的指针为p，e的指针为s。那么进行插入操作即：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">s-&gt;next &#x3D; p-&gt;next;</span><br><span class="line">p-&gt;next &#x3D; s;</span><br></pre></td></tr></table></figure>
+<p><b>两行代码不可先后顺序替换！</b> </p>
+<p>总结一下单链表插入操作流程：</p>
+<ul>
+<li><p>声明一结点p指向链表头结点，初始化j从1开始；</p>
+</li>
+<li><p>当j&lt;1时，就遍历链表，让p指针向后移动，不断指向下一个结点，j累加1；</p>
+</li>
+<li><p>若到链表末尾p为空，则第i元素不存在；</p>
+</li>
+<li><p>反之查找成功，于系统中生成空结点s；</p>
+</li>
+<li><p>将数据元素e赋值给s-&gt;data；</p>
+</li>
+<li><p>单链表插入语句</p>
+<pre><code>s-&gt;next = p-&gt;next;
+p-&gt;next = s;</code></pre></li>
+<li><p>返回成功</p>
+</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define ERROR 0</span><br><span class="line">#define OK 1</span><br><span class="line"></span><br><span class="line">Status ListInsert(linkList *L, int i, ElemType e)</span><br><span class="line">&#123;</span><br><span class="line">	int j;</span><br><span class="line">	LinkList p, s;</span><br><span class="line"></span><br><span class="line">	p &#x3D; *L;		&#x2F;&#x2F;令p为链表L头结点</span><br><span class="line">	j &#x3D; 1;		&#x2F;&#x2F;初始化j为1</span><br><span class="line"></span><br><span class="line">	while(p &amp;&amp; j &lt; i)		&#x2F;&#x2F;查找位置i</span><br><span class="line">	&#123;</span><br><span class="line">		p &#x3D; p-&gt;next;</span><br><span class="line">		j++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if(!p || j &gt; i)</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	s &#x3D; (LinkList)malloc(sizeof(Node));		&#x2F;&#x2F;给结点s动态分配一个空间</span><br><span class="line">	s-&gt;data &#x3D; e;	&#x2F;&#x2F;将需要插入的数值赋值给s的数据域</span><br><span class="line"></span><br><span class="line">	s-&gt;next &#x3D; p-&gt;next;</span><br><span class="line">	p-&gt;next &#x3D; s;	&#x2F;&#x2F;经典两行代码完成插入操作</span><br><span class="line"></span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单链表删除"><a href="#单链表删除" class="headerlink" title="单链表删除"></a>单链表删除</h2><hr>
+<p>删除操作完成代码：<br>    p-&gt;next = p-&gt;next-&gt;next;<br>或者<br>    q=p-&gt;next; p-&gt;next = q-&gt;next;<br>这是删除了结点q。</p>
+<p>单链表删除操作流程：</p>
+<ul>
+<li>声明结点p指向链表第一个结点，初始化j=1；</li>
+<li>当j&lt;1时，遍历链表，让p的指针后移，不断指向下一个结点，j++；</li>
+<li>若链表末尾p为空，则说明第i个元素不存在；</li>
+<li>否则查找成功，p-next赋值给q；</li>
+<li>删除语句p-&gt;next = q-&gt;next；</li>
+<li>q节点中数据赋值给e，作为返回；</li>
+<li>释放q结点。</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define ERROR 0;</span><br><span class="line">#define OK 1;</span><br><span class="line"></span><br><span class="line">Status ListDelete(LinkList *L, int i, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">	int j;</span><br><span class="line">	LinkList p, q;</span><br><span class="line"></span><br><span class="line">	p &#x3D; *L;		&#x2F;&#x2F;令p等于链表L的头结点</span><br><span class="line">	j &#x3D; 1;		&#x2F;&#x2F;初始化j&#x3D;1</span><br><span class="line"></span><br><span class="line">	while(p-&gt;next &amp;&amp; j&lt;i)	&#x2F;&#x2F;查找第i个元素</span><br><span class="line">	&#123;</span><br><span class="line">		p &#x3D; p-&gt;next;</span><br><span class="line">		++j;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if(!(p-&gt;next) || j&gt;i)</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	q &#x3D; p-&gt;next;	</span><br><span class="line">	p-&gt;next &#x3D; q-&gt;next;		&#x2F;&#x2F;删除操作二连</span><br><span class="line"></span><br><span class="line">	*e &#x3D; q-&gt;data;		&#x2F;&#x2F;q的数据给e</span><br><span class="line">	free(q);		&#x2F;&#x2F;释放结点q，C++也可以delete(q);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font size="5"><b>在线性表中，对于进行频繁增删操作的选用链表，对于主要用于存储查找的选用顺序表。</b></font></p>
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构（静态链表操作）</title>
+    <url>/2020/05/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A4%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="静态链表"><a href="#静态链表" class="headerlink" title="静态链表"></a>静态链表</h1><p>线性表的静态链表存储结构：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define MAXSIZE 1000</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data;	&#x2F;&#x2F;数据</span><br><span class="line">	int cur;		&#x2F;&#x2F;游标（Cursor）</span><br><span class="line">&#125;Component, StaticLinkList[MAXSIZE];</span><br></pre></td></tr></table></figure>
+
+<img src="/img/数据结构（简述⑤）/图1.png">
+在该图中可见从下标1开始游标开始连续：2，3，4，0……最后一个存有数据的元素的游标为0，图里出现错误，下标为4的元素其游标应为0。    
+
+<p>游标怎么定义填入，最后一个游标，即下标999处游标为整个静态链表最后一个元素，必定为空，其游标为整个静态链表的第一个存有数据的元素的下标，在该例子中第一个存有数据的元素下标为1，因此最后一个游标为1。<br>整个静态链表第一个游标，即下标为0的第一个元素必定为空，其游标指向第一个没有存放数据的下标，即游标6处，下标为5，则第一个游标为5。</p>
+<p>对静态链表初始化相当于初始化数组：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define OK 1</span><br><span class="line">#define MAXSIZE 1000</span><br><span class="line"></span><br><span class="line">Status InitList(StaticLinkList space)</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	for(i &#x3D; 0; i &lt; MAXSIZE-1; i++)</span><br><span class="line">		space[i].cur &#x3D; i + 1;	&#x2F;&#x2F;因为是初始化阶段，每个游标默认连续</span><br><span class="line">	</span><br><span class="line">	space[MAXSIZE-1].cur &#x3D; 0;	&#x2F;&#x2F;最后一个游标指向第一个存有数据的下标，默认0</span><br><span class="line"></span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>注意：</b></p>
+<ul>
+<li>我们对数组的第一个和最后一个元素做特殊处理，他们的data不存放数据；</li>
+<li>我们通常把未使用的数组元素成为备用链表；</li>
+<li>数组的第一个元素，即下标为0的元素的cur就存放备用链表的第一个结点的下标；</li>
+<li>数组的最后一个元素，即下标为MAXSIZE-1的cur则存放第一个有数值的元素的下标，相当于单链表中的头结点作用。</li>
+</ul>
+<h3 id="静态链表无常用性，因此不必深究"><a href="#静态链表无常用性，因此不必深究" class="headerlink" title="静态链表无常用性，因此不必深究"></a>静态链表无常用性，因此不必深究</h3><div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构（单链表整表操作）</title>
+    <url>/2020/05/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A3%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="单链表整表创建"><a href="#单链表整表创建" class="headerlink" title="单链表整表创建"></a>单链表整表创建</h1><hr>
+<p><b>要注意，单链表的创建过程是一个动态生成链表的过程。</b></p>
+<p>整表创建流程：</p>
+<ul>
+<li>声明结点p和计数变量i；</li>
+<li>初始化空链表L；</li>
+<li>令L的头结点的指针指向NULL，即建立一个带头结点的单链表；</li>
+<li>循环实现后继结点的插入和赋值。</li>
+</ul>
+<h2 id="头插法建立单链表"><a href="#头插法建立单链表" class="headerlink" title="头插法建立单链表"></a>头插法建立单链表</h2><hr>
+<p>头插法从一空表开始，生成新结点，读取数据存放在新结点的数据域中，然后将新结点插入到当前链表的表头，直至结束。</p>
+<p><b>即把新加入元素放在表头后的第一个位置</b></p>
+<ul>
+<li>让新节点的next指向头结点之后；</li>
+<li>然后让表头的next指向新结点。</li>
+</ul>
+<p><b>即将表头视为售货员，每个新结点都是素质真的差的哈批直接插队到第一个。</b><br><b>头插法一个特点为无头结点。</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void CreateListHead(LinkList *L, int n)</span><br><span class="line">&#123;</span><br><span class="line">	LinkList p;		&#x2F;&#x2F;工具结点</span><br><span class="line">	int i;		</span><br><span class="line"></span><br><span class="line">	srand(time(0));		&#x2F;&#x2F;初始化随机数种子</span><br><span class="line"></span><br><span class="line">	*L &#x3D; (LinkList)malloc(sizeof(Node));	&#x2F;&#x2F;动态创建链表空间</span><br><span class="line">	(*L)-&gt;next &#x3D; NULL;		&#x2F;&#x2F;头结点指针指向NULL</span><br><span class="line"></span><br><span class="line">	for(i &#x3D; 0; i &lt; n; i++)		&#x2F;&#x2F;循环进行元素的插入和赋值</span><br><span class="line">	&#123;</span><br><span class="line">		p &#x3D; (LinkList)malloc(sizeof(Node));		&#x2F;&#x2F;为工具结点p动态分配空间</span><br><span class="line">		p-&gt;data &#x3D; rand()%100+1;		&#x2F;&#x2F;将随机数赋值给p的数据域,得到1-100的随机数</span><br><span class="line">		p-&gt;next &#x3D; (*L)-&gt;next;		&#x2F;&#x2F;p指针指向L头结点指针之后</span><br><span class="line">		(*L)-&gt;next &#x3D; p;		&#x2F;&#x2F;L头指针指向p，完成插入和赋值</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="尾插法建立单链表"><a href="#尾插法建立单链表" class="headerlink" title="尾插法建立单链表"></a>尾插法建立单链表</h2><hr>
+<p>与头插法相反，一般情况推荐使用尾插法。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void CreatListTail(LinkList *L, int n)</span><br><span class="line">&#123;</span><br><span class="line">	LinkList p, r;		&#x2F;&#x2F;新增一个工具结点r</span><br><span class="line">	int i;</span><br><span class="line"></span><br><span class="line">	srand(time(0));</span><br><span class="line">	*L &#x3D; (LinkList)malloc(sizeof(Node));</span><br><span class="line">	r &#x3D; *L;		&#x2F;&#x2F;因为一开始为空表，先令r指向l</span><br><span class="line"></span><br><span class="line">	for(i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p &#x3D; (Node *)malloc(sizeof(Node));</span><br><span class="line">		p-&gt;data &#x3D; rand()%100+1;</span><br><span class="line">		r-&gt;next &#x3D; p;	&#x2F;&#x2F;令r的指针指向p</span><br><span class="line">		r &#x3D; p;		&#x2F;&#x2F;再把p的一切都给r，循环下去令r始终等同</span><br><span class="line">				于尾部的外挂指针，用于给新插入元素引路</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	r-&gt;next &#x3D; NULL;		&#x2F;&#x2F;引路完成</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="单链表整表删除"><a href="#单链表整表删除" class="headerlink" title="单链表整表删除"></a>单链表整表删除</h1><hr>
+<p>为了节省运行空间，当单链表不再被需要时就要将其删除，释放空间。</p>
+<p>单链表整表删除思路： </p>
+<ul>
+<li>声明结点p和q；</li>
+<li>将第一个结点赋值给p，下一个结点赋值给q；</li>
+<li>循环执行释放p和将q赋值给p的操作。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define OK 1</span><br><span class="line"></span><br><span class="line">Status ClearList(LinkList *L)</span><br><span class="line">&#123;</span><br><span class="line">	LinkList p, q;</span><br><span class="line">	p &#x3D; (*L)-&gt;next;		&#x2F;&#x2F;L的第一个结点赋值给p，第一个结点并非头结点</span><br><span class="line">	while(p)</span><br><span class="line">	&#123;</span><br><span class="line">		q &#x3D; p-&gt;next;</span><br><span class="line">		free(p);	&#x2F;&#x2F;释放p</span><br><span class="line">		p &#x3D; q;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	(*L)-&gt;next &#x3D; NULL;		&#x2F;&#x2F;释放结束后，链表内无元素，L头指针指向NULL</span><br><span class="line"></span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="单链表结构与顺序存储结构优缺点"><a href="#单链表结构与顺序存储结构优缺点" class="headerlink" title="单链表结构与顺序存储结构优缺点"></a>单链表结构与顺序存储结构优缺点</h1><hr>
+<p><b>存储分配方式</b></p>
+<ul>
+<li>顺序存储结构用一段连续的存储单元一次存储数据元素；</li>
+<li>单链表采用链式存储结构，用一组任意的存储单元存储数据元素。</li>
+</ul>
+<p><b>时间性能</b></p>
+<ul>
+<li>查找<ul>
+<li>顺序存储结构O(1);    【优】</li>
+<li>单链表O(n);</li>
+</ul>
+</li>
+<li>插入和删除<ul>
+<li>顺序存储结构用时O(n);</li>
+<li>单链表用时O(1);    【优】</li>
+</ul>
+</li>
+</ul>
+<p><b>空间性能</b></p>
+<ul>
+<li>顺序存储结构易浪费，易溢出</li>
+<li>单链表不受空间分配上的限制</li>
+</ul>
+<b>
+因此顺序存储结构适用于固定存储后进行查找的条件操作  
+
+<p>进行频繁插入和删除则用单链表<br></b></p>
+<p>游戏开发的用户个人信息注册用顺序存储结构，而玩家的武器和装备列表是不断进行改变的，因此可用单链表。</p>
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单链表职场面试题</title>
+    <url>/2020/05/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A5%EF%BC%89/</url>
+    <content><![CDATA[<p>曾于某鹅厂面试题：</p>
+<h3 id="快速找到未至长度链表的中间结点"><a href="#快速找到未至长度链表的中间结点" class="headerlink" title="快速找到未至长度链表的中间结点"></a>快速找到未至长度链表的中间结点</h3><p>路人思路：<br>遍历链表确定链表长度，然后从头结点开始循环L/2次找到中间结点。<br>算法复杂度：O(L+L/2)=O(3L/2)。<br><b>优化点：快慢指针</b><br>原理：设置两个指针*search、*mid都指向单链表的头结点。其中*search的移动速度是*mid的二倍。当*search指向末尾结点的时候，*mid刚好在中间。即标尺思想。</p>
+<p>优化后代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define OK 1</span><br><span class="line"></span><br><span class="line">Status GetMidNode(LinkList L, ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">	LinkList search, mid;		&#x2F;&#x2F;该定义本身就在定义指针，因此不要再加*，变成指针的指针</span><br><span class="line">	mid &#x3D; search &#x3D; L;	&#x2F;&#x2F;都指向头结点</span><br><span class="line"></span><br><span class="line">	while(search-&gt;next !&#x3D; NULL)		&#x2F;&#x2F;当快指针未到末尾</span><br><span class="line">	&#123;</span><br><span class="line">		if(search-&gt;next-&gt;next !&#x3D; NULL)		&#x2F;&#x2F;判断快指针是否到了倒数第二个结点</span><br><span class="line">		&#123;</span><br><span class="line">			search &#x3D; search-&gt;next-&gt;next;	&#x2F;&#x2F;快指针通过每次指向下下一个结点实现二倍速</span><br><span class="line">			mid &#x3D; mid-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		else	&#x2F;&#x2F;如果是倒数第二个结点，则指向末尾，别二倍速了，都超车了</span><br><span class="line">		&#123;</span><br><span class="line">			search &#x3D; search-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	*e &#x3D; mid-&gt;data;		&#x2F;&#x2F;中间结点数据给e用于返回</span><br><span class="line"></span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+        <category>面试题</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+        <tag>面试题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>循环链表</title>
+    <url>/2020/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A6%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="该章节内容讲解主要在代码内以注释形式存在"><a href="#该章节内容讲解主要在代码内以注释形式存在" class="headerlink" title="该章节内容讲解主要在代码内以注释形式存在"></a><font size="6"><font color="red"><b>该章节内容讲解主要在代码内以注释形式存在</b></font></font></h2><h1 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h1><hr>
+<p>简单来说循环链表就是单链表的尾指针不指向NULL，而是指向第一个结点。<br><img src="/img/数据结构（简述⑦）/图1.png"><br>循环链表不一定有头结点；<br>循环链表和单链表差异主要在判断为空的条件：<br>单链表判断为空是判断head-&gt;next = NULL;<br>循环链表判断为空是判断head-&gt;next = head;  </p>
+<p>循环链表开始结点定义不以head来定义而是尾指针rear组成rear-&gt;next-&gt;next来定义</p>
+<p><b>链表存储结构定义代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct CLinkList</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct CLinkList *next;</span><br><span class="line">&#125;node;</span><br></pre></td></tr></table></figure>
+
+<p><b>循环链表插入代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*参数：链表的第一个结点，插入的位置*&#x2F;</span><br><span class="line">void ds_insert(node **pNode, int i)</span><br><span class="line">&#123;</span><br><span class="line">	node *temp;</span><br><span class="line">	node *target;</span><br><span class="line">	node *p;	&#x2F;&#x2F;中介</span><br><span class="line">	int item;</span><br><span class="line">	int j &#x3D; 1;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;&quot;请输入要插入的结点的值：&quot;&lt;&lt;endl;</span><br><span class="line">	cin&gt;&gt;&amp;item;</span><br><span class="line"></span><br><span class="line">	if(i &#x3D;&#x3D; 1)</span><br><span class="line">	&#123;	&#x2F;&#x2F;新插入的结点作为第一个结点</span><br><span class="line">		temp &#x3D; (node *)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">		if(!temp)	&#x2F;&#x2F;错误输入，错误退出</span><br><span class="line">			exit(0);</span><br><span class="line"></span><br><span class="line">		temp-&gt;data &#x3D; item;</span><br><span class="line"></span><br><span class="line">		&#x2F;*寻找到最后一个结点*&#x2F;</span><br><span class="line">		for(target &#x3D; (*pNode); target-&gt;next !&#x3D; (*pNode); target &#x3D; target-&gt;next)</span><br><span class="line">			;</span><br><span class="line"></span><br><span class="line">		&#x2F;*temp指向第一个结点组成循环结构；</span><br><span class="line">		target指向temp是表明最后一个结点；</span><br><span class="line">		*pNode指向temp是表明第一个结点</span><br><span class="line">		以下操作都是相当于给temp上头衔*&#x2F;</span><br><span class="line"></span><br><span class="line">		temp-&gt;next &#x3D; (*pNode);	</span><br><span class="line">		target-&gt;next &#x3D; temp;</span><br><span class="line">		*pNode &#x3D; temp;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		target &#x3D; *pNode;	&#x2F;&#x2F;先让target为第一个结点</span><br><span class="line"></span><br><span class="line">		for( ; j &lt; (i-1); ++j)		&#x2F;&#x2F;要插入第几个位置，target就指向第几个结点</span><br><span class="line">		&#123;</span><br><span class="line">			target &#x3D; target-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		temp &#x3D; (node *)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">		if(!temp)</span><br><span class="line">			exit(0);</span><br><span class="line">	</span><br><span class="line">		&#x2F;*将要插入的值给temp的数据域；</span><br><span class="line">		中介p先为被插入的结点位置；</span><br><span class="line">		之前target指向被插入位置的结点这里就是让temp替代其位置；</span><br><span class="line">		temp指向p，在刚才p已经存储了旧的被插入结点，这里temp</span><br><span class="line">		再指向p就是将原本位置的结点后移*&#x2F;</span><br><span class="line"></span><br><span class="line">		temp-&gt;data &#x3D; item;</span><br><span class="line">		p &#x3D; target-&gt;next;</span><br><span class="line">		target-&gt;next &#x3D; temp;</span><br><span class="line">		temp-&gt;next &#x3D; p;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>初始化循环链表代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void ds_init(node **pNode)	&#x2F;&#x2F;**pNode用于表示链表上的一个元素，*pNode假设为第一个结点</span><br><span class="line">&#123;</span><br><span class="line">	int item;</span><br><span class="line">	node *temp;</span><br><span class="line">	node *target;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;&quot;输入节点的值，最后输入0完成初始化：&quot;&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;&amp;item;</span><br><span class="line">		fflush(stdin);	&#x2F;&#x2F;清除缓冲区</span><br><span class="line"></span><br><span class="line">		if(item &#x3D;&#x3D; 0)</span><br><span class="line">			return;</span><br><span class="line"></span><br><span class="line">		if((*pNode) &#x3D;&#x3D; NULL)	&#x2F;&#x2F;判断条件可以看为head指向NULL</span><br><span class="line">		&#123;&#x2F;*循环链表中只有一个结点*&#x2F;</span><br><span class="line">			*pNode &#x3D; (node*)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">			if(!(*pNode))	&#x2F;&#x2F;若分配空间失败，错误退出</span><br><span class="line">				exit(0);</span><br><span class="line"></span><br><span class="line">			(*pNode)-&gt;data &#x3D; item;</span><br><span class="line">			(*pNode)-&gt;next &#x3D; *pNode;	&#x2F;&#x2F;第一个结点指向第一个结点，组成循环结构</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			&#x2F;*找到next指向第一个结点的结点*&#x2F;</span><br><span class="line">			for(target &#x3D; (*pNode); target-&gt;next !&#x3D; (*pNode); target &#x3D; target-&gt;next)</span><br><span class="line">				;</span><br><span class="line"></span><br><span class="line">			&#x2F;*生成一个新结点*&#x2F;</span><br><span class="line">			temp &#x3D; (node *)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">			if(!temp)</span><br><span class="line">				exit(0);</span><br><span class="line"></span><br><span class="line">			temp-&gt;data &#x3D; item;</span><br><span class="line">			temp-&gt;next &#x3D; *pNode;</span><br><span class="line">			target-&gt;next &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>循环链表删除节点代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void ds_delete(node **pNode, int i)</span><br><span class="line">&#123;</span><br><span class="line">	node *target;</span><br><span class="line">	node *temp;</span><br><span class="line">	int j &#x3D; 1;</span><br><span class="line"></span><br><span class="line">	if(i &#x3D;&#x3D; 1)</span><br><span class="line">	&#123;&#x2F;*被删除的是第一个结点*&#x2F;</span><br><span class="line">		for(target &#x3D; *pNode; target-&gt;next !&#x3D; *pNode; target &#x3D; target-&gt;next)</span><br><span class="line">			;	&#x2F;&#x2F;找到最后一个结点</span><br><span class="line"></span><br><span class="line">		temp &#x3D; *pNode;		&#x2F;&#x2F;被删除结点为第一个结点</span><br><span class="line">		*pNode &#x3D; (*pNode)-&gt;next;	&#x2F;&#x2F;原本第一个结点为下一个结点</span><br><span class="line">		target-&gt;next &#x3D; *pNode;	&#x2F;&#x2F;最后一个结点重新指向新的第一个结点</span><br><span class="line">		free(temp);		&#x2F;&#x2F;释放旧的第一个结点	</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		target &#x3D; *pNode;	&#x2F;&#x2F;工具结点先为第一个结点</span><br><span class="line"></span><br><span class="line">		for( ; j &lt;i-1; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			target &#x3D; target-&gt;next;		&#x2F;&#x2F;工具结点指向被删除位置的结点</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		temp &#x3D; target-&gt;next;	&#x2F;&#x2F;temp为工具结点所指结点，即为被删除结点</span><br><span class="line">		target-&gt;next &#x3D; temp-&gt;next;	&#x2F;&#x2F;工具结点重新指向被删除结点的下一个结点完成连接</span><br><span class="line">		free(temp);		&#x2F;&#x2F;释放旧位置结点</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>循环链表返回结点所在位置的代码(根据元素数值找位置):</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int ds_search(node *pNode, int elem)</span><br><span class="line">&#123;</span><br><span class="line">	node *target;</span><br><span class="line">	int i &#x3D; 1;</span><br><span class="line"></span><br><span class="line">	&#x2F;*该循环体在条件内先让target为第一个结点，然后判断其数据</span><br><span class="line">	和下一个结点是否为第一个结点，其中一个为假则要么是找到了</span><br><span class="line">	该元素，要么是都已经到最后了还是没找到*&#x2F;</span><br><span class="line"></span><br><span class="line">	for(target &#x3D; pNode;target-&gt;data !&#x3D; elem &amp;&amp; tagret-&gt;next !&#x3D; pNode; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		target &#x3D; target-&gt;next;</span><br><span class="line">	&#125;	&#x2F;&#x2F;寻找结点位置，令target指向被寻找结点</span><br><span class="line"></span><br><span class="line">	if(target-&gt;next &#x3D;&#x3D; pNode)	&#x2F;&#x2F;表中不存在该元素</span><br><span class="line">		return 0;</span><br><span class="line">	else</span><br><span class="line">		return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>约瑟夫问题</title>
+    <url>/2020/06/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A7%EF%BC%89/</url>
+    <content><![CDATA[<p>约瑟夫问题又称为丢手绢问题。<br>有一典故为著名犹太历史学家Josephus在罗马人占领乔塔帕特后，他和他的朋友与39个犹太人躲入洞中，他们决定宁死不屈，因此决定41人围成一个圆，从头开始报数，没报到第三个人就必须自杀，然后下一个人重新报数。<br>其中有个漏洞为最后会剩下两个人，无法数到三，因此这两个人不会自杀。于是Josephus把自己和他的朋友安排在16和31的位置，逃过了这场死亡游戏。<br><img src="/img/数据结构（简述⑧）/图1.png"><br>约瑟夫问题模拟代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;stdilb.h&gt;</span><br><span class="line"></span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct node *next;</span><br><span class="line">&#125;node;		&#x2F;&#x2F;结点结构体</span><br><span class="line"></span><br><span class="line">node *create(int n)		&#x2F;&#x2F;n为该表内元素数量</span><br><span class="line">&#123;</span><br><span class="line">	node *p &#x3D; NULL, *head;		&#x2F;&#x2F;初始化p为空和头结点</span><br><span class="line">	head &#x3D; (node*)malloc(sizeof(node));		&#x2F;&#x2F;给头结点分配空间</span><br><span class="line">	p &#x3D; head;	&#x2F;&#x2F;先令p为头结点</span><br><span class="line">	node *s;	&#x2F;&#x2F;工具指针</span><br><span class="line">	int i &#x3D; 1;</span><br><span class="line"></span><br><span class="line">	if(0 !&#x3D; n)		&#x2F;&#x2F;如果n不为0，即非空</span><br><span class="line">	&#123;</span><br><span class="line">		while(i &lt;&#x3D; n)</span><br><span class="line">		&#123;</span><br><span class="line">			s &#x3D; (node *)malloc(sizeof(node));</span><br><span class="line">			s-&gt;data &#x3D; i++;	&#x2F;&#x2F;先把值给s然后i自增</span><br><span class="line">			p-&gt;next &#x3D; s;</span><br><span class="line">			p &#x3D; s;</span><br><span class="line">		&#125;</span><br><span class="line">		s-&gt;next &#x3D; head-&gt;next;</span><br><span class="line">	&#125;	&#x2F;&#x2F;整体是给约瑟夫环元素赋值</span><br><span class="line"></span><br><span class="line">	free(head);		&#x2F;&#x2F;释放头结点，实现链表循环</span><br><span class="line"></span><br><span class="line">	return s-&gt;next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n &#x3D; 41;</span><br><span class="line">	int m &#x3D; 3;</span><br><span class="line">	node *p&#x3D;create(n);</span><br><span class="line">	node *temp;</span><br><span class="line"></span><br><span class="line">	m %&#x3D; n;		&#x2F;&#x2F;得到最后剩下几个元素</span><br><span class="line"></span><br><span class="line">	while(p !&#x3D; p-&gt;next)		&#x2F;&#x2F;判断非空</span><br><span class="line">	&#123;</span><br><span class="line">		for(i &#x3D; 1;i &lt; m-1; i++)		</span><br><span class="line">		&#123;</span><br><span class="line">			p &#x3D; p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		cout&lt;&lt;p-&gt;next-&gt;data&lt;&lt;&quot;-&gt;&quot;;		&#x2F;&#x2F;每m个元素点名一次</span><br><span class="line">		temp &#x3D; p-&gt;next;</span><br><span class="line">		p-&gt;next &#x3D; temp-&gt;next;		&#x2F;&#x2F;p指向被点名元素下一个元素</span><br><span class="line"></span><br><span class="line">		free(temp);		&#x2F;&#x2F;释放被点名元素</span><br><span class="line"></span><br><span class="line">		p &#x3D; p-&gt;next;	&#x2F;&#x2F;p为下一个元素</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;p-&gt;data&lt;&lt;endl;	&#x2F;&#x2F;输出最后剩余</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>循环链表特点</title>
+    <url>/2020/06/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A8%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="尾指针做索引"><a href="#尾指针做索引" class="headerlink" title="尾指针做索引"></a>尾指针做索引</h1><hr>
+<p>在循环链表中，原本查找到最后一个元素需要时间为O(n)，但是若让尾指针指向第一个元素的话，那么查找第一个和最后一个元素的时间都是O(1)，大大缩短了时间。<br>这时再判断是否为空，则判断尾指针rear是否等于rear-&gt;next。</p>
+<p>例题：将两个线性表(a1,a2,a3,……,an)和(b1,b2,b3,……,bm)连接成一个线性表(a1,……,an,b1,……,bm)的运算</p>
+<p>要点：</p>
+<ul>
+<li>在单链表或者头指针表示的单循环表上做这种操作，都需要遍历第一个链表，找到an，然后b1接an，执行时间O(n)。</li>
+<li>若尾指针表示的单循环表，则只需修改指针，无需遍历，用时O(1)。</li>
+</ul>
+<img src="/img/数据结构（简述⑨）/图1.png">
+
+<p>在图上看，令A的rear尾指针不再指向a1而是指向b1，B的头指针释放，B的尾指针指向a1。</p>
+<p>代码片段:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LinkList Connect(LinkList A,LinkList B)		&#x2F;&#x2F;A和B为两个链表尾指针</span><br><span class="line">&#123;</span><br><span class="line">	LinkList p &#x3D; A-&gt;next;	&#x2F;&#x2F;现将A的头结点存给p</span><br><span class="line"></span><br><span class="line">	A-&gt;next &#x3D; B-&gt;next-&gt;next;	&#x2F;&#x2F;令A得尾链接B的开始结点</span><br><span class="line"></span><br><span class="line">	free(B-&gt;next);		&#x2F;&#x2F;释放B的头结点</span><br><span class="line"></span><br><span class="line">	B-&gt;next &#x3D; p;	&#x2F;&#x2F;B尾指针指向A头结点</span><br><span class="line"></span><br><span class="line">	return B;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="判断单链表是否有环"><a href="#判断单链表是否有环" class="headerlink" title="判断单链表是否有环"></a>判断单链表是否有环</h1><hr>
+<img src="/img/数据结构（简述⑨）/图2.png">
+
+<p>有环：尾结点指向链表内的某结点。</p>
+<p>方法一：用p、q两个指针，p一直向前，q每次从头重新开始向前，对每个节点，看p走的步数是否和q一样。<br>在图中，p从6走到3用了6步，而q从head触发用两步，则矛盾，存在环。</p>
+<p>方法二：使用p、q两个指针，p每次向前一步，q向前两步，若某时p == q，则有环。</p>
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>魔术师发牌问题</title>
+    <url>/2020/06/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A9%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="魔术师发牌问题"><a href="#魔术师发牌问题" class="headerlink" title="魔术师发牌问题"></a>魔术师发牌问题</h1><hr>
+<p>问题描述：魔术师把一副13张黑桃牌，将它们预先排好后放在一起，牌面朝下。魔术师将最上面的牌数为1，把它反过来为黑桃A，把黑桃A放在桌子上，第二次数1,2。把第一张牌放在牌堆下面，第二张牌翻过来是黑桃2，放在桌子上，这样将13张牌翻出。  </p>
+<p>问这些牌要如何排放。</p>
+<p>代码片段：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">#define CardNumber 13</span><br><span class="line"></span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct node* next;</span><br><span class="line">&#125;sqlist, * linklist;</span><br><span class="line"></span><br><span class="line">linklist CreateLinkList()		&#x2F;&#x2F;链表初始化</span><br><span class="line">&#123;</span><br><span class="line">	linklist head &#x3D; NULL;</span><br><span class="line">	linklist s, r;</span><br><span class="line">	int i;</span><br><span class="line"></span><br><span class="line">	r &#x3D; head;</span><br><span class="line"></span><br><span class="line">	for (i &#x3D; 1; i &lt;&#x3D; CardNumber; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s &#x3D; (linklist)malloc(sizeof(sqlist));</span><br><span class="line">		s-&gt;data &#x3D; 0;</span><br><span class="line"></span><br><span class="line">		if (head &#x3D;&#x3D; NULL)</span><br><span class="line">			head &#x3D; s;</span><br><span class="line">		else</span><br><span class="line">			r-&gt;next &#x3D; s;</span><br><span class="line"></span><br><span class="line">		r &#x3D; s;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	r-&gt;next &#x3D; head;</span><br><span class="line"></span><br><span class="line">	return head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;发牌顺序</span><br><span class="line">void Magician(linklist head)</span><br><span class="line">&#123;</span><br><span class="line">	linklist p;</span><br><span class="line">	int j;</span><br><span class="line">	int Countnumber &#x3D; 2;	&#x2F;&#x2F;第二次取牌隔2个，同时取2</span><br><span class="line"></span><br><span class="line">	p &#x3D; head;</span><br><span class="line">	p-&gt;data &#x3D; 1;	&#x2F;&#x2F;第一张牌放A</span><br><span class="line"></span><br><span class="line">	while (1)</span><br><span class="line">	&#123;</span><br><span class="line">		for (j &#x3D; 0; j &lt; Countnumber; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			&#x2F;*往后推移，假如往后数取第4个牌，但中间有个位置有牌，</span><br><span class="line">			则p直接跳过该牌到下一个*&#x2F;</span><br><span class="line">			p &#x3D; p-&gt;next;</span><br><span class="line">			if (p-&gt;data !&#x3D; 0)</span><br><span class="line">			&#123;</span><br><span class="line">				j--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		if (p-&gt;data &#x3D;&#x3D; 0)	&#x2F;&#x2F;如果该位置没被取过，则取该牌</span><br><span class="line">		&#123;</span><br><span class="line">			p-&gt;data &#x3D; Countnumber;</span><br><span class="line">			Countnumber++;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		if (Countnumber &#x3D;&#x3D; 14)	&#x2F;&#x2F;13张牌取完了，跳出循环</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;销毁工作</span><br><span class="line">void DestroyList(linklist* list)</span><br><span class="line">&#123;</span><br><span class="line">	linklist ptr &#x3D; *list;</span><br><span class="line">	linklist buff[CardNumber];</span><br><span class="line">	int i &#x3D; 0;</span><br><span class="line">	while (i &lt; CardNumber)</span><br><span class="line">	&#123;</span><br><span class="line">		buff[i++] &#x3D; ptr;</span><br><span class="line">		ptr &#x3D; ptr-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	for(i &#x3D; 0; i &lt; CardNumber; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		free(buff[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	*list &#x3D; 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	linklist p;</span><br><span class="line">	int i;</span><br><span class="line"></span><br><span class="line">	p &#x3D; CreateLinkList();</span><br><span class="line">	Magician(p);</span><br><span class="line"></span><br><span class="line">	printf(&quot;按以下顺序排列&quot;);</span><br><span class="line">	for (i &#x3D; 0; i &lt; CardNumber; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;黑桃 %d&quot;, p-&gt;data);</span><br><span class="line">		p &#x3D; p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	DestroyList(&amp;p);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+        <category>链表</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语笔记（1）</title>
+    <url>/2020/06/14/%E8%8B%B1%E8%AF%AD%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="狼人芬里尔"><a href="#狼人芬里尔" class="headerlink" title="狼人芬里尔"></a>狼人芬里尔</h2><hr>
+<p>The gods <b>intended</b> to bind the monstrous wolf, Fenrir. They had made two fetters to challenge the wolf.</p>
+<p>诸神先后打造了2根锁链企图将巨狼芬里尔锁住。</p>
+<p>But the third one <b>had been made</b> by the dwarves 6 mythical ingredients.</p>
+<p>但是侏儒用六种罕见的事物锻造成一根名……</p>
+<p>The gods <b>were hoping</b> to trick the wolf into the third fetter but the monster was no fool.</p>
+<p>诸神想把它困在第三根锁链中，但是芬里尔并不傻。</p>
+<p>It <b>was thinking</b> of an exit strategy.</p>
+<p>芬里尔想出了对策。</p>
+<p>In the end, the war god Tyr <b>lost</b> his right hand and the wolf <b>was bound</b> securely by the fetter.</p>
+<p>最后战神蒂尔挺身而出，把手放进了巨狼的大嘴。</p>
+<hr>
+<h3 id="一般过去时"><a href="#一般过去时" class="headerlink" title="一般过去时"></a>一般过去时</h3><hr>
+<p><b>intended, lost, was bound</b><br>用动词过去式的一般形态即可，有时还前面需要加be的过去式。</p>
+<h3 id="过去进行时"><a href="#过去进行时" class="headerlink" title="过去进行时"></a>过去进行时</h3><hr>
+<p><b>were hoping, was thinking of</b><br>用动词的进行时态配上be的过去式</p>
+<h3 id="过去完成时"><a href="#过去完成时" class="headerlink" title="过去完成时"></a>过去完成时</h3><hr>
+<p><b>had done, had made</b><br>用动词的过去分词形式，搭配have的过去式had。</p>
+<h2 id="一般过去时对比过去进行时"><a href="#一般过去时对比过去进行时" class="headerlink" title="一般过去时对比过去进行时"></a>一般过去时对比过去进行时</h2><hr>
+<p>一般过去时，是开始于过去且终止于过去的时态。<br>比如在：<br>In the end, the war god Tyr <b>lost</b> his right hand and the wolf <b>was bound</b> securely by the fetter.<br>这个句子中的lost就是在过去失去，且已经失去。</p>
+<p>突出了动作的完整性。</p>
+<hr>
+<p>过去进行时，不强调行为的开始和终止。<br>比如在：<br>The gods <b>were hoping</b> to trick the wolf into the third fetter but the monster was no fool.It <b>was thinking</b> of an exit strategy.<br>这个句子中不强调众神的希望行为，也不强调芬里尔想要做什么，只是强调了芬里尔并不愚蠢。因此think和hope在这里用过去进行时。失去是一个完整的行为，而希望和得到想法是难以界定其开始和终止的行为。</p>
+<h2 id="过去进行时强化"><a href="#过去进行时强化" class="headerlink" title="过去进行时强化"></a>过去进行时强化</h2><hr>
+<p>The expensive shops in a famous arcade near Piccadilly <b>were just opening.</b></p>
+<p>Mr.Taylor, the owner of a jewellery shop <b>was admiring</b> a new window display.</p>
+<p>再在这里正在营业和正在欣赏都是在为故事背景进行渲染，而非强调部分，且什么时候开始营业和什么时候开始欣赏，何时结束无法进行界定。</p>
+<h2 id="过去完成时强化"><a href="#过去完成时强化" class="headerlink" title="过去完成时强化"></a>过去完成时强化</h2><hr>
+<p>过去完成时可以先简单理解为过去的过去</p>
+<p>She <b>had died</b> by the time he <b>arrived</b> at the hospital.</p>
+<p>这句中dead和arrive存在时间差，且dead的行为先于arrive已经完成了。</p>
+<p>I <b>said</b> Yes <b>the moment</b> she <b>had invited</b> me to her birthday party.</p>
+<p>在这句中the moment作为从句连接词，我的回答后于她的邀请，存在时间差，因此她的邀请是过去完成时。</p>
+<h3 id="课后作业"><a href="#课后作业" class="headerlink" title="课后作业"></a>课后作业</h3><hr>
+<p>1.诸神还没回过神来，巨狼已经挣脱锁链。（escape 逃脱）</p>
+<p>Fenrir had escaped the fetter when the gods not came to life.</p>
+<p>2.芬里尔明白自己被骗的那一瞬间，它一口咬断了蒂尔的手臂。</p>
+<p>Fenrir knew that the moment it was cheated, it bit Tyr’s arm off.</p>
+<p>3.我在书柜顶上找到一本关于北欧神话的旧书。它在那儿已经躺了好多年了。（Norse mythology 北欧神话）</p>
+<p>I found a old book about Norse mythology that had put on there for many years.</p>
+]]></content>
+      <categories>
+        <category>英语</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>英语</tag>
+        <tag>语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【私用】计算机网络笔记①</title>
+    <url>/2020/03/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0%E2%91%A0/</url>
+    <content><![CDATA[<h2 id="因特网"><a href="#因特网" class="headerlink" title="因特网"></a>因特网</h2><p>因特网有三大阶段：</p>
+<ul>
+<li>第一阶段：从单个网络 ARPANET 向互联网发展的过程。1983 年 TCP/IP 协议成为 ARPANET 上的标准协议。</li>
+<li>第二阶段：建成三级结构的因特网：主干网、地区网和校园网（或企业网）。</li>
+<li>第三阶段：形成多层次的ISP（Internet Service Provider 因特网服务提供者）结构的因特网。</li>
+</ul>
+<hr>
+<p>internet 和 Internet 的区别：</p>
+<ul>
+<li><strong><em>internet:</em></strong> 通用名词，它泛指由多个计算机网络互连而成的网络。</li>
+<li><strong><em>Internet:</em></strong> 专用名词，它指当前全球最大的、开放的、由众多网络相互连接而成的特定计算机网络，它采用 TCP/IP 协议族作为通信的规则，且其前身是美国的 ARPANET。</li>
+</ul>
+<hr>
+<h2 id="互联网的组成"><a href="#互联网的组成" class="headerlink" title="互联网的组成"></a>互联网的组成</h2><ul>
+<li><strong><em>边缘部分：</em></strong> 有所有连接在因特网上的主机组成。这部分由用户直接使用，用来进行通信和资源共享。</li>
+<li><strong><em>核心部分：</em></strong> 由大量的网络和连接这些网络的路由器组成。这部分是为边缘部分提供服务的（提供连通性和交换）。</li>
+</ul>
+<p>处于边缘部分的用户通信方式</p>
+<ul>
+<li>客户服务器方式（C/S方式）：即Client/Server方式。（客户是服务的请求方，服务器是服务的提供方）</li>
+<li>对等方式（P2P方式）：即Peer-to-Peer方式。（对等连接中的每一个主机既是客户又同时是服务器）</li>
+</ul>
+<p>核心部分的交换技术</p>
+<ul>
+<li><strong><em>电路交换</em></strong>的三个阶段：建立连接——通话——释放连接<br>在通话时，两用户之间占用端到端的资源，而由于绝大部分时间线路都是空闲的，所以线路的传输速率往往很低。</li>
+<li><strong><em>分组交换</em></strong>的组成：报文、首部、分组。采用存储转发技术，即收到分组——存储分组——查询路由（路由选择协议）——转发分组。优点：高效、灵活、迅速、可靠。缺点：时延、开销。关键构件：路由器。</li>
+<li><strong><em>报文交换</em></strong>整个报文传送到相邻结点，全部存储下来之后查询转发表，转发到下一个结点。<img src="/img/JW1.jpg">
+</li>
+</ul>
+<hr>
+<h2 id="计算机网络的类别"><a href="#计算机网络的类别" class="headerlink" title="计算机网络的类别"></a>计算机网络的类别</h2><ul>
+<li>按通信距离分：广域网、局域网、城域网</li>
+<li>按信息交换方式分：电路交换网、分组交换网、总和交换网</li>
+<li>按网络拓扑结构分：星型网、树型网、环型网、总线网</li>
+<li>按通信介质分：双绞线网、同轴电缆网、光纤网、卫星网</li>
+<li>按传输带宽分：基带网、宽带网</li>
+<li>按使用范围分：公用网、专用网</li>
+<li>按速率分：高速网、中速网、低速网</li>
+<li>按通信传播方式分：广播式、点到点式</li>
+</ul>
+<hr>
+<p>性能指标：速率、带宽、时延</p>
+<ul>
+<li><strong><em>速率：</em></strong>指连接在计算机网络上的主机在数字信道上传送数据的速率。b/s（bps） 如100M以太网，实际是指100Mb/s。往往是指额定速率或标称速率。</li>
+<li><strong><em>带宽：</em></strong>数字信道所能传送的最高速率。b/s（bps）</li>
+<li><strong><em>吞吐量：</em></strong>单位时间内通过某个网络（或信道、接口）的实际数据量。其绝对上限值等于带宽。</li>
+<li><strong><em>时延：</em></strong>数据（一个报文或分组、甚至比特）从网络（或链路）的一段传送到另一端的时间，也称延迟。<br>① 发送时延：主机或路由器发送数据帧所需的时间，也就是从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需的时间。也成传输时延。<br>发送时延 = 数据帧长度（b） / 信道带宽（b/s）<br>② 传播时延：电磁波在信道中传输一定距离所需划分的时间。<br>传播时间 = 信道长度（m） / 传输速率（m/s）<br>③ 处理时延：主机或路由器处理收到的分组所花费的时间。<br>④ 排队时延：分组在输入队列中等待处理的时间加上其在输出队列中等待转发的时间。<br>综上：总时延 = 发送时延 + 传播时延 + 处理时延 + 排队时延。<br>注：对于高速网络链路，提高的是发送速率而不是传播速率。</li>
+<li>时延带宽积：传播时延 * 带宽。表示链路的容量。</li>
+<li>往返时间RTT：从发送方发送数据开始，到发送发收到接收方的确认为止，所花费的时间。</li>
+<li>利用率：某信道有百分之几是被利用的（有数据通过）。而信道或网络利用率过高会产生非常大的时延。<br>当前时延=空闲时时延/（1-利用率）</li>
+</ul>
+<hr>
+<h2 id="计算机网络的体系结构"><a href="#计算机网络的体系结构" class="headerlink" title="计算机网络的体系结构"></a>计算机网络的体系结构</h2><p><strong><em>网络协议：</em></strong>简称协议，是为了进行网络中的数据交换而建立的规则、标准或约定。<br>网络协议三要素：</p>
+<ul>
+<li>语法：数据与控制信息的结构或格式</li>
+<li>语义：需要发出何种控制信息，完成何种动作以及做出何种响应</li>
+<li>同步：事件实现顺序的详细说明</li>
+</ul>
+<p><strong><em>体系结构(architecture)</em></strong>是计算机网络的各层及其协议的集合<br>五层协议的体系结构：</p>
+<ul>
+<li><strong><em>物理层：</em></strong>物理层的任务就是透明地传送比特流。（注意：传递信息的物理媒体，如双绞线、同轴电缆、光缆等，是在物理层的下面，当做第0 层。）物理层还要确定连接电缆插头的定义及连接法。</li>
+<li><strong><em>数据链路层：</em></strong>将网络层交下来的IP数据报组装成帧，在两个相邻结点间的链路上”透明“的传送以帧为单位的数据。每一帧包括数据和必要的控制信息。在收到数据时，控制信息使收到端直到哪个帧从哪个比特开始和结束。</li>
+<li><strong><em>网络层：</em></strong>选择合适的路由，使发送站的运输层所传下来的分组能够正确无误地按照地址找到目的站，并交付给目的站的运输层。网络层将运输层产生的报文或用户数据报封装成分组（IP数据报）或包进行传送。</li>
+<li><strong><em>运输层：</em></strong>向上一层的进行通信的两个进程之间提供一个可靠的端对端服务，使它们看不见运输层以下的数据通信的细节。（TCP、UDP）</li>
+<li><strong><em>应用层：</em></strong>直接为用户的应用进程提供服务（HTTP、FTP等）</li>
+</ul>
+<p>OSI体系结构：物理层、数据链路层、网络层、运输层、会话层、表示层、应用层</p>
+<p>TCP/IP体系结构：网络接口层、网际层IP、运输层、应用层</p>
+<img src="/img/JW2.jpg">
+
+<p>私用</p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构（线性表与查增删）</title>
+    <url>/2020/05/14/%E7%BA%BF%E6%80%A7%E8%A1%A8%EF%BC%88%E7%AE%80%E8%BF%B0%E2%91%A0%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h1><p><b>线性表：</b>由零个或多个数据元素组成的优先序列。</p>
+<p><b>注意：</b>  </p>
+<ol>
+<li>第一个元素无前驱，最后一个元素无后继，其余元素有且只有一个前驱和后继。  </li>
+<li>表中元素按一定顺序进行排列，有其先来后到。  </li>
+<li>线性表只能处理<b>有限</b>的元素</li>
+</ol>
+<h3 id="基本操作相关"><a href="#基本操作相关" class="headerlink" title="基本操作相关"></a>基本操作相关</h3><hr>
+<p><font size=2><b>强烈建议命名进行规范，加强代码可读性。 </b></font></p>
+<p><b>InitList(*L)</b>：初始化操作，建立空表L。<br><b>ListEmpty(L)</b>：判断表是否为空，若空返回true,反之返回false。<br><b>ClearList(*L)</b>：将线性表清空。<br><b>GetElem(L,i,*e)</b>：将表L中的第i个位置元素值返回给e。<br><b>LocateElem(L,e)</b>：在表L中查找与给定值e相等的元素，如果查找成功，返回该元素在表中序号，失败则返回0。<br><b>ListInsert(*L,i,e)：</b>在表L中第i个位置插入新元素e。<br><b>ListDelete(*L,i,*e)：</b>删除表L中第i个位置元素，并用e返回其值。<br><b>ListLength(L)：</b>返回表L的长度（元素个数）。<br><b>ListInsert(*L,i,e)：</b>在表L的i位置插入新元素e。<br><b>ListDelete(SqList *L, int i, ElemType *e)：</b>删除表L的i位置元素，并把元素的值e取出。<br><b>endADT</b></p>
+<p>以以上命名为基础，进行集合并集的数据结构代码  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void ListL(Lista *La,Listb Lb)	</span><br><span class="line">&#123;</span><br><span class="line">	int La_len,Lb_len,i;	</span><br><span class="line">	&#x2F;*定义三个元素用于存放La的元素个数，Lb的元素个数和元素位置*&#x2F;</span><br><span class="line">	ElemType e;		&#x2F;&#x2F;万能元素，用于返回需求的值</span><br><span class="line">	La_len &#x3D; ListLength(*La);	&#x2F;&#x2F;将La的元素个数返回给La_len</span><br><span class="line">	Lb_len &#x3D; ListLength(Lb);	&#x2F;&#x2F;道理同上</span><br><span class="line">	for(i&#x3D;1; i &lt;&#x3D; Lb_len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		GetElem(Lb, i, &amp;e);		&#x2F;&#x2F;Lb中第i个元素给e</span><br><span class="line">		if(!LocateElem(*La, e))		&#x2F;&#x2F;判断e中的值是否在La中已有</span><br><span class="line">		&#123;</span><br><span class="line">			ListInsert(La, ++La_len, e);	</span><br><span class="line">	&#x2F;*若没有重复，则将e中的值插入到La中成为一个新的元素，并</span><br><span class="line">	另La元素个数+1*&#x2F;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下来再看一下顺序存储结构的代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define MAXSIZE 50	&#x2F;&#x2F;令MAXSIZE代表50</span><br><span class="line">typedef int ElemType	&#x2F;&#x2F;令ElemType在这里代表int数据类型</span><br><span class="line">typedef struct		&#x2F;&#x2F;结构体</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data[MAXSIZE];		&#x2F;&#x2F;等同于int data[50];</span><br><span class="line">	int length;		&#x2F;&#x2F;线性表当前长度</span><br><span class="line">&#125;SqList;	&#x2F;&#x2F;表名</span><br></pre></td></tr></table></figure>
+
+<p><b>存储地址计算：<font color="blue">LOC(ai) = LOC(a1) + (i-1)*l</font></b><br><font size=1>l为一个元素所占内存空间</font></p>
+<h2 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define TRUE 1</span><br><span class="line">#define FALSE 0</span><br><span class="line"></span><br><span class="line">typedef int Status;</span><br><span class="line"></span><br><span class="line">Status GetElem(SqList L, int i, ElemType *e)	&#x2F;&#x2F;获取表L的位置i的元素并把值给e</span><br><span class="line">&#123;</span><br><span class="line">	if(L.length&#x3D;&#x3D;0 || i&lt;1 || i&gt;L.length)	&#x2F;&#x2F;表L为空或者位置小于1或者位置大于表L元素个数都返回错误</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	*e &#x3D; L.data[i-1];	</span><br><span class="line">	&#x2F;*因为要获取第2个元素的话实际上是获取表中1地址元素（道理同</span><br><span class="line">	数组排序），因此要获取第i元素值便是获取L表中data[i-1]的值*&#x2F;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存储中插入操作的流程"><a href="#存储中插入操作的流程" class="headerlink" title="存储中插入操作的流程"></a>存储中插入操作的流程</h2><hr>
+<ul>
+<li>如果插入位置不合理要抛出异常；</li>
+<li>如果表长大于数组长度，抛出异常，或者动态增加数组容量；</li>
+<li>从最后一个元素开始向前遍历到第i个位置，分别将他们都向后移动一个位置；</li>
+<li>将要插入的元素填入位置i处；</li>
+<li>线性表长+1；</li>
+</ul>
+<p><b>实现代码：</b></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define MAXSIZE 50</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OK 1</span><br><span class="line"></span><br><span class="line">Status ListInsert(SqList *L, int i, ElemType e)</span><br><span class="line">&#x2F;&#x2F;将值e插入到表L的位置i处</span><br><span class="line">&#123;</span><br><span class="line">	int k;</span><br><span class="line"></span><br><span class="line">	if(L-&gt;length &#x3D;&#x3D; MAXSIZE)	&#x2F;&#x2F;表满了返回错误</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	if(i&lt;1 || i&gt;L-&gt;length+1)	&#x2F;&#x2F;插入位置非法返回错误</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	if(i &lt;&#x3D; L-&gt;Length)</span><br><span class="line">	&#123;</span><br><span class="line">	&#x2F;&#x2F;将被插入元素位置往后的元素地址后后移一位</span><br><span class="line">		for(k &#x3D; L-&gt;length-1; k &gt;&#x3D; i-1; k--)		&#x2F;&#x2F;数组特性第i位实际就是位置i-1</span><br><span class="line">		&#123;</span><br><span class="line">			L-&gt;data[k+1] &#x3D; L-&gt;data[k];	&#x2F;&#x2F;实现了k位置往后移1位</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	L-&gt;data[i-1] &#x3D; e;	&#x2F;&#x2F;位置i插入元素值e</span><br><span class="line">	L-&gt;length++;	&#x2F;&#x2F;表L长度+1</span><br><span class="line"></span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除操作流程"><a href="#删除操作流程" class="headerlink" title="删除操作流程"></a>删除操作流程</h2><hr>
+<ul>
+<li>删除位置不合理，抛出异常；</li>
+<li>取出删除元素；</li>
+<li>删除元素开始位置往后遍历到最后一个元素，分别将其向前移动一个位置；</li>
+<li>表长-1；</li>
+</ul>
+<p>操作代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define ERROR 0;</span><br><span class="line">#define OK 1;</span><br><span class="line"></span><br><span class="line">Status ListDelete(SqList *L,int i,ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">	int k;</span><br><span class="line"></span><br><span class="line">	if(L-&gt;length &#x3D;&#x3D; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	if(i &lt; 1 || i &gt; L-&gt;length)</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;	&#x2F;&#x2F;都是非法地址删除操作</span><br><span class="line"></span><br><span class="line">	*e &#x3D; L-&gt;data[i-1];	&#x2F;&#x2F;用e获取被删除位置i元素的值</span><br><span class="line"></span><br><span class="line">	if(i &lt; L-&gt;length)</span><br><span class="line">	&#123;</span><br><span class="line">		for(k &#x3D; i; k &lt; L-&gt;length; k++)</span><br><span class="line">	&#x2F;*重复解释，因为要移动被删除位置i后面的所有元素，因</span><br><span class="line">	此在数组中其实被删除的是i-1位置元素，往后起始元素便是i*&#x2F;</span><br><span class="line">		&#123;</span><br><span class="line">			L-&gt;data[k-1] &#x3D; L-&gt;data[k];	&#x2F;&#x2F;位置后移操作</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	L-&gt;length--;	&#x2F;&#x2F;表长减1</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线性表顺序存储优缺点"><a href="#线性表顺序存储优缺点" class="headerlink" title="线性表顺序存储优缺点"></a>线性表顺序存储优缺点</h3><p><b>优点：</b></p>
+<ul>
+<li>无序为表示表中元素之间的逻辑关系而增加存储空间；</li>
+<li>可以快速存取表中任意位置元素；  </li>
+</ul>
+<p><b>缺点：</b></p>
+<ul>
+<li>插入和删除操作需要移动大量元素；</li>
+<li>线性表长度变化较大时，难以确定存储空间容量；</li>
+<li>容易造成存储空间的“碎片”。</li>
+</ul>
+<p><font size="12"><font color="red">记住，未对结构体进行修改的传值时不传指针，即传值时SqList L即可，需要对结构进行修改的传值SqList *L</font></p>
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>预备知识（数据结构）</title>
+    <url>/2020/05/11/%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86%EF%BC%88%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%89/</url>
+    <content><![CDATA[<p><font size=2>本文依照数据结构、算法与应用（C++语言）（第二版）所进行学习</font></p>
+<p><b>1.函数部分</b><br><b>1.1 传值参数</b></p>
+<figure class="highlight plain"><figcaption><span>abc(int a,int b,int c)</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  return a*b+c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数abc中让int类型的a、b、c作为<strong>形参</strong>，在函数内用return返回由a、b、c所构成的表达式。之后可以进行<b>实参</b>传递：</p>
+<pre><code>z=abc(3,4,5);</code></pre><p>即z得到abc的实参3、4、5所参与的表达式进行运算后的结果（3×4+5=17）<br>要注意函数运行结束后，形参类型的<b>析构函数</b>负责释放形式参数。</p>
+<p><font size=2>即形参的值在函数运行结束后不会复制到对应的形参上，不会修改实参的值。</font></p>
+<p>形参与实参的数据类型不匹配即形参int a对应了实参float x=3.8，那么在参数传值的过程中只会传递数值3而不是3.8或4。<br><b>1.2 模板函数</b><br>函数与函数之间直接实现数据类型的相互套用。</p>
+<figure class="highlight plain"><figcaption><span>abc(float a,float b,float c)</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  return a+b+c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上为一般代码</p>
+<p>而在此基础上进行模板函数套用。</p>
+<pre><code>template&lt;class T&gt;
+T abc(T a,T b,T c)
+{
+return a+b+c;
+}</code></pre><p>则任何数据类型可以通过替代T来实现形参数据类型的统一。在主函数中调用时，任何一个操作规定了T的数据类型，则该模板函数中的T会自然统一。</p>
+<pre><code>int x=3;
+int y=4;
+z=abc&lt;int&gt;(x,y,5);</code></pre><p>则模板函数中的所有T都将被统一为int数据类型。<br><b>1.3 引用参数</b><br>在正常的参数传值过程中实际上是实参的值复制给了形参然后再运算后复制给实参，在此过程中的操作是十分繁多的，如果在1.1中abc传递的是一个1000数值的矩阵，那么过程中将进行3000次运算（复制给形参1000次，运算1000次，复制给实参1000次）。</p>
+<p>若利用引用参数的方法则对于1000数值的矩阵只需进行1000次运算，大大减少了工作负荷。</p>
+<pre><code>template&lt;class T&gt;
+T abc(T&amp; a,T&amp; b,T&amp; c)
+{
+  return a+b+c;
+}</code></pre><p>这个过程实际上是直接引用了实参，让实参替代了形参，而非将实参的值复制给形参，运算后得到结果直接赋给了实参不需要从形参再复制给实参。</p>
+<p><b>1.4 常量引用参数</b><br>常量引用的过程中被引用的实参无法被函数所修改。</p>
+<pre><code>template&lt;class T&gt;
+T abc(const T&amp; a,const T&amp; b,const T&amp; c)
+{
+  a++;b++;c++;
+  return a+b+c;
+}</code></pre><p>在该引用过程中若被引用的实参数值分别为3，4，5。那么得到的返回值将会是3+4+5=12而非4+5+6=15。</p>
+<p>更加规范正规的版本</p>
+<pre><code>template&lt;class Ta,class Tb,class Tc&gt;
+Ta abc(const Ta&amp; a,const Tb&amp; b,const Tc&amp; c)
+{
+  return a+b+c;
+}</code></pre><p><b>1.5 返回值</b><br>    return z;<br>在该返回方式中，返回值z会被放到返回值内存空间内，将随着函数结束后内存空间的释放而消失，在未释放前会一直占用内存空间。</p>
+<pre><code>T&amp; abc(int i,T&amp; z)</code></pre><p>这是<b>引用返回</b>，返回值将会直接被引用回主函数内，不会将返回值存入内存空间。</p>
+<pre><code>const T&amp; abc(int i,T&amp; z)</code></pre><p>这是常量引用返回，返回值中途无法被修改。</p>
+<p><b>练习</b><br>1.解释为何下列程序交换函数没有把形参x和y所对应的实参的值交换，如何修改代码可以实现交换？</p>
+<pre><code>void swap(int x,int y)
+{
+  int temp=x;
+  x=y;
+  y=temp;
+}</code></pre><p>答：在该代码片段中设计知识可回看<strong>1.1</strong>部分，由于析构函数会释放函数运行后的内存空间，形参的值不会直接复制给实参，且无返回值和主函数内返回值的接受对象，因此无法实现实参值得转换。可进行修改。</p>
+<pre><code>void swap(int&amp; x,int&amp; y)
+{
+  int temp=x;
+  x=y;
+  y=temp;
+}</code></pre><p>利用<b>引用参数</b>直接引用入实参进行交换，则是一种对实参值的直接交换。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+</search>

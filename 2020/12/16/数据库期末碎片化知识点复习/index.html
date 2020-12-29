@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据库期末碎片化知识点复习 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="第一章 数据库系统概述数据 
+
+数据是描述现实世界中各种具体事物或抽象概念的符号标记，除了常用的数字数据外，文字、图形、图像、声音等信息也都是数据。
+
+数据库系统阶段特点
+
+数据结构化：数据结构化是,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据库期末碎片化知识点复习</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数据库期末碎片化知识点复习</h1>
+        <div class="stuff">
+            <span>十二月 16, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="第一章-数据库系统概述"><a href="#第一章-数据库系统概述" class="headerlink" title="第一章 数据库系统概述"></a>第一章 数据库系统概述</h2><p><b>数据</b> </p>
+<ul>
+<li>数据是描述现实世界中各种具体事物或抽象概念的符号标记，除了常用的数字数据外，文字、图形、图像、声音等信息也都是数据。</li>
+</ul>
+<p><b>数据库系统阶段特点</b></p>
+<ul>
+<li>数据结构化：数据结构化是数据库系统与文件系统的根本区别。</li>
+<li>较高的数据共享性：数据共享是指允许<b>多个用户同时存取数据而互不影响</b>，该特征是数据库技术先进性的体现。</li>
+<li>较高的数据独立性：所谓数据独立是指<b>数据与应用程序的彼此独立</b>，他们之间不存在相互依赖的关系。</li>
+<li>数据由DBMS统一管理和控制：数据库的共享是<b>并发共享</b> ，即多个用户可以同时存取数据库中的数据，因此DBMS还必须提供数据的统一管理和控制功能。</li>
+</ul>
+<p><b>数据库系统的组成</b> </p>
+<img src="/img/数据库期末复习/img1.jpg">
+
+<hr>
+<p>由底层到外层：<b>硬件 -&gt; 数据库 -&gt; OS -&gt; DBMS -&gt; 开发工具 -&gt; 数据库应用系统 -&gt; 人员</b></p>
+<p><b>概念模型</b></p>
+<ul>
+<li>实体：实体是客观存在并且可以相互区分的事物，人、物、概念、状态都可以用实体表示，也可指事物之间的具体联系，如一名学生、一名老师。</li>
+<li>属性：属性是<b>实体所具有的某些特性</b>。实体是由<b>属性组成的</b>，通过<b>属性</b>对<b>实体</b>进行<b>描述</b>。</li>
+</ul>
+<p><b>实体关系模型（E-R图）</b></p>
+<img src="/img/数据库期末复习/img2.jpg">
+
+<hr>
+<p>由上图可以知道E-R图的画法：</p>
+<ul>
+<li><b>矩形：</b>表示实体。</li>
+<li><b>椭圆形：</b>表示实体所含属性</li>
+<li><b>菱形：</b>表示两实体之间的联系（<em>两实体之间必须有一联系作为介质</em> ）</li>
+<li><b>N、M、1：</b>表示对应数量【图中<em>课程</em> 与<em>选修</em> 之间的N，以及<em>选修</em> 与<em>学生</em> 之间的M表示<b>N个课程由M个学生选修</b>或<b>M个学生选修N个课程</b>】</li>
+</ul>
+<p>一个复杂的E-R图（供学习理解）</p>
+<img src="/img/数据库期末复习/img3.jpg">
+
+<hr>
+<p><b>关系模型</b></p>
+<img src="/img/数据库期末复习/img4.jpg">
+
+<hr>
+<ul>
+<li>关系：一个关系就是一张二维表，每个关系都有一个关系名。</li>
+<li>元组：二维表中的行称为元组，每一行是一个元组，元组对应存储文件中的一个记录。</li>
+<li>属性：二维表的列称为属性，每一列有一个属性名，属性值是属性的具体值，属性对应存储文件中的一个字段。</li>
+<li>域：域是属性的取值范围。</li>
+<li>关系模式：对关系的信息结构及语义限制的描述称为关系模式，用关系名和包含的属性名的集合表示。</li>
+<li>关键字或码：在关系的属性中，能够用来唯一标识元组的属性（或属性组合）称为关键字或码。</li>
+<li>候选关键字或候选码：如果一个关系中存在多个属性（或属性组合）都能用来唯一标识该关系中的元组，这些属性都成为该关系的候选关键字或候选码，候选码可以有多个。</li>
+<li>主键或主码：在一个关系的若干候选关键字中，被指定作为关键字的候选关键字称为该关系的主键或主码。</li>
+<li>主属性和非主属性：在一个关系中，包含在任何候选关键字中的各个属性都成为主属性，不包含在任一候选关键字中的属性称为非主属性。（图中<em>职工号、姓名</em> 为主属性，<em>性别、年龄</em> 为非主属性）</li>
+<li>外键或外码：一个关系的某个属性（或属性组合）不是该关系的主键的一部分，却是另一个关系的主键，则称这样的属性为该关系的外键或外码。</li>
+</ul>
+<hr>
+<h2 id="第二章-关系数据库"><a href="#第二章-关系数据库" class="headerlink" title="第二章 关系数据库"></a>第二章 关系数据库</h2><p><b>关系的性质</b></p>
+<ul>
+<li>列是同质的，<em>即每一列中的分量是同一类型的数据，来自同一个域</em> 。</li>
+<li>在同一关系中，列的次序无关紧要，即<em>列的排序是不分先后的</em> 。</li>
+<li>在同一关系中，不同的列的数据可以是同一种数据类型，但各属性的名称必须互不相同。</li>
+<li>在同一关系中，任意两个元组都<b>不能完全相同</b>。</li>
+<li>在同一关系中，元组的位置无关紧要，即排行不分先后，可以任意交换两行的位置。</li>
+<li>关系中的每个属性必须是单值，即不可再分，这就要求关系的结构<b>不能嵌套</b>，这是最基本的条件。</li>
+</ul>
+<p><b>笛卡尔积</b></p>
+<ul>
+<li>笛卡尔积记作：A×B={(x,y)|x∈A∧y∈B}</li>
+<li>设A,B为集合，用A中元素为第一元素，B中元素为第二元素构成有序对，所有这样的有序对组成的集合叫做A与B的笛卡尔积，记作AxB</li>
+</ul>
+<p>例如，A={a,b}, B={0,1,2}，则</p>
+<p>A×B={(a, 0), (a, 1), (a, 2), (b, 0), (b, 1), (b, 2)}</p>
+<p>B×A={(0, a), (0, b), (1, a), (1, b), (2, a), (2, b)}</p>
+<p><b>专门的关系计算——选择</b></p>
+<img src="/img/数据库期末复习/img5.png">
+
+<p><b>用于查询满足某一条件的元组</b></p>
+<p>如果要查询student表中的专业是数学系的学生。</p>
+<p>即：<em>特殊符号（下标：专业）=’数学系’【上标（student）】</em></p>
+<p>详细例子看书P29-4。</p>
+<p><b>专门的关系计算——投影</b></p>
+<img src="/img/数据库期末复习/img6.png">
+
+<p><b>用于查询所有元组中满足某些条件的属性</b></p>
+<p>如果要查询课程表中的课程名和课程号</p>
+<p>即：<em>特殊符号（下标：课程名，课程号）（课程表）</em></p>
+<p>详细例子看书P29-4</p>
+<p><b>专门的关系运算——连接</b></p>
+<img src="/img/数据库期末复习/img8.jpg">
+
+<img src="/img/数据库期末复习/img7.jpg">
+
+<p>连接是比较两个表的笛卡尔积，因此要对比较大小的值每一个都互相匹配一遍，将满足连接条件的所有元组单独成表。</p>
+<p>其中自然连接可以看到原两表中R.B和S.B的值相同，即将该元组加入新表。目的为了筛选掉重复信息。</p>
+<p>一般条件下，经常使用自然连接。</p>
+<p>详细例子看书P29-4。</p>
+<p><b>三大范式</b></p>
+<ul>
+<li><b>第一范式：</b><ul>
+<li>每个属性值域不可再分即满足第一范式。例如工资下分基本工资、职务工资等便不满足第一范式</li>
+</ul>
+</li>
+<li><b>第二范式：</b><ul>
+<li>若主码为学号, 课程名称的组合。存在决定关系：(学号, 课程名称) → (姓名, 年龄, 成绩, 学分)。但又存在(课程名称) → (学分)<br>(学号) → (姓名, 年龄)。有多余匹配，造成数据冗余，因此不符合第二范式。</li>
+</ul>
+</li>
+<li><b>第三范式：</b><ul>
+<li>存在传递关系关键字段 → 非关键字段x → 非关键字段y。例如”A → B → C”，若存在A → C，则不满足第三范式。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第三章-数据库设计"><a href="#第三章-数据库设计" class="headerlink" title="第三章 数据库设计"></a>第三章 数据库设计</h2><p><b>将E-R图转化为关系数据模型</b></p>
+<ul>
+<li><p>实体的转换</p>
+<p>  一个实体转化为一个关系模式，实体属性即关系模式的属性，实体主码即关系模式主码。</p>
+</li>
+<li><p>联系的转换</p>
+<p>  在E-R图中，菱形表示实体间的联系，用无向边分别把菱形与有关实体连接起来，并在无向边旁注明了联系的类型。而在关系数据模型中，实体和联系都用关系来表示。</p>
+</li>
+</ul>
+<p>举例：</p>
+<ul>
+<li><p>1:1联系的转换</p>
+<img src="/img/数据库期末复习/img9.jpg">
+
+<p>  如图内，有两种转换方法，一种是独立型，即将联系、实体分别转换成关系模式，第二种是整合型，将联系和实体整合转换成关系模式。</p>
+<p>  方法一：</p>
+<p>  转换成以下关系模式：</p>
+<p>  班级（<u>班号</u>，系别，班主任，入学时间）</p>
+<p>  班长（<u>学号</u>，姓名，性别，年龄）</p>
+<p>  班级-班长（<u>班号，学号</u>，任期）</p>
+<p>  &nbsp;</p>
+<p>  方法二：（<em>因为任期是班长的任期而不是班级的任期，因此将任期整合在班长中</em> ）</p>
+<p>  班级（<u>班号</u>，系别，班主任，入学时间）</p>
+<p>  班长（<u>学号</u>，姓名，性别，年龄，班号，<b>任期</b>）</p>
+<p>  &nbsp;</p>
+</li>
+<li><p>1:N联系的转换</p>
+<img src="/img/数据库期末复习/img10.jpg">
+
+<p>  方法一：（<em>关系的主码为N端实体的主码</em> ）</p>
+<p>  转换成以下关系模式：</p>
+<p>  系（<u>系号</u>，系名，系主任）</p>
+<p>  教师（<u>教师号</u>，教师名，年龄，职称）</p>
+<p>  工作（<u>教师号</u>，系号，入系日期）</p>
+<p>  &nbsp;</p>
+<p>  方法二：（<em>联系合并到N端实体</em> ）</p>
+<p>  转换成以下关系模式：</p>
+<p>  系（<u>系号</u>，系名，系主任）</p>
+<p>  教师（<u>教师号</u>，教师名，年龄，职称，系号，<b>入系日期</b>）</p>
+<p>  &nbsp;</p>
+</li>
+<li><p>M:N联系的转换</p>
+<img src="/img/数据库期末复习/img11.jpg">
+
+<p>  方法一：</p>
+<p>  职工（<u>职工号</u>，姓名，性别，年龄，职务）</p>
+<p>  项目（<u>项目号</u>，项目名，起始日期，鉴定日期）</p>
+<p>  参加（<u>职工号，项目号</u>，薪酬）</p>
+</li>
+</ul>
+<hr>
+<h2 id="第四章-SQL-Server-2008基础"><a href="#第四章-SQL-Server-2008基础" class="headerlink" title="第四章 SQL Server 2008基础"></a>第四章 SQL Server 2008基础</h2><p><b>T-SQL语言的分类</b></p>
+<ul>
+<li><p>数据定义语言（DDL）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">CREATE</td>
+<td align="center">创建数据库或数据库对象</td>
+<td align="center">不同数据库对象的创建，其CREATE语句的语法形式不同</td>
+</tr>
+<tr>
+<td align="center">ALTER</td>
+<td align="center">修改数据库或数据库对象</td>
+<td align="center">不同数据库对象的修改，其ALTER语句的语法形式不同</td>
+</tr>
+<tr>
+<td align="center">DROP</td>
+<td align="center">删除数据库或数据库对象</td>
+<td align="center">不同数据库对象的删除，其DROP语句的语法形式不同</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>数据操作语言（DML）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">INSERT</td>
+<td align="center">插入数据</td>
+<td align="center">插入一行或多行数据到表或视图末尾</td>
+</tr>
+<tr>
+<td align="center">UPDATE</td>
+<td align="center">修改数据</td>
+<td align="center">既可修改表或视图的一行数据，也可修改一组或全部数据</td>
+</tr>
+<tr>
+<td align="center">DELETE</td>
+<td align="center">删除数据</td>
+<td align="center">可根据条件删除表或视图中指定的数据行或全部数据行</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>数据控制语言（DCL）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GRANT</td>
+<td align="center">授予权限</td>
+<td align="center">可把语句许可成对象许可的权限授予其他用户或角色</td>
+</tr>
+<tr>
+<td align="center">REVOKE</td>
+<td align="center">撤销权限</td>
+<td align="center">与GRANT的功能相反，但不影响该用户或角色从其他角色中作为成员继承许可权限</td>
+</tr>
+<tr>
+<td align="center">DENY</td>
+<td align="center">禁止权限</td>
+<td align="center">功能与REVOKE相似，不同之处是除收回权限外，还禁止从其他角色继承许可权限</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>数据查询语言（DQL）</p>
+<table>
+<thead>
+<tr>
+<th align="center">语句</th>
+<th align="center">功能</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SELECT</td>
+<td align="center">检索数据</td>
+<td align="center">从表或视图中检索需要的数据，是使用最频繁的SQL语句之一</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<hr>
+<h2 id="第五章-数据库的概念和操作"><a href="#第五章-数据库的概念和操作" class="headerlink" title="第五章 数据库的概念和操作"></a>第五章 数据库的概念和操作</h2><p><b>SQL Server 2008中数据库文件的类型</b></p>
+<ul>
+<li>主数据文件：主数据文件是数据库的起点，指向是数据库中的其他文件。每个数据库都<b>有且只有一个主数据文件</b>。文件扩展名.mdf</li>
+<li>辅助数据文件：除<b>主数据</b>文件以外的<b>其他所有数据文件</b>都是<b>辅助数据文件</b>。某些数据库可能不含有任何辅助数据文件，而有些数据库有多个辅助数据文件。文件扩展名.ndf</li>
+<li>事务日志文件：日志文件包括了用于<b>恢复数据库的所有日志信息</b>。每个数据库必须<b>至少有一个</b>日志文件，也可以有多个。SQL Server 2008中采用事务日志提前写入的方式，即对数据库的修改先写进日志，再写入数据库。文件扩展名.ldf</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>逻辑数据库</b></p>
+<ul>
+<li><p>master数据库</p>
+<p>  master数据库是SQL Server 2008中的主数据库，它是最重要的<b>系统数据库</b>，记录系统中的所有系统级信息。对其他数据库实施控制和管理功能。</p>
+</li>
+<li><p>model数据库</p>
+<p>  model数据库为用户新创建的数据库提供模板，它包含用户数据库中应该包含的所有系统表结构。用户创建数据库时，系统会自动把model数据库中的内容复制到新建的用户数据库中。</p>
+</li>
+<li><p>msdb数据库</p>
+<p>  msdb数据库记录备份及还原的历史信息、维护计划信息、作业信息、异常信息以及操作者信息等。它可以为SQL Server代理程序提供要调度的警报和作业等信息。</p>
+</li>
+<li><p>tempdb数据库</p>
+<p>  tempdb数据库是<b>临时的</b>，每次打开SQL Server它都将被重新创建。tempdb数据库用于存放临时表和临时数据库对象的存储过程，它是一个全局资源。</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>创建数据库</b></p>
+<p>基本语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE STUDENT1</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库名为 <em>STUDENT2</em> 的数据库，包含一个主数据文件和一个事务日志文件。主数据文件逻辑名为 <em>STUDENT2_DATA</em> ，操作系统文件名称为 <em>STUDENT2_DATA.MDF</em> ，初始容量大小为5MB，最大容量为20MB，文件增长量为20%。事务日志文件的逻辑名为 <em>STUDENT2_LOG</em> ，物理文件名为 <em>STUDENT2_LOG.LDF</em> ，初始容量为5MB，最大容量为10MB，文件增长量为2MB。数据文件和事务日志文件都放在F盘根目录下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE STUDENT2</span><br><span class="line">ON PRIMARY</span><br><span class="line">(NAME &#x3D; &#39;STUDENT2_DATA&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT2_DATA.MDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 20MB,</span><br><span class="line">FILEGROWTH &#x3D; 20% )</span><br><span class="line">LOG ON</span><br><span class="line">(NAME &#x3D; &#39;STUDENT2_LOG&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT2_LOG.LDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 10MB,</span><br><span class="line">FILEGROWTH &#x3D; 2MB )</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库名为 <em>STUDENTS</em> 的数据库，包含多个数据文件和多个事务日志文件。数据文件逻辑名为 <em>STUDENT1</em> 和 <em>STUDENT2</em> ，操作系统文件名称为 <em>STUDENT1.MDF</em> 和 <em>STUDENT2.MDF</em> ，初始容量大小为5MB和10MB，最大容量为无限大和100MB，文件增长量为10%和1MB，主数据文件 <em>STUDENT1</em> 属于 <em>PRIMARY</em> 文件组，辅助数据文件 <em>STUDENT2</em> ，属于新建文件分组 <em>FG1</em> 。事务日志文件的逻辑名为 <em>STUDENTLOG1</em> 和 <em>STUDENTLOG2</em> ，物理文件名为 <em>STUDENTLOG1.LDF</em> 和 <em>STUDENTLOG2.LDF</em> ，初始容量都为5MB，最大容量为50MB，文件增长量为1MB。数据文件和事务日志文件都放在F盘根目录下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE STUDENTS</span><br><span class="line">ON PRIMARY</span><br><span class="line">(NAME &#x3D; &#39;STUDENT1&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT1.MDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; unlimited,</span><br><span class="line">FILEGROWTH &#x3D; 10% )，</span><br><span class="line">FILEGROUP FG1</span><br><span class="line">(NAME &#x3D; &#39;STUDENT2&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENT2.MDF&#39;,</span><br><span class="line">SIZE &#x3D; 10MB,</span><br><span class="line">MAXSIZE &#x3D; 100MB,</span><br><span class="line">FILEGROWTH &#x3D; 1MB )</span><br><span class="line">LOG ON</span><br><span class="line">(NAME &#x3D; &#39;STUDENTLOG1&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENTLOG1.LDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 50MB,</span><br><span class="line">FILEGROWTH &#x3D; 1MB ),</span><br><span class="line">(NAME &#x3D; &#39;STUDENTLOG2&#39;,</span><br><span class="line">FILENAME &#x3D; &#39;F:\DATA\STUDENTLOG2.LDF&#39;,</span><br><span class="line">SIZE &#x3D; 5MB,</span><br><span class="line">MAXSIZE &#x3D; 50MB,</span><br><span class="line">FILEGROWTH &#x3D; 1MB )</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第六章-表的操作"><a href="#第六章-表的操作" class="headerlink" title="第六章 表的操作"></a>第六章 表的操作</h2><p><b>创建表</b></p>
+<p>在数据库 <em>teaching</em> 中创建 <em>course</em> 表，该表结构如图：<br><img src="/img/数据库期末复习/img12.jpg"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE TABLE course</span><br><span class="line">(cno        char(4) PRIMARY KEY,</span><br><span class="line">cname       nvarchar(20) NOT NULL,</span><br><span class="line">classhour   tinyint,</span><br><span class="line">credit      tinyint</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>创建和删除FOREIGN KEY约束</b></p>
+<p>在数据库 <em>STUDENT1</em> 中创建一个 “<em>成绩</em> ” 表，包括 “<em>学号</em> ” 、 “<em>课程号</em> ”、 “<em>成绩</em> ” 字段，并为 “<em>成绩</em> ” 表创建<b>外键</b>约束，该约束把 “<em>成绩</em> ” 表中的 “<em>学号</em> ” 字段和 “<em>学生</em> ” 表中的 “<em>学号</em> ” 字段关联起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">CREATE TABLE 成绩</span><br><span class="line">( 学号      char(6)  CONSTRAINT f_st_pk  FOREIGN KEY REFERENCES 学生(学号),</span><br><span class="line">  课程号    char(4),</span><br><span class="line">  成绩      int )</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>表中插入数据</b></p>
+<p>在 <em>teaching</em> 数据库的 <em>student</em> 表中插入一行数据，即 “<em>sno，sname，ssex，grade</em> ” 值为 “ ‘1600215’，‘刘玲玲’，‘女’，‘16级’ ”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">INSERT INTO student(sno,sname,ssex,grade)</span><br><span class="line">VALUE(&#39;1600215&#39;,&#39;刘玲玲&#39;,&#39;女&#39;,&#39;16级&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>STUDENT1</em> 数据库的 “<em>学生</em> ” 表中插入3行数据，即“ ‘160102’，‘王小玲’，‘130212199907190926’，‘女’ ” 、 “ ‘160103’，‘王伟’，‘130212199809100871’，‘男’ ” 、 “ ‘160104’，‘张大力’，‘130212199702150812’，‘男’ ”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">INSERT INTO 学生 VALUE(&#39;160102&#39;,&#39;王小玲&#39;,&#39;130212199907190926&#39;,&#39;女&#39;),</span><br><span class="line">                      (&#39;160103&#39;,&#39;王伟&#39;,&#39;130212199809100871&#39;,&#39;男&#39;),</span><br><span class="line">                      (&#39;160104&#39;,&#39;张大力&#39;,&#39;130212199702150812&#39;,&#39;男&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>表中修改数据</b></p>
+<p>将 <em>STUDENT1</em> 数据库的 “<em>学生</em> ” 表中的 “<em>性别</em> ” 字段的值设为 “<em>男</em> ”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">UPDATE 学生 SET 性别 &#x3D; &#39;男&#39;</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>STUDENT1</em> 数据库的 “<em>学生</em> ” 表中添加 “<em>备注</em> ” 字段 <em>navchar(20)</em> ， “<em>备注</em> ” 字段的信息为 “<em>已毕业</em> ”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">ALTER TABLE 学生</span><br><span class="line">ADD 备注 navchar(20)</span><br><span class="line">UPDATE 学生 SET 备注 &#x3D; &#39;已毕业&#39;</span><br></pre></td></tr></table></figure>
+
+<p>在 “<em>学生</em> ” 表中将学号为 “<em>160101</em> ” 的学生的姓名改为 “<em>王武</em> ”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">UPDATE 学生 SET 姓名 &#x3D; &#39;王武&#39; WHERE 学号 &#x3D; &#39;160101&#39;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>表中删除数据</b></p>
+<p>删除 “<em>学生</em> ” 表中 “<em>160101</em> ” 号学生的记录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">USE STUDENT1</span><br><span class="line">GO</span><br><span class="line">DELETE 学生 WHERE 学号 &#x3D; &#39;160101&#39;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第七章-数据库查询"><a href="#第七章-数据库查询" class="headerlink" title="第七章 数据库查询"></a>第七章 数据库查询</h2><p><b>SELECT查询语法</b></p>
+<ul>
+<li>INTO XXX：指定使用结果集创建新表。</li>
+<li>FROM {XXX}：指定要从中检索数据的表名或视图名。</li>
+<li>WHERE {XXX}：定义了源表中的行要满足SELECT语句的要求所必须达到的条件。</li>
+<li>GROUP BY{XXX}：根据列中的值将结果集分成组。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>投影查询</b></p>
+<p>查询 <em>teaching</em> 数据库中学生的姓名、性别和专业。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sname,ssex,specialty FROM student</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>course</em> 表的所有记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM course        &#x2F;&#x2F; * 表示所有列</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>student</em> 表的专业名称，滤掉重复行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT DISTINCT specialty FROM student</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>course</em> 表的前三行信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT top 3 * FROM course</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 <em>course</em> 表的前50%行的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT top 50 percent * FROM course</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>student</em> 表中所有学生的学号、姓名，将结果中各列的标题分别指定为汉字 “学号” 和 “姓名” 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno AS 学号, sname AS 姓名 FROM student</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>sc</em> 表，按150分制计算成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,cno,score150 &#x3D; score*1.50 FROM sc</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>选择查询</b></p>
+<p>常用查询条件：</p>
+<table>
+<thead>
+<tr>
+<th align="center">查 询 条 件</th>
+<th align="center">谓 词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">比较运算符</td>
+<td align="center">=、&gt;、&lt;、&gt;=、&lt;=、!=、&lt;&gt;、!&gt;、!&lt;</td>
+</tr>
+<tr>
+<td align="center">确定范围</td>
+<td align="center">BETWEEN AND、NOT BETWEEN AND</td>
+</tr>
+<tr>
+<td align="center">确定集合</td>
+<td align="center">IN、NOT IN</td>
+</tr>
+<tr>
+<td align="center">字符匹配</td>
+<td align="center">LIKE、NOT LIKE</td>
+</tr>
+<tr>
+<td align="center">空值</td>
+<td align="center">IS NULL、IS NOT NULL</td>
+</tr>
+<tr>
+<td align="center">多重条件</td>
+<td align="center">AND、OR、NOT</td>
+</tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>查询 <em>teaching</em> 数据库的 <em>sc</em> 表中成绩大于等于60的学生的学号、课程号和成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM sc WHERE score &gt;&#x3D; 60</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 “计算机” 专业的 “男” 生的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM student WHERE specialty &#x3D; &#39;计算机&#39; AND ssex &#x3D; &#39;男&#39;</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 “计算机” 专业学生或所有专业 “男” 生的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM student WHERE specialty &#x3D; &#39;计算机&#39; OR ssex &#x3D; &#39;男&#39;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="/music/塞壬唱片-MSR - Renegade.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-数据库系统概述"><span class="toc-number">1.</span> <span class="toc-text">第一章 数据库系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-关系数据库"><span class="toc-number">2.</span> <span class="toc-text">第二章 关系数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章-数据库设计"><span class="toc-number">3.</span> <span class="toc-text">第三章 数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章-SQL-Server-2008基础"><span class="toc-number">4.</span> <span class="toc-text">第四章 SQL Server 2008基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章-数据库的概念和操作"><span class="toc-number">5.</span> <span class="toc-text">第五章 数据库的概念和操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章-表的操作"><span class="toc-number">6.</span> <span class="toc-text">第六章 表的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七章-数据库查询"><span class="toc-number">7.</span> <span class="toc-text">第七章 数据库查询</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

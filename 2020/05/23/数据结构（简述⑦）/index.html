@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>循环链表 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="该章节内容讲解主要在代码内以注释形式存在循环链表
+简单来说循环链表就是单链表的尾指针不指向NULL，而是指向第一个结点。循环链表不一定有头结点；循环链表和单链表差异主要在判断为空的条件：单链表判断为,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">循环链表</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">循环链表</h1>
+        <div class="stuff">
+            <span>五月 23, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="该章节内容讲解主要在代码内以注释形式存在"><a href="#该章节内容讲解主要在代码内以注释形式存在" class="headerlink" title="该章节内容讲解主要在代码内以注释形式存在"></a><font size="6"><font color="red"><b>该章节内容讲解主要在代码内以注释形式存在</b></font></font></h2><h1 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h1><hr>
+<p>简单来说循环链表就是单链表的尾指针不指向NULL，而是指向第一个结点。<br><img src="/img/数据结构（简述⑦）/图1.png"><br>循环链表不一定有头结点；<br>循环链表和单链表差异主要在判断为空的条件：<br>单链表判断为空是判断head-&gt;next = NULL;<br>循环链表判断为空是判断head-&gt;next = head;  </p>
+<p>循环链表开始结点定义不以head来定义而是尾指针rear组成rear-&gt;next-&gt;next来定义</p>
+<p><b>链表存储结构定义代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct CLinkList</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct CLinkList *next;</span><br><span class="line">&#125;node;</span><br></pre></td></tr></table></figure>
+
+<p><b>循环链表插入代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*参数：链表的第一个结点，插入的位置*&#x2F;</span><br><span class="line">void ds_insert(node **pNode, int i)</span><br><span class="line">&#123;</span><br><span class="line">	node *temp;</span><br><span class="line">	node *target;</span><br><span class="line">	node *p;	&#x2F;&#x2F;中介</span><br><span class="line">	int item;</span><br><span class="line">	int j &#x3D; 1;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;&quot;请输入要插入的结点的值：&quot;&lt;&lt;endl;</span><br><span class="line">	cin&gt;&gt;&amp;item;</span><br><span class="line"></span><br><span class="line">	if(i &#x3D;&#x3D; 1)</span><br><span class="line">	&#123;	&#x2F;&#x2F;新插入的结点作为第一个结点</span><br><span class="line">		temp &#x3D; (node *)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">		if(!temp)	&#x2F;&#x2F;错误输入，错误退出</span><br><span class="line">			exit(0);</span><br><span class="line"></span><br><span class="line">		temp-&gt;data &#x3D; item;</span><br><span class="line"></span><br><span class="line">		&#x2F;*寻找到最后一个结点*&#x2F;</span><br><span class="line">		for(target &#x3D; (*pNode); target-&gt;next !&#x3D; (*pNode); target &#x3D; target-&gt;next)</span><br><span class="line">			;</span><br><span class="line"></span><br><span class="line">		&#x2F;*temp指向第一个结点组成循环结构；</span><br><span class="line">		target指向temp是表明最后一个结点；</span><br><span class="line">		*pNode指向temp是表明第一个结点</span><br><span class="line">		以下操作都是相当于给temp上头衔*&#x2F;</span><br><span class="line"></span><br><span class="line">		temp-&gt;next &#x3D; (*pNode);	</span><br><span class="line">		target-&gt;next &#x3D; temp;</span><br><span class="line">		*pNode &#x3D; temp;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		target &#x3D; *pNode;	&#x2F;&#x2F;先让target为第一个结点</span><br><span class="line"></span><br><span class="line">		for( ; j &lt; (i-1); ++j)		&#x2F;&#x2F;要插入第几个位置，target就指向第几个结点</span><br><span class="line">		&#123;</span><br><span class="line">			target &#x3D; target-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		temp &#x3D; (node *)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">		if(!temp)</span><br><span class="line">			exit(0);</span><br><span class="line">	</span><br><span class="line">		&#x2F;*将要插入的值给temp的数据域；</span><br><span class="line">		中介p先为被插入的结点位置；</span><br><span class="line">		之前target指向被插入位置的结点这里就是让temp替代其位置；</span><br><span class="line">		temp指向p，在刚才p已经存储了旧的被插入结点，这里temp</span><br><span class="line">		再指向p就是将原本位置的结点后移*&#x2F;</span><br><span class="line"></span><br><span class="line">		temp-&gt;data &#x3D; item;</span><br><span class="line">		p &#x3D; target-&gt;next;</span><br><span class="line">		target-&gt;next &#x3D; temp;</span><br><span class="line">		temp-&gt;next &#x3D; p;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>初始化循环链表代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">void ds_init(node **pNode)	&#x2F;&#x2F;**pNode用于表示链表上的一个元素，*pNode假设为第一个结点</span><br><span class="line">&#123;</span><br><span class="line">	int item;</span><br><span class="line">	node *temp;</span><br><span class="line">	node *target;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;&quot;输入节点的值，最后输入0完成初始化：&quot;&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;&amp;item;</span><br><span class="line">		fflush(stdin);	&#x2F;&#x2F;清除缓冲区</span><br><span class="line"></span><br><span class="line">		if(item &#x3D;&#x3D; 0)</span><br><span class="line">			return;</span><br><span class="line"></span><br><span class="line">		if((*pNode) &#x3D;&#x3D; NULL)	&#x2F;&#x2F;判断条件可以看为head指向NULL</span><br><span class="line">		&#123;&#x2F;*循环链表中只有一个结点*&#x2F;</span><br><span class="line">			*pNode &#x3D; (node*)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">			if(!(*pNode))	&#x2F;&#x2F;若分配空间失败，错误退出</span><br><span class="line">				exit(0);</span><br><span class="line"></span><br><span class="line">			(*pNode)-&gt;data &#x3D; item;</span><br><span class="line">			(*pNode)-&gt;next &#x3D; *pNode;	&#x2F;&#x2F;第一个结点指向第一个结点，组成循环结构</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			&#x2F;*找到next指向第一个结点的结点*&#x2F;</span><br><span class="line">			for(target &#x3D; (*pNode); target-&gt;next !&#x3D; (*pNode); target &#x3D; target-&gt;next)</span><br><span class="line">				;</span><br><span class="line"></span><br><span class="line">			&#x2F;*生成一个新结点*&#x2F;</span><br><span class="line">			temp &#x3D; (node *)malloc(sizeof(struct CLinkList));</span><br><span class="line"></span><br><span class="line">			if(!temp)</span><br><span class="line">				exit(0);</span><br><span class="line"></span><br><span class="line">			temp-&gt;data &#x3D; item;</span><br><span class="line">			temp-&gt;next &#x3D; *pNode;</span><br><span class="line">			target-&gt;next &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>循环链表删除节点代码:</b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">void ds_delete(node **pNode, int i)</span><br><span class="line">&#123;</span><br><span class="line">	node *target;</span><br><span class="line">	node *temp;</span><br><span class="line">	int j &#x3D; 1;</span><br><span class="line"></span><br><span class="line">	if(i &#x3D;&#x3D; 1)</span><br><span class="line">	&#123;&#x2F;*被删除的是第一个结点*&#x2F;</span><br><span class="line">		for(target &#x3D; *pNode; target-&gt;next !&#x3D; *pNode; target &#x3D; target-&gt;next)</span><br><span class="line">			;	&#x2F;&#x2F;找到最后一个结点</span><br><span class="line"></span><br><span class="line">		temp &#x3D; *pNode;		&#x2F;&#x2F;被删除结点为第一个结点</span><br><span class="line">		*pNode &#x3D; (*pNode)-&gt;next;	&#x2F;&#x2F;原本第一个结点为下一个结点</span><br><span class="line">		target-&gt;next &#x3D; *pNode;	&#x2F;&#x2F;最后一个结点重新指向新的第一个结点</span><br><span class="line">		free(temp);		&#x2F;&#x2F;释放旧的第一个结点	</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		target &#x3D; *pNode;	&#x2F;&#x2F;工具结点先为第一个结点</span><br><span class="line"></span><br><span class="line">		for( ; j &lt;i-1; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			target &#x3D; target-&gt;next;		&#x2F;&#x2F;工具结点指向被删除位置的结点</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		temp &#x3D; target-&gt;next;	&#x2F;&#x2F;temp为工具结点所指结点，即为被删除结点</span><br><span class="line">		target-&gt;next &#x3D; temp-&gt;next;	&#x2F;&#x2F;工具结点重新指向被删除结点的下一个结点完成连接</span><br><span class="line">		free(temp);		&#x2F;&#x2F;释放旧位置结点</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><b>循环链表返回结点所在位置的代码(根据元素数值找位置):</b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">int ds_search(node *pNode, int elem)</span><br><span class="line">&#123;</span><br><span class="line">	node *target;</span><br><span class="line">	int i &#x3D; 1;</span><br><span class="line"></span><br><span class="line">	&#x2F;*该循环体在条件内先让target为第一个结点，然后判断其数据</span><br><span class="line">	和下一个结点是否为第一个结点，其中一个为假则要么是找到了</span><br><span class="line">	该元素，要么是都已经到最后了还是没找到*&#x2F;</span><br><span class="line"></span><br><span class="line">	for(target &#x3D; pNode;target-&gt;data !&#x3D; elem &amp;&amp; tagret-&gt;next !&#x3D; pNode; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		target &#x3D; target-&gt;next;</span><br><span class="line">	&#125;	&#x2F;&#x2F;寻找结点位置，令target指向被寻找结点</span><br><span class="line"></span><br><span class="line">	if(target-&gt;next &#x3D;&#x3D; pNode)	&#x2F;&#x2F;表中不存在该元素</span><br><span class="line">		return 0;</span><br><span class="line">	else</span><br><span class="line">		return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="/music/Manafest - Edge Of My Life.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#该章节内容讲解主要在代码内以注释形式存在"><span class="toc-number">1.</span> <span class="toc-text">该章节内容讲解主要在代码内以注释形式存在</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#循环链表"><span class="toc-number"></span> <span class="toc-text">循环链表</span></a>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

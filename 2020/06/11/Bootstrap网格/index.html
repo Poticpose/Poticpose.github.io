@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bootstrap网格 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="什么是Bootstrap网格？
+
+Bootstrap将网页横向默认的分为12个单元块，即12个网格块，而通过相关CSS内含样式可以将这12个单元块重新合并再分为四个三单元块，三个四单元块，两个六单元,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Bootstrap网格</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Bootstrap网格</h1>
+        <div class="stuff">
+            <span>六月 11, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Bootstrap/" rel="tag">Bootstrap</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="什么是Bootstrap网格？"><a href="#什么是Bootstrap网格？" class="headerlink" title="什么是Bootstrap网格？"></a>什么是Bootstrap网格？</h2><hr>
+<img src="/img/Bootstrap网格/图1.png">
+Bootstrap将网页横向默认的分为12个单元块，即12个网格块，而通过相关CSS内含样式可以将这12个单元块重新合并再分为四个三单元块，三个四单元块，两个六单元块等等。但始终记得一行中单元块总体不能超过12。
+
+<h3 id="网格系统工作原理"><a href="#网格系统工作原理" class="headerlink" title="网格系统工作原理"></a>网格系统工作原理</h3><hr>
+<ul>
+<li>行必须放置在 .container class 内，以便获得适当的对齐（alignment）和内边距（padding）。</li>
+<li>使用行来创建列的水平组。</li>
+<li>内容应该放置在列内，且唯有列可以是行的直接子元素。</li>
+<li>预定义的网格类，比如 .row 和 .col-xs-4，可用于快速创建网格布局。LESS 混合类可用于更多语义布局。</li>
+<li>列通过内边距（padding）来创建列内容之间的间隙。该内边距是通过 .rows 上的外边距（margin）取负，表示第一列和最后一列的行偏移。</li>
+<li>网格系统是通过指定您想要横跨的十二个可用的列来创建的。例如，要创建三个相等的列，则使用三个 .col-xs-4。</li>
+</ul>
+<h3 id="媒体限制"><a href="#媒体限制" class="headerlink" title="媒体限制"></a>媒体限制</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@media (max-width: @screen-xs-max) &#123; ... &#125;</span><br><span class="line">@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) &#123; ... &#125;</span><br><span class="line">@media (min-width: @screen-md-min) and (max-width: @screen-md-max) &#123; ... &#125;</span><br><span class="line">@media (min-width: @screen-lg-min) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>以此方式通过确定屏幕大小来确定可展示或者隐藏的内容，只有某个限定媒体才可查看内容写在以上代码中的限定样式后的{…}内。</p>
+<h3 id="网格选项总结"><a href="#网格选项总结" class="headerlink" title="网格选项总结"></a>网格选项总结</h3><hr>
+<img src="/img/Bootstrap网格/图2.png">
+
+<p>Bootstrap网格基本结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">   &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;col-*-*&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;col-*-*&quot;&gt;&lt;&#x2F;div&gt;      </span><br><span class="line">   &lt;&#x2F;div&gt;</span><br><span class="line">   &lt;div class&#x3D;&quot;row&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;....</span><br></pre></td></tr></table></figure>
+
+<p>在应用过程中，往往col-<em>-</em>是搭配使用的，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;col-xs-6 col-sm-4 col-md-6 col-lg-4&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>这样就可以精确限制在各个媒体设备上的展示效果。</p>
+<h3 id="响应列重置"><a href="#响应列重置" class="headerlink" title="响应列重置"></a>响应列重置</h3><hr>
+<p>有时候不恰当的模块浮动布局会让人很头疼，比如<br><img src="/img/Bootstrap网格/图3.png"></p>
+<p>但可以通过 .clearfix class来解决相关问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 就让div中代码为空 --&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;clearfix&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>即可形成以下效果：<br><img src="/img/Bootstrap网格/图4.png"></p>
+<h3 id="偏移列"><a href="#偏移列" class="headerlink" title="偏移列"></a>偏移列</h3><p>有时候你想要让你的模块在一行中有所位置偏移，但利用绝对和相对定位又很麻烦而且达不到响应式效果。此时可以利用 .col-md-offset-* 类进行列偏移。范围是1-11。<br>比如有一个<div class="col-md-6">..</div>。因为之前提到一行是12个单位块，此div已经占用6个，因此偏移3个即令其达到居中效果.col-md-offset-3。</p>
+<p>相关代码片段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;瞅瞅这偏移&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;row&quot; &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;col-md-6 col-md-offset-3&quot; </span><br><span class="line">        style&#x3D;&quot;background-color: #dedef8;box-shadow: </span><br><span class="line">        inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">            &lt;p&gt;我漂移了！</span><br><span class="line">            &lt;&#x2F;p&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>效果：<br><img src="/img/Bootstrap网格/图5.png"></p>
+<h3 id="嵌套列"><a href="#嵌套列" class="headerlink" title="嵌套列"></a>嵌套列</h3><p>顾名思义，嵌套效果，其实就是一个class=”row”里面的col-<em>-</em>里面的再一个class=”row”和col-<em>-</em><br>大概效果：<br><img src="/img/Bootstrap网格/图6.png"></p>
+<p>一次完整示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;测试一下&lt;&#x2F;title&gt;</span><br><span class="line">      &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">      &lt;!-- 引入 Bootstrap --&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.staticfile.org&#x2F;jquery&#x2F;2.1.1&#x2F;jquery.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">      &lt;link href&#x3D;&quot;https:&#x2F;&#x2F;cdn.staticfile.org&#x2F;twitter-bootstrap&#x2F;3.3.7&#x2F;css&#x2F;bootstrap.min.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;</span><br><span class="line"> </span><br><span class="line">      &lt;!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 --&gt;</span><br><span class="line">      &lt;!-- 注意： 如果通过 file:&#x2F;&#x2F;  引入 Respond.js 文件，则该文件无法起效果 --&gt;</span><br><span class="line">      &lt;!--[if lt IE 9]&gt;</span><br><span class="line">         &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;oss.maxcdn.com&#x2F;libs&#x2F;html5shiv&#x2F;3.7.0&#x2F;html5shiv.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">         &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;oss.maxcdn.com&#x2F;libs&#x2F;respond.js&#x2F;1.3.0&#x2F;respond.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">      &lt;![endif]--&gt;</span><br><span class="line">   &lt;&#x2F;head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">         &lt;h1&gt;来了老弟&lt;&#x2F;h1&gt;</span><br><span class="line">         &lt;div class&#x3D;&quot;row&quot; &gt;</span><br><span class="line">             &lt;div class&#x3D;&quot;col-md-6 col-md-offset-3&quot; </span><br><span class="line">             style&#x3D;&quot;background-color: #dedef8;box-shadow: </span><br><span class="line">             inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">                 &lt;p&gt;首先，我先给大家整个漂移。</span><br><span class="line">                 &lt;&#x2F;p&gt;</span><br><span class="line">             &lt;&#x2F;div&gt;</span><br><span class="line">             &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">             inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">                WTM直接二分天下</span><br><span class="line">                 &lt;&#x2F;div&gt;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">            inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">            这半边是我的。</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6 col-md-offset-3&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">            inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">               &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">               inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">               我给大伙套个娃</span><br><span class="line">               &lt;&#x2F;div&gt;</span><br><span class="line">               &lt;div class&#x3D;&quot;col-md-6 col-xs-6 col-lg-6 col-sm-6&quot; style&#x3D;&quot;background-color: aqua;box-shadow: </span><br><span class="line">               inset 1px -1px 1px #444, inset -1px 1px 1px #444;&quot;&gt;</span><br><span class="line">               禁止套娃！</span><br><span class="line">               &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">         &lt;&#x2F;div&gt;</span><br><span class="line">     &lt;&#x2F;div&gt;</span><br><span class="line"> </span><br><span class="line">      &lt;!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) --&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;code.jquery.com&#x2F;jquery.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">      &lt;!-- 包括所有已编译的插件 --&gt;</span><br><span class="line">      &lt;script src&#x3D;&quot;js&#x2F;bootstrap.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">   &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p>效果图：<br><img src="/img/Bootstrap网格/图7.png"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="/music/森川ちよ - Amazing Trees（Cover Tielle ／ SawanoHiroyuki[nZk]）.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Bootstrap网格？"><span class="toc-number">1.</span> <span class="toc-text">什么是Bootstrap网格？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网格系统工作原理"><span class="toc-number">1.1.</span> <span class="toc-text">网格系统工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#媒体限制"><span class="toc-number">1.2.</span> <span class="toc-text">媒体限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网格选项总结"><span class="toc-number">1.3.</span> <span class="toc-text">网格选项总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#响应列重置"><span class="toc-number">1.4.</span> <span class="toc-text">响应列重置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#偏移列"><span class="toc-number">1.5.</span> <span class="toc-text">偏移列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#嵌套列"><span class="toc-number">1.6.</span> <span class="toc-text">嵌套列</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

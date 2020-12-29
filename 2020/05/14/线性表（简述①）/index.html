@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据结构（线性表与查增删） - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="线性表线性表：由零个或多个数据元素组成的优先序列。
+注意：  
+
+第一个元素无前驱，最后一个元素无后继，其余元素有且只有一个前驱和后继。  
+表中元素按一定顺序进行排列，有其先来后到。  
+线性表只,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据结构（线性表与查增删）</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数据结构（线性表与查增删）</h1>
+        <div class="stuff">
+            <span>五月 14, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h1><p><b>线性表：</b>由零个或多个数据元素组成的优先序列。</p>
+<p><b>注意：</b>  </p>
+<ol>
+<li>第一个元素无前驱，最后一个元素无后继，其余元素有且只有一个前驱和后继。  </li>
+<li>表中元素按一定顺序进行排列，有其先来后到。  </li>
+<li>线性表只能处理<b>有限</b>的元素</li>
+</ol>
+<h3 id="基本操作相关"><a href="#基本操作相关" class="headerlink" title="基本操作相关"></a>基本操作相关</h3><hr>
+<p><font size=2><b>强烈建议命名进行规范，加强代码可读性。 </b></font></p>
+<p><b>InitList(*L)</b>：初始化操作，建立空表L。<br><b>ListEmpty(L)</b>：判断表是否为空，若空返回true,反之返回false。<br><b>ClearList(*L)</b>：将线性表清空。<br><b>GetElem(L,i,*e)</b>：将表L中的第i个位置元素值返回给e。<br><b>LocateElem(L,e)</b>：在表L中查找与给定值e相等的元素，如果查找成功，返回该元素在表中序号，失败则返回0。<br><b>ListInsert(*L,i,e)：</b>在表L中第i个位置插入新元素e。<br><b>ListDelete(*L,i,*e)：</b>删除表L中第i个位置元素，并用e返回其值。<br><b>ListLength(L)：</b>返回表L的长度（元素个数）。<br><b>ListInsert(*L,i,e)：</b>在表L的i位置插入新元素e。<br><b>ListDelete(SqList *L, int i, ElemType *e)：</b>删除表L的i位置元素，并把元素的值e取出。<br><b>endADT</b></p>
+<p>以以上命名为基础，进行集合并集的数据结构代码  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void ListL(Lista *La,Listb Lb)	</span><br><span class="line">&#123;</span><br><span class="line">	int La_len,Lb_len,i;	</span><br><span class="line">	&#x2F;*定义三个元素用于存放La的元素个数，Lb的元素个数和元素位置*&#x2F;</span><br><span class="line">	ElemType e;		&#x2F;&#x2F;万能元素，用于返回需求的值</span><br><span class="line">	La_len &#x3D; ListLength(*La);	&#x2F;&#x2F;将La的元素个数返回给La_len</span><br><span class="line">	Lb_len &#x3D; ListLength(Lb);	&#x2F;&#x2F;道理同上</span><br><span class="line">	for(i&#x3D;1; i &lt;&#x3D; Lb_len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		GetElem(Lb, i, &amp;e);		&#x2F;&#x2F;Lb中第i个元素给e</span><br><span class="line">		if(!LocateElem(*La, e))		&#x2F;&#x2F;判断e中的值是否在La中已有</span><br><span class="line">		&#123;</span><br><span class="line">			ListInsert(La, ++La_len, e);	</span><br><span class="line">	&#x2F;*若没有重复，则将e中的值插入到La中成为一个新的元素，并</span><br><span class="line">	另La元素个数+1*&#x2F;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下来再看一下顺序存储结构的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#define MAXSIZE 50	&#x2F;&#x2F;令MAXSIZE代表50</span><br><span class="line">typedef int ElemType	&#x2F;&#x2F;令ElemType在这里代表int数据类型</span><br><span class="line">typedef struct		&#x2F;&#x2F;结构体</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data[MAXSIZE];		&#x2F;&#x2F;等同于int data[50];</span><br><span class="line">	int length;		&#x2F;&#x2F;线性表当前长度</span><br><span class="line">&#125;SqList;	&#x2F;&#x2F;表名</span><br></pre></td></tr></table></figure>
+
+<p><b>存储地址计算：<font color="blue">LOC(ai) = LOC(a1) + (i-1)*l</font></b><br><font size=1>l为一个元素所占内存空间</font></p>
+<h2 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define TRUE 1</span><br><span class="line">#define FALSE 0</span><br><span class="line"></span><br><span class="line">typedef int Status;</span><br><span class="line"></span><br><span class="line">Status GetElem(SqList L, int i, ElemType *e)	&#x2F;&#x2F;获取表L的位置i的元素并把值给e</span><br><span class="line">&#123;</span><br><span class="line">	if(L.length&#x3D;&#x3D;0 || i&lt;1 || i&gt;L.length)	&#x2F;&#x2F;表L为空或者位置小于1或者位置大于表L元素个数都返回错误</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	*e &#x3D; L.data[i-1];	</span><br><span class="line">	&#x2F;*因为要获取第2个元素的话实际上是获取表中1地址元素（道理同</span><br><span class="line">	数组排序），因此要获取第i元素值便是获取L表中data[i-1]的值*&#x2F;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存储中插入操作的流程"><a href="#存储中插入操作的流程" class="headerlink" title="存储中插入操作的流程"></a>存储中插入操作的流程</h2><hr>
+<ul>
+<li>如果插入位置不合理要抛出异常；</li>
+<li>如果表长大于数组长度，抛出异常，或者动态增加数组容量；</li>
+<li>从最后一个元素开始向前遍历到第i个位置，分别将他们都向后移动一个位置；</li>
+<li>将要插入的元素填入位置i处；</li>
+<li>线性表长+1；</li>
+</ul>
+<p><b>实现代码：</b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#define MAXSIZE 50</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OK 1</span><br><span class="line"></span><br><span class="line">Status ListInsert(SqList *L, int i, ElemType e)</span><br><span class="line">&#x2F;&#x2F;将值e插入到表L的位置i处</span><br><span class="line">&#123;</span><br><span class="line">	int k;</span><br><span class="line"></span><br><span class="line">	if(L-&gt;length &#x3D;&#x3D; MAXSIZE)	&#x2F;&#x2F;表满了返回错误</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	if(i&lt;1 || i&gt;L-&gt;length+1)	&#x2F;&#x2F;插入位置非法返回错误</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	if(i &lt;&#x3D; L-&gt;Length)</span><br><span class="line">	&#123;</span><br><span class="line">	&#x2F;&#x2F;将被插入元素位置往后的元素地址后后移一位</span><br><span class="line">		for(k &#x3D; L-&gt;length-1; k &gt;&#x3D; i-1; k--)		&#x2F;&#x2F;数组特性第i位实际就是位置i-1</span><br><span class="line">		&#123;</span><br><span class="line">			L-&gt;data[k+1] &#x3D; L-&gt;data[k];	&#x2F;&#x2F;实现了k位置往后移1位</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	L-&gt;data[i-1] &#x3D; e;	&#x2F;&#x2F;位置i插入元素值e</span><br><span class="line">	L-&gt;length++;	&#x2F;&#x2F;表L长度+1</span><br><span class="line"></span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除操作流程"><a href="#删除操作流程" class="headerlink" title="删除操作流程"></a>删除操作流程</h2><hr>
+<ul>
+<li>删除位置不合理，抛出异常；</li>
+<li>取出删除元素；</li>
+<li>删除元素开始位置往后遍历到最后一个元素，分别将其向前移动一个位置；</li>
+<li>表长-1；</li>
+</ul>
+<p>操作代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#define ERROR 0;</span><br><span class="line">#define OK 1;</span><br><span class="line"></span><br><span class="line">Status ListDelete(SqList *L,int i,ElemType *e)</span><br><span class="line">&#123;</span><br><span class="line">	int k;</span><br><span class="line"></span><br><span class="line">	if(L-&gt;length &#x3D;&#x3D; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	if(i &lt; 1 || i &gt; L-&gt;length)</span><br><span class="line">	&#123;</span><br><span class="line">		return ERROR;</span><br><span class="line">	&#125;	&#x2F;&#x2F;都是非法地址删除操作</span><br><span class="line"></span><br><span class="line">	*e &#x3D; L-&gt;data[i-1];	&#x2F;&#x2F;用e获取被删除位置i元素的值</span><br><span class="line"></span><br><span class="line">	if(i &lt; L-&gt;length)</span><br><span class="line">	&#123;</span><br><span class="line">		for(k &#x3D; i; k &lt; L-&gt;length; k++)</span><br><span class="line">	&#x2F;*重复解释，因为要移动被删除位置i后面的所有元素，因</span><br><span class="line">	此在数组中其实被删除的是i-1位置元素，往后起始元素便是i*&#x2F;</span><br><span class="line">		&#123;</span><br><span class="line">			L-&gt;data[k-1] &#x3D; L-&gt;data[k];	&#x2F;&#x2F;位置后移操作</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	L-&gt;length--;	&#x2F;&#x2F;表长减1</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线性表顺序存储优缺点"><a href="#线性表顺序存储优缺点" class="headerlink" title="线性表顺序存储优缺点"></a>线性表顺序存储优缺点</h3><p><b>优点：</b></p>
+<ul>
+<li>无序为表示表中元素之间的逻辑关系而增加存储空间；</li>
+<li>可以快速存取表中任意位置元素；  </li>
+</ul>
+<p><b>缺点：</b></p>
+<ul>
+<li>插入和删除操作需要移动大量元素；</li>
+<li>线性表长度变化较大时，难以确定存储空间容量；</li>
+<li>容易造成存储空间的“碎片”。</li>
+</ul>
+<p><font size="12"><font color="red">记住，未对结构体进行修改的传值时不传指针，即传值时SqList L即可，需要对结构进行修改的传值SqList *L</font></p>
+<div align=center><font size="1"><font color="grey">本文参考小甲鱼数据结构</font></font></div>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="/music/J.Fla - Natural.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#线性表"><span class="toc-number">1.</span> <span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本操作相关"><span class="toc-number">1.0.1.</span> <span class="toc-text">基本操作相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取元素"><span class="toc-number">1.1.</span> <span class="toc-text">获取元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储中插入操作的流程"><span class="toc-number">1.2.</span> <span class="toc-text">存储中插入操作的流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除操作流程"><span class="toc-number">1.3.</span> <span class="toc-text">删除操作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性表顺序存储优缺点"><span class="toc-number">1.3.1.</span> <span class="toc-text">线性表顺序存储优缺点</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
