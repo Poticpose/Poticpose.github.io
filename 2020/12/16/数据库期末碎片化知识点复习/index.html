@@ -17,7 +17,7 @@
 数据库系统阶段特点
 
 数据结构化：数据结构化是,"> 
-    <meta name="author" content="John Doe"> 
+    <meta name="author" content="Poet"> 
     <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
     
@@ -44,7 +44,7 @@
     <div id="single">
     <div id="top" style="display: block;">
     <div class="bar" style="width: 0;"></div>
-    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://poticpose.github.io"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
     <h3 class="subtitle">数据库期末碎片化知识点复习</h3>
     <div class="social">
@@ -470,6 +470,126 @@
 
 <p>查询 <em>teaching</em> 数据库中 “计算机” 专业学生或所有专业 “男” 生的信息。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM student WHERE specialty &#x3D; &#39;计算机&#39; OR ssex &#x3D; &#39;男&#39;</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中成绩在80到90之间的学生的学号、课程号和成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,cno,score FROM sc WHERE score BETWEEN 80 AND 90</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中成绩不在80到90之间的学生的学号、课程号和成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,cno,score FROM sc WHERE score NOT BETWEEN 80 AND 90</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中 “<em>计算机</em> ” 和 “<em>通信</em> ” 专业的学生的姓名、学号和专业。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sname,sno,specialty FROM student WHERE specialty IN(&#39;计算机&#39;,&#39;通信&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>常用通配符</b></p>
+<table>
+<thead>
+<tr>
+<th align="center">通 配 符</th>
+<th align="center">含 义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%</td>
+<td align="center">包含零个或多个字符的任意字符串</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">任何单个字符</td>
+</tr>
+<tr>
+<td align="center">[ ]</td>
+<td align="center">代表指定范围内的单个字符，在[ ]中可以是单个字符（如[acef]），也可以是字符范围（如[a-f]）</td>
+</tr>
+<tr>
+<td align="center">[^]</td>
+<td align="center">代表不在指定范围内的单个字符，在[^]中可以是单个字符（如[^acef]），也可以是字符范围（如[^a-f]）</td>
+</tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>通配符示例：</p>
+<ul>
+<li>LIKE ‘AB%’：返回以 “AB” 开始的任意字符串。</li>
+<li>LIKE ‘Ab%’：返回以 “Ab” 开始的任意字符串。</li>
+<li>LIKE ‘%abc’：返回以 “abc” 结束的任意字符串。</li>
+<li>LIKE ‘%abc%’：返回包含 “abc” 的任意字符串。</li>
+<li>LIKE ‘_ab’：返回以 “ab” 结束的 3 个字符的字符串。</li>
+<li>LIKE ‘[ACK]%’：返回以 “A” 、 “C” 或 “K” 开始的任意字符串。</li>
+<li>LIKE ‘[A-T]ing’：返回 4 个字符的字符串，结尾是 “ing” ，首字符的范围是从 A 到 T 。</li>
+<li>LIKE ‘M[^c]%’：返回以 “M” 开始且第二个字符不是 “c” 的任意长度的字符串。</li>
+</ul>
+<p>&nbsp;</p>
+<p>查询 <em>teaching</em> 数据库中所有姓 “张” 的学生的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM student WHERE sname LIKE &#39;张%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>teaching</em> 数据库中所有 “成绩” 为空值的学生的学号、课程号和成绩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,cno,score FROM sc WHERE score IS NULL</span><br></pre></td></tr></table></figure>
+
+<p>从 <em>teaching</em> 数据库的 <em>student</em> 表中查询所有 “<em>计算机</em> ” 和 “<em>通信</em> ” 专业的 “<em>女</em> ” 生的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM student WHERE ssex &#x3D; &#39;女&#39; AND (specialty &#x3D; &#39;计算机&#39; OR specialty &#x3D; &#39;通信&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>常用聚合函数</b></p>
+<table>
+<thead>
+<tr>
+<th align="center">函 数 名</th>
+<th align="center">功 能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sum(列名)</td>
+<td align="center">对一个数字列求和</td>
+</tr>
+<tr>
+<td align="center">avg(列名)</td>
+<td align="center">对一个数字列计算平均值</td>
+</tr>
+<tr>
+<td align="center">min(列名)</td>
+<td align="center">返回一个数字、字符串或日期的最小值</td>
+</tr>
+<tr>
+<td align="center">max(列名)</td>
+<td align="center">返回一个数字、字符串或日期的最大值</td>
+</tr>
+<tr>
+<td align="center">count(列名)</td>
+<td align="center">返回一个列的数据项数</td>
+</tr>
+<tr>
+<td align="center">count(*)</td>
+<td align="center">返回找到的行数</td>
+</tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>在 <em>teaching</em> 数据库中查询 <em>sc</em> 表中成绩的平均值，平均值显示列标题为“平均成绩”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT avg(score) AS 平均成绩 FROM sc</span><br></pre></td></tr></table></figure>
+
+<p>从 <em>teaching</em> 数据库的 <em>student</em> 表中查询专业的种类（相同的按一种计算）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT count (DISTINCT specialty) AS 专业种类数 FROM student</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中查询 1302001 号学生的平均成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT avg(score) AS 平均成绩 FROM student WHERE sno &#x3D; &#39;1302001&#39;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>分组查询</b></p>
+<p><font color='red'><em>注：分组查询用于查询后返回的结果不仅有聚合函数列，同时也有一般的列做分类的时候，以一般列为主体进行分组（如果有两个一般列，则两个一般列都是主体），当最后还要显示每列的总计结果时，加 WITH CUBE</em>。</font></p>
+<p>查询 <em>teaching</em> 数据库中男生和女生的人数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT ssex,count(ssex) AS 人数 FROM student GROUP BY ssex</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>sc</em> 表中查询选修了两门及以上课程的学生的学号和选修课程数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,count(cno) FROM sc GROUP BY sno HAVING count(cno) &gt;&#x3D; 2</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中查询 <em>sc</em> 表，求被选修的各门课程的平均成绩和选修该课程的人数，以及所有课程的总平均成绩和总选修人数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT cno,AVG(score) AS 平均成绩,COUNT(sno) AS 选修人数 FROM sc GROUP BY cno WITH CUBE</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中查询 <em>student</em> 表，统计各专业男生、女生的人数，每个专业的学生人数和男生总人数、女生总人数以及所有学生人数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT specialty,ssex,count(*) AS 人数 FROM student GROUP BY specialty,ssex WITH CUBE</span><br></pre></td></tr></table></figure>
+<p><font color='red'>*注：使用 WITH CUBE 和 WITH ROLLUP 时，不支持区分性聚合函数，如 AVG(DISTINCT 列名) 等。</font></p>
+<p><font color='red'>*注：CUBE 会依据分组将每个类别都进行总计，而 ROLLUP 仅依据分组时第一顺序的类别进行总计。</font></p>
+<p>统计 <em>teaching</em> 数据库中每个专业的男、女生人数，每个专业的总人数和所有学生人数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT specialty,ssex,count(*) AS 人数 FROM student GROUP BY specialty,ssex WITH ROLLUP</span><br></pre></td></tr></table></figure>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
                 <source type="audio/mpeg" src="/music/塞壬唱片-MSR - Renegade.mp3">
