@@ -606,7 +606,53 @@ Bootstrap将网页横向默认的分为12个单元块，即12个网格块，而�
 <p><font color='red'>*注：使用 WITH CUBE 和 WITH ROLLUP 时，不支持区分性聚合函数，如 AVG(DISTINCT 列名) 等。</font></p>
 <p><font color='red'>*注：CUBE 会依据分组将每个类别都进行总计，而 ROLLUP 仅依据分组时第一顺序的类别进行总计。</font></p>
 <p>统计 <em>teaching</em> 数据库中每个专业的男、女生人数，每个专业的总人数和所有学生人数。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT specialty,ssex,count(*) AS 人数 FROM student GROUP BY specialty,ssex WITH ROLLUP</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT specialty,ssex,count(*) AS 人数 FROM student GROUP BY specialty,ssex WITH ROLLUP</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中查询 “<em>计算机</em> ” 专业的学生的学号、姓名和性别，并统计学生总人数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,sname,ssex FROM student WHERE specialty &#x3D; &#39;计算机&#39; COMPUTE COUNT(sno)</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中查询所有学生的选课信息，并计算每个学生的平均成绩。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,cno,score FROM sc ORDER BY sno COMPUTE avg(score) BY sno</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>无关子查询</b></p>
+<p>在 <em>teaching</em> 数据库中查询与 “<em>沈艳</em> ” 在同一个专业学习的学生的学号、姓名和专业。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,sname,specialty FROM student WHERE specialty &#x3D; ( SELECT specialty FROM student WHERE sname &#x3D; &#39;沈艳&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中查询 C001 号课的考试成绩比 “<em>郑丽</em> ” 高的学生的学号和姓名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT student.sno,sname FROM student,sc WHERE student.sno &#x3D; sc.sno AND cno &#x3D; &#39;C001&#39; AND score &gt; ( SELECT score FROM sc WHERE cno &#x3D; &#39;C001&#39; AND sno &#x3D; (SELECT sno FROM student WHERE sname &#x3D; &#39;郑丽&#39;))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第八章-视图和索引"><a href="#第八章-视图和索引" class="headerlink" title="第八章 视图和索引"></a>第八章 视图和索引</h2><p>&nbsp;</p>
+<p><b>创建视图</b></p>
+<p>创建 <em>s_c_sc</em> 视图，包括 “<em>计算机</em> ” 专业的学生的学号、姓名，以及他们选修的课程号、课程名和成绩。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE VIEW s_c_sc</span><br><span class="line">AS</span><br><span class="line">    SELECT student.sno,sname,course.cno,cname,score FROM student,sc,course WHERE student.sno &#x3D; sc.sno AND course.cno &#x3D; sc.cno AND specialty &#x3D; &#39;计算机&#39;</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<p>创建 <em>inve_count</em> 库存统计视图，求每种商品的总库存量，要求包括商品编号和商品名称。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE inventory</span><br><span class="line">GO</span><br><span class="line">CREATE VIEW inve_count</span><br><span class="line">AS</span><br><span class="line">    SELECT goods.gno,gname,SUM(number) AS snumber FROM goods,invent WHERE goods.gno &#x3D; invent.gno GROUP BY goods.gno,gname</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>使用视图</b></p>
+<p>在查询窗口中查询 <em>s_c_sc</em> 视图，统计 “<em>C++语言</em> ” 课程的总分和平均分。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT SUM(score) AS sumscore,AVG(score) AS avgscore FROM s_c_sc WHERE cname &#x3D; &#39;C++语言&#39;</span><br></pre></td></tr></table></figure>
+
+<p>查询 <em>inve_count</em> 视图中 “<em>冰箱</em> ” 的商品统计信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT * FROM inve_count WHERE gname &#x3D; &#39;冰箱&#39;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>索引的类型</b></p>
+<ul>
+<li><p><b>聚集索引：</b></p>
+<p>  聚集索引会对表和视图<b>进行物理排序</b>，所以这种索引对查询非常有效，在表和视图中<b>只能有一个聚集索引</b>。当建立主键约束时，表中没有聚集索引，则SQL Server会用主键列作为聚集索引建。用户可以在表的任何列或列额组合上建立索引，在实际应用中一般为定义成主键约束的列建立聚集索引。</p>
+<p>  字典中文字按照拼音的排序就是一种聚集索引。</p>
+</li>
+<li><p>非聚集索引</p>
+<p>  非聚集索引对表和视图<b>不会进行物理排序</b>。如果表中不存在聚集索引，则表是未排序的。在表或视图中<b>最多可以建立250个非聚集索引，或者249个非聚集索引和1个聚集索引</b>。 </p>
+<p>  字典中按偏旁部首查找，两个同偏旁的字却在字典中并不连续，这就是一种非聚集索引。</p>
+<p>  聚集索引和非聚集索引都可以是唯一索引。因此，只要在列中的数据是唯一的，就可以在同一个表上创建一个唯一的聚集索引。如果要必须实施数据的唯一性，则应该添加主键约束，而不是单靠唯一索引。</p>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>数据库</category>
       </categories>
