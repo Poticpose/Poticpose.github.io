@@ -635,7 +635,197 @@
 <p>  聚集索引和非聚集索引都可以是唯一索引。因此，只要在列中的数据是唯一的，就可以在同一个表上创建一个唯一的聚集索引。如果要必须实施数据的唯一性，则应该添加主键约束，而不是单靠唯一索引。</p>
 </li>
 </ul>
+<p>&nbsp;</p>
+<p><b>创建索引</b></p>
+<p>根据 <em>teaching</em> 数据库中 <em>student</em> 表的姓名列的升序创建一个名为 <em>index_sname</em> 的普通索引。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE INDEX index_sname ON student(sname)</span><br></pre></td></tr></table></figure>
 
+<p>根据 <em>inventory</em> 数据库中 <em>goods</em> 表的商品名称、生产商创建一个名为 <em>goods_producer</em> 的唯一性复合索引，其中商品名称为升序、生产商为降序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">USE inventory</span><br><span class="line">GO</span><br><span class="line">CREATE UNIQUE INDEX goods_producer ON goods(gname ASC,producer DESC)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;ASC 代表升序，DESC 代表降序</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第九章-T-SQL-编程"><a href="#第九章-T-SQL-编程" class="headerlink" title="第九章 T-SQL 编程"></a>第九章 T-SQL 编程</h2><p><b>标识符</b></p>
+<p>常规标识符：</p>
+<ul>
+<li>必须以汉字、字母、下划线、@或#开头，不能以数字开头。</li>
+<li>不能是 SQL Server 保留字。</li>
+<li>最长不超过128个字符。</li>
+</ul>
+<p>分隔标识符：</p>
+<p>分隔标识符括在[ ]或“ ”中。</p>
+<p>下列情况需要使用分隔标识符：</p>
+<ul>
+<li>使用保留关键字作为对象名或对象名的一部分。</li>
+<li>标识符的命名不符合常规标识符命名规则。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>变量</b></p>
+<p>全局变量：</p>
+<p>全局变量由系统提供且预先声明，通过在名称前加两个“@”符号区别于局部变量。用户只能使用全局变量，无法修改，全局变量作用于整个SQL Server系统，可以随时调用。</p>
+<p>局部变量：</p>
+<p>T-SQL语言的变量在定义和引用时要在名称前加“@”，且必须用DECLARE命令定以后才可以使用。</p>
+<p>计算表达式的值，并将结果赋值给变量 <em>@ExpResult</em> 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @ExpResult numeric</span><br><span class="line">SET @ExpResult &#x3D; 67 % 31</span><br><span class="line">SELECT @ExpResult AS &#39;表达式计算结果&#39;</span><br></pre></td></tr></table></figure>
+
+<p>定义变量 <em>@a1</em> <em>@a2</em> ，给变量赋值，然后求两个变量与、或、异或的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @a1 int,@a2 int</span><br><span class="line">SET @a1 &#x3D; 3</span><br><span class="line">SET @a2 &#x3D; 8</span><br><span class="line">SELECT @a1 &amp; @a2 AS 与,@a1 | @a2 AS 或,@a1 ^ @a2 AS 异或</span><br></pre></td></tr></table></figure>
+
+<p>使用比较运算符计算表达式的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @Exp1 int,@Exp2 int</span><br><span class="line">SET @Exp1 &#x3D; 30</span><br><span class="line">SET @Exp2 &#x3D; 50</span><br><span class="line">IF @Exp1 &lt; @Exp2</span><br><span class="line">SELECT @Exp1 AS 小数据</span><br></pre></td></tr></table></figure>
+
+<p>使用字符串连接运算符计算表达式的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @ExpResult char(60)</span><br><span class="line">SELECT @ExpResult &#x3D; &#39;河北省石家庄市&#39; + &#39;河北师范大学&#39; + &#39;网络工程&#39;</span><br><span class="line">SELECT @ExpResult AS &#39;字符串的连接结果&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;结果即 “河北省石家庄市河北师范大学网络工程”</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>流程控制语句</b></p>
+<ul>
+<li><p>SET 语句用于赋值变量</p>
+</li>
+<li><p>BEGIN…END 语句用于创造语句块，例如</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BEGIN</span><br><span class="line">    *******************</span><br><span class="line">END</span><br></pre></td></tr></table></figure></li>
+<li><p>IF…ELSE 语句用于条件判断，例如</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IF (*******)***</span><br><span class="line">    *********</span><br><span class="line">ELSE</span><br><span class="line">    ****************</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>如果 <em>C001</em> 号课的平均成绩高于 80 分，则显示 “平均成绩还不错” ，否则显示 “平均成绩一般” 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">IF (SELECT avg(score) FROM sc WHERE cno &#x3D; &#39;C001&#39;) &gt; 80</span><br><span class="line">    PRINT &#39;平均成绩还不错&#39;</span><br><span class="line">ELSE</span><br><span class="line">    PRINT &#39;平均成绩一般&#39;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>CASE 语句</b></p>
+<ul>
+<li>简单 CASE 格式：将某个表达式与一组简单表达式进行比较，以确定结果。</li>
+<li>搜索 CASE 格式：计算一组布尔表达式，以确定结果。</li>
+</ul>
+<p>简单 CASE 格式查询所有学生的专业情况，包括学号、姓名和专业的英文名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,sname</span><br><span class="line">    CASE specialty</span><br><span class="line">    WHEN &#39;计算机&#39; THEN &#39;Computer&#39;</span><br><span class="line">    WHEN &#39;电子&#39; THEN &#39;Electronic&#39;</span><br><span class="line">    WHEN &#39;网络&#39; THEN &#39;Network&#39;</span><br><span class="line">    WHEN &#39;通信&#39; THEN &#39;Communication&#39;</span><br><span class="line">    END AS specialty</span><br><span class="line">FROM student</span><br></pre></td></tr></table></figure>
+
+<p>搜索 CASE 格式查询所有学生的考试等级，包括学号、课程号和成绩级别（a、b、c、d、e）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">SELECT sno,cno</span><br><span class="line">    CASE</span><br><span class="line">    WHEN score &gt;&#x3D; 90 then &#39;a&#39;</span><br><span class="line">    WHEN score &gt;&#x3D; 80 then &#39;b&#39;</span><br><span class="line">    WHEN score &gt;&#x3D; 70 then &#39;c&#39;</span><br><span class="line">    WHEN score &gt;&#x3D; 60 then &#39;d&#39;</span><br><span class="line">    WHEN score &lt; 60 then &#39;e&#39;</span><br><span class="line">    END AS score_level</span><br><span class="line">FROM sc</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>WHILE 语句</b></p>
+<p>循环语句，以布尔表达式设置条件。</p>
+<p>创建一个 <em>usern</em> 表，包含 <em>userid</em> 和 <em>username</em> 列，接着利用 WHILE 循环向其中插入前 20 行数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @i int</span><br><span class="line">SET @i &#x3D; 1</span><br><span class="line">WHILE @i &lt;&#x3D; 20</span><br><span class="line">BEGIN</span><br><span class="line">INSERT INTO usern (userid,username) value(@i,&#39;user&#39; + ltrim(str(@i)))</span><br><span class="line">SET @i &#x3D; @i + 1</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<p>求 1 到 100 的累加和，当和超过 1000 时停止累加，显示累加和以及累加到的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @i int,@a int</span><br><span class="line">SET @i &#x3D; 1</span><br><span class="line">SET @a &#x3D; 0</span><br><span class="line">WHILE @i &lt;&#x3D; 100</span><br><span class="line">    BEGIN</span><br><span class="line">        SET @a &#x3D; @a + @i</span><br><span class="line">        IF @a &gt;&#x3D; 1000 BREAK</span><br><span class="line">        SET @i &#x3D; @i + 1</span><br><span class="line">    END</span><br><span class="line">SELECT @a AS &#39;a&#39;,@i AS &#39;i&#39;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>函数</b></p>
+<p>系统内置函数：</p>
+<ul>
+<li>确定性函数：每次使用特定的输入值集调用该函数时总是返回相同的结果。</li>
+<li>非确定性函数：每次使用特定的输入值集调用时可能返回不同的结果。</li>
+</ul>
+<p>数学函数：</p>
+<table>
+<thead>
+<tr>
+<th align="center">函 数 名 称</th>
+<th align="center">函 数 功 能</th>
+<th align="center">函 数 名 称</th>
+<th align="center">函 数 功 能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ABS</td>
+<td align="center">求绝对值</td>
+<td align="center">POWER</td>
+<td align="center">求 x 的 y 次方</td>
+</tr>
+<tr>
+<td align="center">COS</td>
+<td align="center">余弦函数</td>
+<td align="center">RAND</td>
+<td align="center">求随机数</td>
+</tr>
+<tr>
+<td align="center">COT</td>
+<td align="center">余切函数</td>
+<td align="center">ROUND</td>
+<td align="center">四舍五入</td>
+</tr>
+<tr>
+<td align="center">EXP</td>
+<td align="center">计算 e 的 x 次幂</td>
+<td align="center">SIN</td>
+<td align="center">正弦函数</td>
+</tr>
+<tr>
+<td align="center">FLOOR</td>
+<td align="center">求仅次于最小值的值</td>
+<td align="center">SQUARE</td>
+<td align="center">开方</td>
+</tr>
+<tr>
+<td align="center">LOG</td>
+<td align="center">求自然对数</td>
+<td align="center">SQRT</td>
+<td align="center">求平方根</td>
+</tr>
+<tr>
+<td align="center">PI</td>
+<td align="center">常量，圆周率</td>
+<td align="center">TAN</td>
+<td align="center">正切函数</td>
+</tr>
+</tbody></table>
+<p>日期和时间函数：</p>
+<ul>
+<li>GETDATE( )：返回系统当前的日期和时间</li>
+<li>DATEADD(a,b,c)：返回指定日期 a 加伤指定的额外日期间隔 b 产生的新日期。</li>
+<li>DAY(a)：返回日期表达式中的日。</li>
+<li>MONTH(a)：返回日期表达式中的月。</li>
+<li>YEAR(a)：返回日期表达式中的年。</li>
+</ul>
+<p>计算现在是几月。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT MONTH(GETDATE())</span><br></pre></td></tr></table></figure>
+
+<p>字符串函数：</p>
+<ul>
+<li>CHAR(a)：返回证书所代表的 ASCII 码值对应的字符。</li>
+<li>LOWER(a)：将大写字符转换成小写字符。</li>
+<li>UPPER(a)：将小写字符转换成大写字符。</li>
+<li>LTRIM(a)：删除字符串开始部分的空格。</li>
+<li>RTRIM(a)：删除字符串结尾部分的空格。</li>
+</ul>
+<p>将字符串 “I am a student” 以大写字母表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT UPPER(&#39;I am a student&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>用户自定义函数：</p>
+<p>函数体包含在 BEGIN…END 中。</p>
+<p>求 “选课” 表中某门课的平均成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE FUNCTION average(@cn char(4)) RETURNS float</span><br><span class="line">AS</span><br><span class="line">    BEGIN</span><br><span class="line">        DECLARE @aver float</span><br><span class="line">        SELECT @aver &#x3D; (SELECT avg(score) FROM sc WHERE cno &#x3D; @cn)</span><br><span class="line">        RETURN @aver</span><br><span class="line">    END</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第十章-存储过程和触发器"><a href="#第十章-存储过程和触发器" class="headerlink" title="第十章 存储过程和触发器"></a>第十章 存储过程和触发器</h2><p><b>创建存储过程</b></p>
+<p>存储过程类似于其他编程语言中的方法，一经创建将被保存在系统库中，后续可以直接通过存储过程名进行调用。</p>
+<p>在 <em>teaching</em> 数据库中创建无参存储过程，查询每个学生的各门课程的平均成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE PROCEDURE student_avg</span><br><span class="line">AS</span><br><span class="line">SELECT sno,avg(score) AS &#39;avgstore&#39; FROM sc</span><br><span class="line">GROUP BY sno</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 库中创建带参数的存储过程，查询某个学生的学号、姓名、专业、其选修的所有课程的课程号和考试成绩以及平均成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE PROCEDURE GetStudent @number char(7)</span><br><span class="line">AS</span><br><span class="line">SELECT s.sno,sname,specialty,cno,score FROM student s,sc</span><br><span class="line">WHERE s.sno &#x3D; @number AND s.sno &#x3D; sc.sno</span><br><span class="line">compute avg(score)</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中创建带参数的存储过程，修改某个学生的某门课的成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE PROCEDURE Update_score @number &#x3D; char(7),@cno char(4),@score int</span><br><span class="line">AS UPDATE sc SET score &#x3D; @score WHERE sno &#x3D; @number AND cno &#x3D; @cno</span><br></pre></td></tr></table></figure>
+
+<p>使用流程控制语句在 <em>inventory</em> 数据库中创建存储过程，修改某商品的单价，如果库存总量大于某个值，就打九折。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">USE inventory</span><br><span class="line">GO</span><br><span class="line">CREATE PROCEDURE Update_price @gno char(3),@s float</span><br><span class="line">AS</span><br><span class="line">    IF (SELECT sum(number) FROM invent WHERE gno &#x3D; @gno)&gt;@s</span><br><span class="line">        UPDATE goods SET price &#x3D; price * 0.9</span><br><span class="line">        WHERE gno &#x3D; @gno</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>teaching</em> 数据库中创建带有参数和默认值（通配符）的存储过程，从 <em>student</em> 表中返回指定学生（提供姓名）的信息。该存储过程对传递的参数进行模式匹配，如果没有提供参数，则返回所有学生的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE PROCEDURE Student_Name @sname varchar(40) &#x3D; &#39;%&#39;</span><br><span class="line">AS</span><br><span class="line">    SELECT * FROM student WHERE sname LIKE @sname</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<p>在 <em>inventory</em> 数据库中创建带 OUTPUT 参数的存储过程，用于计算指定商品的平均价格，在存储过程中使用一个输入参数（商品名）和一个输出参数（平均价格）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USE inventory</span><br><span class="line">GO</span><br><span class="line">CREATE PROCEDURE avgprice @gn varchar(20),@avgp int OUTPUT</span><br><span class="line">AS</span><br><span class="line">    SELECT @avgp &#x3D; avg(price) FROM goods WHERE gname &#x3D; @gn</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<p><b>执行存储过程</b></p>
+<p>显示学生 “张明明” 的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXECUTE Student_Name &#39;张明明&#39;</span><br></pre></td></tr></table></figure>
+
+<p>执行带有输入和输出参数的存储过程 <em>avgprice</em> 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @avgprice int</span><br><span class="line">EXECUTE avgprice &#39;冰箱&#39;,@avgprice OUTPUT</span><br><span class="line">PRINT &#39;冰箱的平均价格：&#39; + str(@avgprice)</span><br></pre></td></tr></table></figure>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
                 <source type="audio/mpeg" src="/music/塞壬唱片-MSR - Renegade.mp3">
@@ -658,7 +848,7 @@
     </div>
     
         <div class='side'>
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-数据库系统概述"><span class="toc-number">1.</span> <span class="toc-text">第一章 数据库系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-关系数据库"><span class="toc-number">2.</span> <span class="toc-text">第二章 关系数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章-数据库设计"><span class="toc-number">3.</span> <span class="toc-text">第三章 数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章-SQL-Server-2008基础"><span class="toc-number">4.</span> <span class="toc-text">第四章 SQL Server 2008基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章-数据库的概念和操作"><span class="toc-number">5.</span> <span class="toc-text">第五章 数据库的概念和操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章-表的操作"><span class="toc-number">6.</span> <span class="toc-text">第六章 表的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七章-数据库查询"><span class="toc-number">7.</span> <span class="toc-text">第七章 数据库查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第八章-视图和索引"><span class="toc-number">8.</span> <span class="toc-text">第八章 视图和索引</span></a></li></ol>	
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-数据库系统概述"><span class="toc-number">1.</span> <span class="toc-text">第一章 数据库系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-关系数据库"><span class="toc-number">2.</span> <span class="toc-text">第二章 关系数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章-数据库设计"><span class="toc-number">3.</span> <span class="toc-text">第三章 数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章-SQL-Server-2008基础"><span class="toc-number">4.</span> <span class="toc-text">第四章 SQL Server 2008基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章-数据库的概念和操作"><span class="toc-number">5.</span> <span class="toc-text">第五章 数据库的概念和操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章-表的操作"><span class="toc-number">6.</span> <span class="toc-text">第六章 表的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七章-数据库查询"><span class="toc-number">7.</span> <span class="toc-text">第七章 数据库查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第八章-视图和索引"><span class="toc-number">8.</span> <span class="toc-text">第八章 视图和索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第九章-T-SQL-编程"><span class="toc-number">9.</span> <span class="toc-text">第九章 T-SQL 编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第十章-存储过程和触发器"><span class="toc-number">10.</span> <span class="toc-text">第十章 存储过程和触发器</span></a></li></ol>	
         </div>
     
 </div>
