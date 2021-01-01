@@ -842,7 +842,195 @@ Bootstrap将网页横向默认的分为12个单元块，即12个网格块，而�
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EXECUTE Student_Name &#39;张明明&#39;</span><br></pre></td></tr></table></figure>
 
 <p>执行带有输入和输出参数的存储过程 <em>avgprice</em> 。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DECLARE @avgprice int</span><br><span class="line">EXECUTE avgprice &#39;冰箱&#39;,@avgprice OUTPUT</span><br><span class="line">PRINT &#39;冰箱的平均价格：&#39; + str(@avgprice)</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DECLARE @avgprice int</span><br><span class="line">EXECUTE avgprice &#39;冰箱&#39;,@avgprice OUTPUT</span><br><span class="line">PRINT &#39;冰箱的平均价格：&#39; + str(@avgprice)</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<p><b>触发器的分类</b></p>
+<ul>
+<li><p>DML 触发器：</p>
+<p>  DML触发器是当数据库服务器中发生数据操作语言（DML）事件时会自动执行的存储过程。</p>
+<p>  DML 事件包括修改数据的 INSERT 语句、UPDATE 语句或 DELETE 语句。</p>
+</li>
+<li><p>DDL 触发器：</p>
+<p>  响应数据定义语言（DDL）语句时触发，一般在数据库中用于管理任务。</p>
+</li>
+</ul>
+<p>使用 DDL 触发器 <em>limited</em> 防止数据库中的任何一表被修改或删除。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE TRIGGER limited ON database</span><br><span class="line">FOR DROP_TABLE,ALTER_TABLE</span><br><span class="line">AS</span><br><span class="line">    PRINT &#39;名为 limited 的触发器不允许您执行对表的修改或删除操作！&#39;</span><br><span class="line">    ROLLBACK</span><br></pre></td></tr></table></figure>
+
+<p>为 <em>student</em> 表创建一个简单 DML 触发器，在插入和修改数据时都会自动显示提示信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO</span><br><span class="line">CREATE TRIGGER reminder ON student</span><br><span class="line">FOR INSERT,UPDATE</span><br><span class="line">AS</span><br><span class="line">    PRINT &#39;你在插入或修改 student 的数据&#39;</span><br></pre></td></tr></table></figure>
+
+<p>为 <em>student</em> 表创建一个 DML 触发器，在插入和修改数据时都会自动显示所有学生的信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE teaching</span><br><span class="line">GO CREATE TRIGGER print_table ON student</span><br><span class="line">FOR INSERT,UPDATE</span><br><span class="line">AS</span><br><span class="line">    SELECT * FROM student</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第十一章-事务与并发控制"><a href="#第十一章-事务与并发控制" class="headerlink" title="第十一章 事务与并发控制"></a>第十一章 事务与并发控制</h2><p><b>事务概述</b></p>
+<p>在 SQL Server 2008 中，事务要求处理时必须满足4个原则：</p>
+<ul>
+<li>原子性：事物必须是原子工作单元，对于其数据修改，要么全都执行，要么全都不执行。</li>
+<li>一致性：一致性要求事务执行完成后将数据库从一个一致状态转变到另一个一致状态。即在相关数据库中所有规则都必须应用于事务的修改，以保持所有数据的完整性。</li>
+<li>隔离性：也称为独立性，指并行事务的修改必须与其他并行事务的修改相互独立。</li>
+<li>持久性：在事务完成提交后会对系统产生持久的影响，即事务的操作将写入数据库中，无论发生何种机器和系统故障都不应该对其有任何影响。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>并发带来的问题</b></p>
+<ul>
+<li>丢失修改：指在一个事务读取一个数据时，另一个事务也访问该同一数据。第一个事务对数据进行修改后，第二个事务也对数据进行了修改，则第一个事务的修改结果就会丢失。</li>
+<li>脏读：指当一个事务正在访问数据并且对数据进行了修改，而这种修改还没有提交到数据库中，这时另一个事务也访问了这个数据，然后使用了这个数据。因这个数据还没有最终确定，而另一个事务则使用了该数据，那么另一个事务读取到的这个数据就是个“脏数据”，依据“脏数据”执行的操作可能是不正确的。</li>
+<li>不可重复读：指在一个事务内多次读取同一数据。在这个事务还没有结束时，另外一个事物也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，第一个事务两次读取到的数据可能不一样。</li>
+<li>幻读：第一个事务对一个表中数据进行了修改，这种修改设计表中全部数据行，第二个事务也修改了表中数据，向其中插入了一条数据。后续读取时，第一个事务就会发现一条未被修改的数据行。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>锁的类型</b></p>
+<ul>
+<li><p>共享锁：</p>
+<p>  简称（S锁），允许并发事务读取（SELECT）一个资源。当资源上存在共享 S锁 时，任何其他事物都不能修改数据。一旦已经读取数据，便立即释放资源上的共享 S锁 ，除非在事务生存周期内用锁定提示保护共享 S锁 。</p>
+</li>
+<li><p>排它锁：</p>
+<p>  简称（X锁），可以防止并发事务对资源进行访问，其他事物不能读取或修改 X锁 锁定的数据。即 X锁 锁定的资源只允许进行<b>锁定操作</b>的程序使用，其他任何对他的操作均不会被接受。</p>
+</li>
+</ul>
+<hr>
+<h2 id="第十二章-数据库的安全管理"><a href="#第十二章-数据库的安全管理" class="headerlink" title="第十二章 数据库的安全管理"></a>第十二章 数据库的安全管理</h2><ul>
+<li><p><b>Windows 验证模式</b></p>
+<p>  用户通过 Windows 的用户身份验证，连接到 SQL Server 服务器上，而 SQL Server 本身不需要管理一套登录数据。 SQL Server 检测当前使用 Windows 的用户账户，并在系统注册表中查找该用户，以确定该用户是否有权登录。这种验证只适用于能够进行有效身份验证的 Windows 操作系统，在其他操作系统无法使用。</p>
+<p>  其优点：</p>
+<ul>
+<li>数据库管理员的工作可以集中在管理数据库上，对用户账户的管理可以交给 Windows 去完成。</li>
+<li>Windows 有着更强的用户账户管理工具。</li>
+<li>Windows 的组策略支持多个用户同时被授权访问 SQL Server。</li>
+</ul>
+</li>
+<li><p><b>混合验证模式</b></p>
+<p>  用户可以使用 Windows 身份验证或 SQL Server 身份验证与 SQL Server 服务器连接。它将通过数据库最初 IP 地址进行区分用户账户在 Windows 操作系统下是否可信。不可信用户需要通过账户存在性和密码的匹配性验证。</p>
+<p>  其优点：</p>
+<ul>
+<li>创建了 Windows 之上的另一个安全层次。</li>
+<li>支持更大范围的用户，例如非 Windows 用户。</li>
+<li>一个应用程序可以利用单个 SQL Server 登录或口令。</li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>固定服务器角色</b></p>
+<ul>
+<li><em>sysadmin</em> ：可以在 SQL Server 中执行任何活动。</li>
+<li><em>serveradmin</em> ：可以设置服务器范围的配置选项，还可以关闭服务器。</li>
+<li><em>setupadmin</em> ：可以管理连接服务器和启动过程。</li>
+<li><em>securityadmin</em> ：可以管理登录和创建数据库的权限，还可以读取错误日志和更改密码。</li>
+<li><em>processadmin</em> ：可以管理在 SQL Server 中运行的进程。</li>
+<li><em>dbcreator</em> ：可以创建、更改和删除数据库。</li>
+<li><em>diskadmin</em> ：可以管理磁盘文件。</li>
+<li><em>bulkadmin</em> ：可以执行 BULK INSERT （大容量插入语句）。</li>
+</ul>
+<p><b>固定数据库角色</b></p>
+<ul>
+<li><em>db_owner</em> ：具有数据库中的全部权限。</li>
+<li><em>db_accessadmin</em> ：可以添加和删除用户。</li>
+<li><em>db_securityadmin</em> ：可以管理全部权限、对象所有权限，拥有角色和角色成员资格。</li>
+<li><em>db_ddladmin</em> ：可以发出除 GRANT、REVOKE、DENY 以外的所有数据定义语句。</li>
+<li><em>db_backupoperator</em> ：具有备份数据库的权限。</li>
+<li><em>db_datareader</em> ：可以查询数据库内任何用户表、视图及表值函数中的所有数据。</li>
+<li><em>db_denydatareader</em> ：不能选择数据库内任何用户表、视图及表值函数中的任何数据。</li>
+<li><em>db_denydatawriter</em> ：不能更改数据库内任何用户表、视图及表值函数中的任何数据。</li>
+<li><em>public</em> ：最基本的数据库角色。</li>
+</ul>
+<hr>
+<h2 id="第十三章-数据库的备份与还原"><a href="#第十三章-数据库的备份与还原" class="headerlink" title="第十三章 数据库的备份与还原"></a>第十三章 数据库的备份与还原</h2><p><b>备份内容</b></p>
+<p>备份内容主要包括系统数据库、用户数据库和事务日志。</p>
+<ul>
+<li>系统数据库记录了 SQL Server 系统配置参数、用户资料以及所有用户数据库等重要信息，主要包括 <em>master</em> 、 <em>msdb</em> 、 <em>model</em> 数据库。</li>
+<li>用户数据库中存储了用户的数据。</li>
+<li>事务日志记录了用户对数据库中数据的各种操作，平时系统会自动管理和维护所有的数据库事务日志。</li>
+</ul>
+<p><b>备份频率</b></p>
+<p>数据库备份频率一般取决于修改数据库的频繁程度，以及一旦出现意外丢失的工作量的大小，还有发生意外丢失数据的可能性大小。</p>
+<p>当用户数据库中执行了加入数据、创建索引等操作时应该对用户数据库进行备份，此外，清空了事务日志，也应该备份数据库。</p>
+<p><b>备份存储介质</b></p>
+<p>常用的备份存储介质包括硬盘、磁带和命令管道等。</p>
+<p><b>其他计划</b></p>
+<ul>
+<li>确定备份工作负责人。</li>
+<li>确定使用在线备份还是脱机备份。</li>
+<li>确定是否使用备份服务器。</li>
+<li>确定备份存储的地方。</li>
+<li>确定备份存储的期限。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>数据库备份的类型</b></p>
+<p><b>完整数据库备份</b></p>
+<p>完整备份会将所有数据进行备份，还原时操作更加方便，但备份用时更长，需要更多存储空间。因此小型数据库常用完整备份，大型数据库更推荐使用差异数据库备份。</p>
+<p><b>差异数据库备份</b></p>
+<p>差异数据库备份只备份自上一次完整数据库备份发生改变的内容和在差异数据库备份过程中所发生的所有活动。差异数据库备份基于以前的完整数据库备份，因此，这样的完整数据库备份称为“基准备份”。</p>
+<p><b>事务日志备份</b></p>
+<p>事务日志备份是自上次事务日志备份后对数据库执行的所有事物的一系列记录，可以记录数据库的更改，但前提是在执行了完整数据库备份之后，用户可以使用事务日志备份将数据库恢复到特定的即时点。</p>
+<font color='red'>
+注意：
+
+<ul>
+<li>除非已经至少执行了一次完整数据库备份，否则不用做事务日志备份。</li>
+<li>如果没有了相应的数据库备份，则无法还原事务日志备份。</li>
+<li>当数据库使用简单恢复模式时无法备份事务日志。</font>
+
+</li>
+</ul>
+<p><b>数据库文件或文件组备份</b></p>
+<ul>
+<li>必须指定逻辑文件或文件组。</li>
+<li>必须执行事务日志备份，使还原的文件与数据库的其他部分相一致。</li>
+<li>最多可以指定 16 个文件或文件组。</li>
+<li>应制定轮流备份每个文件的计划。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b>完整恢复模式</b></p>
+<p>完整恢复模式是等级最高的数据库恢复模式。</p>
+<p>特点：</p>
+<ul>
+<li>允许将数据库还原到故障点状态。</li>
+<li>数据库可以进行 4 中备份方式中的任何一种。</li>
+<li>可以还原到某个即时点。</li>
+</ul>
+<p>符合下列任何要求则使用完整恢复模式：</p>
+<ul>
+<li>用户必须能够恢复所有数据。</li>
+<li>数据库包含多个文件组，并且希望逐段还原读写辅助文件组。</li>
+<li>必须能够恢复到故障点。</li>
+</ul>
+<p><b>简单恢复模式</b></p>
+<p>简单恢复模式简略地记录大多数事务，记录信息只是为了确保在系统崩溃或还原数据备份之后的数据库的一致性。</p>
+<p>特点：</p>
+<ul>
+<li>允许将数据库还原到最新的备份。</li>
+<li>数据库只能进行完整数据库备份和差异备份，不能进行事务日志备份和文件及文件组备份。</li>
+<li>不能还原到某个即时点。</li>
+</ul>
+<p>符合下列任何要求则使用简单恢复模式：</p>
+<ul>
+<li>丢失日志中的一些数据无关紧要。</li>
+<li>无论何时还原自主文件组，用户都希望始终还原读写辅助文件组。</li>
+<li>是否备份事务日志无所谓，只需要完整和差异备份。</li>
+<li>不在乎无法恢复到故障点以及丢失上次备份到发生故障之间的任何更新。</li>
+</ul>
+<p><b>大容量日志恢复模式</b></p>
+<p>特点：</p>
+<ul>
+<li>还原允许大容量日志记录的操作。</li>
+<li>数据库可以进行 4 中备份方式中的任何一种。</li>
+<li>不能还原到某个即时点。</li>
+</ul>
+<p>将整个 <em>teaching</em> 数据库完整备份到磁盘上，并创建一个新的媒体集。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">BACKUP DATABASE teaching</span><br><span class="line">TO DISK &#x3D; &#39;F:\BACKUP\teaching.Bak&#39;</span><br><span class="line">    WITH FORMAT</span><br><span class="line">    NAME &#x3D; &#39;teaching 的完整备份&#39;</span><br></pre></td></tr></table></figure>
+
+<p>创建 <em>teaching</em> 的差异数据库备份。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">BACKUP DATABASE teaching</span><br><span class="line">TO DISK &#x3D; &#39;F\BACKUP\teaching差异备份.Bak&#39;</span><br><span class="line">    WITH DIFFERENTIAL</span><br></pre></td></tr></table></figure>
+
+<p><b>数据库还原操作</b></p>
+<p>将 <em>teaching</em> 数据库的完整数据库备份进行还原。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RESTORE DATABASE teaching</span><br><span class="line">FROM DISK &#x3D; &#39;F:\BACKUP\teaching.Bak&#39;</span><br><span class="line">WITH REPLACE,NORECOVERY</span><br></pre></td></tr></table></figure>
+
+<p>将 <em>teaching</em> 数据库的差异数据库备份进行还原。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RESTORE DATABASE teaching</span><br><span class="line">FROM DISK &#x3D; &#39;F:\BACKUP\teaching差异备份.Bak&#39;</span><br><span class="line">WITH RECOVERY</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>数据库</category>
       </categories>
