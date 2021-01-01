@@ -1030,7 +1030,25 @@ Bootstrap将网页横向默认的分为12个单元块，即12个网格块，而�
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RESTORE DATABASE teaching</span><br><span class="line">FROM DISK &#x3D; &#39;F:\BACKUP\teaching.Bak&#39;</span><br><span class="line">WITH REPLACE,NORECOVERY</span><br></pre></td></tr></table></figure>
 
 <p>将 <em>teaching</em> 数据库的差异数据库备份进行还原。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RESTORE DATABASE teaching</span><br><span class="line">FROM DISK &#x3D; &#39;F:\BACKUP\teaching差异备份.Bak&#39;</span><br><span class="line">WITH RECOVERY</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RESTORE DATABASE teaching</span><br><span class="line">FROM DISK &#x3D; &#39;F:\BACKUP\teaching差异备份.Bak&#39;</span><br><span class="line">WITH RECOVERY</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="个人练习纠错"><a href="#个人练习纠错" class="headerlink" title="个人练习纠错"></a>个人练习纠错</h2><font color='red'>
+数据库能为各种用户共享
+
+<p>第三范式仍存在一定的插入和删除异常</p>
+<p>软件错误属于系统故障</p>
+<p>数据库中存放三级模式结构定义的是DB</p>
+<p>DBMS通过语法检查来保证数据库中的数据是正确的，便面非法的不符合语义的错误数据的输入和输出</p>
+<p>数据流表示某一加工处理过程的输入或输出数据</p>
+<p>DBS运行的最小逻辑工作单元是事务</p>
+<p>系统能把数据库从被破坏、不正确的状态，恢复到最近一个正确的状态，DBMS的这种能力称为可恢复性</p>
+<p>关系模型的实体完整性是指关系的主键值唯一且非空</p>
+<p>外模式/模式映像为数据库提供了逻辑数据独立性</p>
+<p>设计全局ER模式时需要消除的冲突有：属性冲突、命名冲突和结构冲突</p>
+<p>需求说明书的主要内容是数据流图（DFD）和数据字典</p>
+<p>采用ER方法的数据库概念设计包括以下步骤：设计局部ER模式、设计全局ER模式、优化全局ER模式。</p>
+<p>关系数据库中的关键码包括超键、候选键、主键和外键。超键和候选键是能唯一地标识关系中的元组的属性或属性集，但候选键中不含有多于属性。主键是从候选键中人为指定的，外键是指一个关系包含另一个关系的主键所对应的属性组。<br></font></p>
+]]></content>
       <categories>
         <category>数据库</category>
       </categories>
