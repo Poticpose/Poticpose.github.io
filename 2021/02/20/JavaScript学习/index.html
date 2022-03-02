@@ -126,7 +126,7 @@ DOM是W3C组织推荐的处理可扩展标记语言的标准编程接口。通�
 <td>浏览器</td>
 </tr>
 <tr>
-<td>doudocument.write(msg)</td>
+<td>document.write(msg)</td>
 <td>浏览器页面打印输出信息</td>
 <td>浏览器</td>
 </tr>
@@ -136,7 +136,7 @@ DOM是W3C组织推荐的处理可扩展标记语言的标准编程接口。通�
 <td>浏览器</td>
 </tr>
 </tbody></table>
-<p>alert( )和doudocument.write( )主要将信息展示给用户</p>
+<p>alert( )和document.write( )主要将信息展示给用户</p>
 <p>console.log( )主要将信息展示给程序员</p>
 <hr>
 <h2 id="变量的使用"><a href="#变量的使用" class="headerlink" title="变量的使用"></a>变量的使用</h2><ul>
@@ -454,7 +454,7 @@ DOM是W3C组织推荐的处理可扩展标记语言的标准编程接口。通�
 <li><p>利用 new Object 创建对象</p>
 <ul>
 <li><p>创建空对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> andy = <span class="keyword">new</span> Obect();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> andy = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>给空对象添加属性和方法</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">andy.name = <span class="string">'pink'</span>;</span><br><span class="line">andy.age = <span class="number">18</span>;</span><br><span class="line">andy.sex = <span class="string">'男'</span>;</span><br><span class="line">andy.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'大家好啊~'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
