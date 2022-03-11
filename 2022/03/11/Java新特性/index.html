@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Java新特性 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="Java 8 新特性Lambda 表达式12345678910111213141516public void test1()&amp;#123;    //原本写法：    Comparator&amp;lt;In,"> 
+    <meta name="author" content="Poet"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://poticpose.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Java新特性</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Java新特性</h1>
+        <div class="stuff">
+            <span>三月 11, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="Java-8-新特性"><a href="#Java-8-新特性" class="headerlink" title="Java 8 新特性"></a>Java 8 新特性</h1><h2 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//原本写法：</span></span><br><span class="line">    Comparator&lt;Integer&gt; comparator = <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer o1, Integer o2)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> Integer.compare(o1, o2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    System.out.println(comparator.compare(<span class="number">12</span>, <span class="number">21</span>));</span><br><span class="line">    <span class="comment">//Lambda表达式写法：</span></span><br><span class="line">    Comparator&lt;Integer&gt; comparator1 = (o1, o2) -&gt; Integer.compare(o1, o2);</span><br><span class="line">    System.out.println(comparator1.compare(<span class="number">21</span>, <span class="number">12</span>));</span><br><span class="line">    <span class="comment">//方法引用写法：</span></span><br><span class="line">    Comparator&lt;Integer&gt; comparator2 = Integer :: compare;</span><br><span class="line">    System.out.println(comparator2.compare(<span class="number">21</span>, <span class="number">21</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br><span class="line">1</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>如果构造器有参数则在括号内填参数即可</p>
+<p>Lambda 本质：作为函数式接口的实例。</p>
+<p>函数式接口：只声明了一个抽象方法的接口，加上注解（@FunctionalInterface）显式声明是一个函数式接口</p>
+<hr>
+<h2 id="StreamAPI"><a href="#StreamAPI" class="headerlink" title="StreamAPI"></a>StreamAPI</h2><img src='/img/Java高级/98.png'>
+
+<img src='/img/Java高级/99.png'>
+
+<p>Stream 步骤：</p>
+<img src='/img/Java高级/100.png'>
+
+<hr>
+<ul>
+<li>创建</li>
+</ul>
+<p>EmployeeData.java：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmployeeData</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Employee&gt; <span class="title">getEmployees</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;Employee&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        list.add(<span class="keyword">new</span> Employee(<span class="number">1001</span>,<span class="string">"张三"</span>,<span class="number">23</span>,<span class="number">6000.82</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> Employee(<span class="number">1002</span>,<span class="string">"李四"</span>,<span class="number">26</span>,<span class="number">7800.32</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> Employee(<span class="number">1003</span>,<span class="string">"王五"</span>,<span class="number">34</span>,<span class="number">8923.55</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> Employee(<span class="number">1004</span>,<span class="string">"老六"</span>,<span class="number">22</span>,<span class="number">6000.15</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> Employee(<span class="number">1005</span>,<span class="string">"七七"</span>,<span class="number">25</span>,<span class="number">7358.71</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> Employee(<span class="number">1006</span>,<span class="string">"老八"</span>,<span class="number">25</span>,<span class="number">7223.96</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> salary;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">(<span class="keyword">int</span> id, String name, <span class="keyword">int</span> age, <span class="keyword">double</span> salary)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.salary = salary;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src='/img/Java高级/101.png'>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一：通过集合</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line">    <span class="comment">//返回一个顺序流</span></span><br><span class="line">    Stream&lt;Employee&gt; stream = employees.stream();</span><br><span class="line">    <span class="comment">//返回一个并行流</span></span><br><span class="line">    Stream&lt;Employee&gt; parallelStream = employees.parallelStream();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src='/img/Java高级/102.png'>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式二：通过数组</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    IntStream stream = Arrays.stream(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src='/img/Java高级/103.png'>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式三：通过Steam的of()</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Stream&lt;Integer&gt; stream = Stream.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src='/img/Java高级/104.png'>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式四：创建无限流</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//迭代（遍历前10个偶数）</span></span><br><span class="line">    Stream.iterate(<span class="number">0</span>, t -&gt; t + <span class="number">2</span>).limit(<span class="number">10</span>).forEach(System.out::println);</span><br><span class="line">    <span class="comment">//生成（生成10个随机数）</span></span><br><span class="line">    Stream.generate(Math::random).limit(<span class="number">10</span>).forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>中间操作</li>
+</ul>
+<p>以之前的方式一内代码为例：</p>
+<img src='/img/Java高级/105.png'>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一：通过集合</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line">    <span class="comment">//返回一个顺序流</span></span><br><span class="line">    Stream&lt;Employee&gt; stream = employees.stream();</span><br><span class="line">    <span class="comment">//筛选工资大于7000的员工信息</span></span><br><span class="line">    stream.filter(e -&gt; e.getSalary() &gt; <span class="number">7000</span>).forEach(System.out::println);</span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">//查询表中前三条数据</span></span><br><span class="line">    employees.stream().limit(<span class="number">3</span>).forEach(System.out::println);</span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">//跳过前三条数据</span></span><br><span class="line">    employees.stream().skip(<span class="number">3</span>).forEach(System.out::println);</span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">//筛选重复数据（根据数据项所在类提供的hashCode()和equals()进行筛选）</span></span><br><span class="line">    employees.add(<span class="keyword">new</span> Employee(<span class="number">1010</span>,<span class="string">"九九"</span>,<span class="number">29</span>,<span class="number">8000</span>));</span><br><span class="line">    employees.add(<span class="keyword">new</span> Employee(<span class="number">1010</span>,<span class="string">"九九"</span>,<span class="number">29</span>,<span class="number">8000</span>));</span><br><span class="line">    employees.add(<span class="keyword">new</span> Employee(<span class="number">1010</span>,<span class="string">"九九"</span>,<span class="number">29</span>,<span class="number">8000</span>));</span><br><span class="line">    employees.add(<span class="keyword">new</span> Employee(<span class="number">1010</span>,<span class="string">"九九"</span>,<span class="number">29</span>,<span class="number">8000</span>));</span><br><span class="line">    employees.stream().distinct().forEach(System.out::println);</span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">//返回一个并行流</span></span><br><span class="line">    Stream&lt;Employee&gt; parallelStream = employees.parallelStream();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Employee&#123;id&#x3D;1002, name&#x3D;&#39;李四&#39;, age&#x3D;26, salary&#x3D;7800.32&#125;</span><br><span class="line">Employee&#123;id&#x3D;1003, name&#x3D;&#39;王五&#39;, age&#x3D;34, salary&#x3D;8923.55&#125;</span><br><span class="line">Employee&#123;id&#x3D;1005, name&#x3D;&#39;七七&#39;, age&#x3D;25, salary&#x3D;7358.71&#125;</span><br><span class="line">Employee&#123;id&#x3D;1006, name&#x3D;&#39;老八&#39;, age&#x3D;25, salary&#x3D;7223.96&#125;</span><br><span class="line"></span><br><span class="line">Employee&#123;id&#x3D;1001, name&#x3D;&#39;张三&#39;, age&#x3D;23, salary&#x3D;6000.82&#125;</span><br><span class="line">Employee&#123;id&#x3D;1002, name&#x3D;&#39;李四&#39;, age&#x3D;26, salary&#x3D;7800.32&#125;</span><br><span class="line">Employee&#123;id&#x3D;1003, name&#x3D;&#39;王五&#39;, age&#x3D;34, salary&#x3D;8923.55&#125;</span><br><span class="line"></span><br><span class="line">Employee&#123;id&#x3D;1004, name&#x3D;&#39;老六&#39;, age&#x3D;22, salary&#x3D;6000.15&#125;</span><br><span class="line">Employee&#123;id&#x3D;1005, name&#x3D;&#39;七七&#39;, age&#x3D;25, salary&#x3D;7358.71&#125;</span><br><span class="line">Employee&#123;id&#x3D;1006, name&#x3D;&#39;老八&#39;, age&#x3D;25, salary&#x3D;7223.96&#125;</span><br><span class="line"></span><br><span class="line">Employee&#123;id&#x3D;1001, name&#x3D;&#39;张三&#39;, age&#x3D;23, salary&#x3D;6000.82&#125;</span><br><span class="line">Employee&#123;id&#x3D;1002, name&#x3D;&#39;李四&#39;, age&#x3D;26, salary&#x3D;7800.32&#125;</span><br><span class="line">Employee&#123;id&#x3D;1003, name&#x3D;&#39;王五&#39;, age&#x3D;34, salary&#x3D;8923.55&#125;</span><br><span class="line">Employee&#123;id&#x3D;1004, name&#x3D;&#39;老六&#39;, age&#x3D;22, salary&#x3D;6000.15&#125;</span><br><span class="line">Employee&#123;id&#x3D;1005, name&#x3D;&#39;七七&#39;, age&#x3D;25, salary&#x3D;7358.71&#125;</span><br><span class="line">Employee&#123;id&#x3D;1006, name&#x3D;&#39;老八&#39;, age&#x3D;25, salary&#x3D;7223.96&#125;</span><br><span class="line">Employee&#123;id&#x3D;1010, name&#x3D;&#39;九九&#39;, age&#x3D;29, salary&#x3D;8000.0&#125;</span><br></pre></td></tr></table></figure>
+
+<img src='/img/Java高级/106.png'>
+
+<img src='/img/Java高级/107.png'>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="/music/森川ちよ - Amazing Trees（Cover Tielle ／ SawanoHiroyuki[nZk]）.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-8-新特性"><span class="toc-number">1.</span> <span class="toc-text">Java 8 新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda-表达式"><span class="toc-number">1.1.</span> <span class="toc-text">Lambda 表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StreamAPI"><span class="toc-number">1.2.</span> <span class="toc-text">StreamAPI</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
