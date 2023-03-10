@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>jQuery简学 - 诗文的小书屋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="blog,"> 
+    <meta name="description" content="jQuery基本选择器$(selector) 作用：根据选择器规则在整个文档中查找所有匹配的标签的数组，并封装成 jQuery 对象。
+选择器本身只是个有特定语法规则的字符串，没有实质用处。它的基本,"> 
+    <meta name="author" content="Poet"> 
+    <link rel="alternative" href="atom.xml" title="诗文的小书屋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">诗文的小书屋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://poticpose.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">jQuery简学</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">jQuery简学</h1>
+        <div class="stuff">
+            <span>三月 15, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h1><h2 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h2><p>$(selector) 作用：根据选择器规则在整个文档中查找所有匹配的标签的数组，并封装成 jQuery 对象。</p>
+<p>选择器本身只是个有特定语法规则的字符串，没有实质用处。它的基本语法规则使用的就是CSS的选择器语法，对基进行了拓展。只有调用 $，并将选择器作为参数传入才有作用</p>
+<p>例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选择id为div1的元素</span></span><br><span class="line">$(<span class="string">'#div1'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择所有div元素</span></span><br><span class="line">$(<span class="string">'div'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择所有class为box的元素</span></span><br><span class="line">$(<span class="string">'.box'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择所有div和span元素</span></span><br><span class="line">$(<span class="string">'div,span'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择所有class属性为box的div元素</span></span><br><span class="line">$(<span class="string">'div.box'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//以上为将元素的背景改为红色</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h2><p>层次选择器用来查找后代元素和兄弟元素。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选中ul下所有的span</span></span><br><span class="line">$(<span class="string">'ul span'</span>).css(<span class="string">'background'</span>,<span class="string">'yellow'</span>)</span><br><span class="line"><span class="comment">//选择ul下所有的子元素span</span></span><br><span class="line">$(<span class="string">'ul&gt;span'</span>).css(<span class="string">'background'</span>,<span class="string">'yellow'</span>)</span><br><span class="line"><span class="comment">//选中class为box的下一个li</span></span><br><span class="line">$(<span class="string">'.box+li'</span>).css(<span class="string">'background'</span>,<span class="string">'yellow'</span>)</span><br><span class="line"><span class="comment">//选中ul下的class为box的元素后面的所有兄弟元素</span></span><br><span class="line">$(<span class="string">'ul .box~*'</span>).css(<span class="string">'background'</span>,<span class="string">'yellow'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="过滤选择器"><a href="#过滤选择器" class="headerlink" title="过滤选择器"></a>过滤选择器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选中第一个div</span></span><br><span class="line">$(<span class="string">'div:first'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择最后一个class为box的元素</span></span><br><span class="line">$(<span class="string">'.box:last'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择所有class属性不为box的div</span></span><br><span class="line">$(<span class="string">'div:not(.box)'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择第二个和第三个li元素</span></span><br><span class="line">$(<span class="string">'li:gt(0):lt(2)'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)<span class="comment">//索引大于0小于3的li</span></span><br><span class="line"><span class="comment">//选择内容为BBBBB的li</span></span><br><span class="line">$(<span class="string">'li:contains("BBBBB")'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择隐藏的li</span></span><br><span class="line"><span class="built_in">console</span>.log($(<span class="string">'li:hidden'</span>).length, $(<span class="string">'li:hidden'</span>)[<span class="number">0</span>]);</span><br><span class="line"><span class="comment">//选择有title属性的li</span></span><br><span class="line">$(<span class="string">'li[title]'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">//选择所有title属性为hello的li</span></span><br><span class="line">$(<span class="string">'li[title="hello"]'</span>).css(<span class="string">'background'</span>,<span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-元素的尺寸"><a href="#jQuery-元素的尺寸" class="headerlink" title="jQuery 元素的尺寸"></a>jQuery 元素的尺寸</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//内容尺寸</span></span><br><span class="line"><span class="built_in">console</span>.log($div.width(), $div.height());</span><br><span class="line"><span class="comment">//内部尺寸</span></span><br><span class="line"><span class="built_in">console</span>.log($div.innerWidth(), $div.innerHeight());</span><br><span class="line"><span class="comment">//外部尺寸</span></span><br><span class="line"><span class="built_in">console</span>.log($div.outerWidth(), $div.outerHeight());</span><br><span class="line"><span class="comment">//尺寸带参数</span></span><br><span class="line"><span class="built_in">console</span>.log($div.width(<span class="literal">true</span>), $div.height(<span class="literal">true</span>));</span><br><span class="line"><span class="comment">//带参数 false 为 (height/width + padding + border) true 的话加上 margin</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-对象的过滤"><a href="#jQuery-对象的过滤" class="headerlink" title="jQuery 对象的过滤"></a>jQuery 对象的过滤</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先获取ul下的所有li</span></span><br><span class="line"><span class="keyword">var</span> $lis = $(<span class="string">'ul&gt;li'</span>);</span><br><span class="line"><span class="comment">//ul下第一个li标签</span></span><br><span class="line">$lis.first();</span><br><span class="line"><span class="comment">//或 $lis[0]</span></span><br><span class="line"><span class="comment">//ul下最后一个li标签</span></span><br><span class="line">$lis.last();</span><br><span class="line"><span class="comment">//或$lis[length-1]</span></span><br><span class="line"><span class="comment">//ul下第二个li</span></span><br><span class="line">$lis.eq(<span class="number">1</span>)</span><br><span class="line"><span class="comment">//ul下title为hello的li</span></span><br><span class="line">$lis.filter(<span class="string">'[title="hello"]'</span>);</span><br><span class="line"><span class="comment">//ul下title不为hello的li</span></span><br><span class="line">$lis.filter(<span class="string">'[title!="hello"]'</span>);</span><br><span class="line"><span class="comment">//ul下有span子标签的li</span></span><br><span class="line">$lis.has(<span class="string">'span'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="jQuery-对象的查找"><a href="#jQuery-对象的查找" class="headerlink" title="jQuery 对象的查找"></a>jQuery 对象的查找</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先获取到ul</span></span><br><span class="line"><span class="keyword">var</span> $ul = $(<span class="string">'ul'</span>);</span><br><span class="line"><span class="comment">//ul标签的第二个span子标签</span></span><br><span class="line">$ul.children(<span class="string">'span:eq(1)'</span>);</span><br><span class="line"><span class="comment">//ul标签的第二个span后代标签</span></span><br><span class="line">$ul.find(<span class="string">'span:eq(1)'</span>);</span><br><span class="line"><span class="comment">//ul标签的父标签</span></span><br><span class="line">$ul.parent();</span><br><span class="line"><span class="comment">//id为cc的li标签前面的所有li标签</span></span><br><span class="line"><span class="keyword">var</span> $li = $(<span class="string">'#cc'</span>);</span><br><span class="line">$li.prevAll(<span class="string">'li'</span>);</span><br><span class="line"><span class="comment">//id为cc的li标签的所有兄弟li标签</span></span><br><span class="line">$li.siblings(<span class="string">'li'</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件绑定和解除"><a href="#事件绑定和解除" class="headerlink" title="事件绑定和解除"></a>事件绑定和解除</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//给.out绑定click事件</span></span><br><span class="line">$(<span class="string">'.out'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"on click"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//给.inner绑定鼠标移入移出</span></span><br><span class="line">$(<span class="string">'.inner'</span>).on(<span class="string">'mouseenter'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"进入"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">$(<span class="string">'.inner'</span>).on(<span class="string">'mouseleave'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"离开"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//或</span></span><br><span class="line">$(<span class="string">'.inner'</span>).hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"进入"</span>);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"离开"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//点击btn1解除.inner上事件监听</span></span><br><span class="line">$(<span class="string">'#btn1'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'.inner'</span>).off();</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//点击btn2解除.inner上的mouseenter事件监听</span></span><br><span class="line">$(<span class="string">'#btn2'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'.inner'</span>).off(<span class="string">'mouseenter'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//点击btn3得到事件坐标</span></span><br><span class="line">$(<span class="string">'#btn3'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//当前点击位置相对于被点击元素的左上角的坐标</span></span><br><span class="line">    <span class="built_in">console</span>.log(event.offsetX, event.offsetY);</span><br><span class="line">    <span class="comment">//当前点击位置相对于页面左上角的坐标</span></span><br><span class="line">    <span class="built_in">console</span>.log(event.pageX, event.pageY);</span><br><span class="line">    <span class="comment">//当前点击位置相对于视窗左上角的坐标</span></span><br><span class="line">    <span class="built_in">console</span>.log(event.clientX, event.clientY);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//点击.inner区域外部监听不响应</span></span><br><span class="line"><span class="comment">//原理是阻止事件冒泡</span></span><br><span class="line">$(<span class="string">'.inner'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"click uuu"</span>);</span><br><span class="line">    event.stopPropagation();</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//点击链接，如果是当前为偶数时间不跳转</span></span><br><span class="line"><span class="comment">//原理是阻止事件默认行为</span></span><br><span class="line">$(<span class="string">'#text4'</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Date</span>.now()%<span class="number">2</span> === <span class="number">0</span>)&#123;</span><br><span class="line">        event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>注：区分 mouseover 和 mouseenter 的区别</p>
+<ul>
+<li>mouseover：在移入子元素时也会触发，对应mouseout，即在 div1 上绑定 mouseover 事件且 div1内还有子元素 div2 则当鼠标移入 div1 时产生进入效果，当移入 div2 时虽然还在 div1 之中但仍会触发离开效果。</li>
+<li>mouseenter：只有移入当前元素才会触发，对应 mouseleave，即在 div1 上绑定 mouseenter 事件且 div1 内还有子元素 div2 则当鼠标移入 div1 时产生进入效果，当移入 div2 时并不会产生移出效果，只有彻底离开 div1 的范围才会触发离开效果。</li>
+</ul>
+<p>注：on(‘eventName’,fun()) 与 eventName(fun()) 的区别</p>
+<ul>
+<li>on：通用，支持动态绑定</li>
+<li>eventName：简单，只支持静态绑定</li>
+</ul>
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><p>事件委托：将多个子元素共需的事件委派给父元素进行接收处理，在此过程中新加入的子元素同样可以得到相应的事件处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//点击li变色，点击btn生成新的li</span></span><br><span class="line"><span class="comment">//利用delegate完成事件委托，三个参数分别为委托对象，委托事件类型，委托事件内容</span></span><br><span class="line">$(<span class="string">'ul'</span>).delegate(<span class="string">'li'</span>, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//此处this指向的是委托对象li</span></span><br><span class="line">    <span class="keyword">this</span>.style.background = <span class="string">"red"</span>;</span><br><span class="line">&#125;)</span><br><span class="line">$(<span class="string">'#btn'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'ul'</span>).append(<span class="string">'&lt;li&gt;新增的&lt;/li&gt;'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将多个子元素的事件监听委托给父元素</li>
+<li>监听回调加在父元素上</li>
+<li>当操作任何子元素时，事件会冒泡到父元素</li>
+<li>父元素不会直接处理事件，而是根据 event.target 得到发生事件的子元素，通过子元素调用事件回调函数。</li>
+</ul>
+<p>好处：新添加的子元素可以动态的响应事件、事件监听的数量从 n 个减少到了 1 个</p>
+<ul>
+<li>删除事件委托</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#btn2'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'ul'</span>).undelegate(<span class="string">'click'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="/music/The Score - Born For This.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jQuery"><span class="toc-number">1.</span> <span class="toc-text">jQuery</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本选择器"><span class="toc-number">1.1.</span> <span class="toc-text">基本选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#层次选择器"><span class="toc-number">1.2.</span> <span class="toc-text">层次选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤选择器"><span class="toc-number">1.3.</span> <span class="toc-text">过滤选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery-元素的尺寸"><span class="toc-number">1.4.</span> <span class="toc-text">jQuery 元素的尺寸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery-对象的过滤"><span class="toc-number">1.5.</span> <span class="toc-text">jQuery 对象的过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery-对象的查找"><span class="toc-number">1.6.</span> <span class="toc-text">jQuery 对象的查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件绑定和解除"><span class="toc-number">1.7.</span> <span class="toc-text">事件绑定和解除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件委托"><span class="toc-number">1.8.</span> <span class="toc-text">事件委托</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
